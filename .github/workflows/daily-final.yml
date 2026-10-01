@@ -1,0 +1,58 @@
+name: 每日收盘定稿
+on:
+  schedule:
+    - cron: "30 7 * * 1-5"   # 北京时间 15:30，周一至周五
+  workflow_dispatch: {}       # 支持手动触发
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 运行全流水线（东财失败自动切腾讯兜底）
+        run: |
+          set -x
+          python scan.py || python rescan_tencent.py
+          python backtest.py
+          python analytics.py
+          python param_scan.py
+          python track_picks.py
+          python fetch_intraday.py || true
+          python build_site.py
+
+      - name: 提交最新数据与站点文件
+        run: |
+          git config user.name  "quant-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "auto: 收盘定稿 $(date '+%F %T')"
+            git pull --rebase --autostash || true
+            git push
+          fi
+
+      - name: 部署到 GitHub Pages
+        uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: deploy
+      - uses: actions/deploy-pages@v4

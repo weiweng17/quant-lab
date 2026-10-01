@@ -1,0 +1,53 @@
+name: 盘中快照
+on:
+  schedule:
+    - cron: "5 2,3,5,6,7 * * 1-5"   # 北京时间 10:05 11:05 13:05 14:05 15:05
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 盘中快照并重建站点（东财失败自动切腾讯）
+        run: |
+          set -x
+          python fetch_intraday.py || true
+          python build_site.py
+
+      - name: 提交最新数据与站点文件
+        run: |
+          git config user.name  "quant-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "auto: 盘中快照 $(date '+%F %T')"
+            git pull --rebase --autostash || true
+            git push
+          fi
+
+      - name: 部署到 GitHub Pages
+        uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: deploy
+      - uses: actions/deploy-pages@v4

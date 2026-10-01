@@ -1,0 +1,154 @@
+{
+ "ts": "2026-09-30 15:33",
+ "phase": "收盘定稿",
+ "picks": [
+  {
+   "secid": "1.605268",
+   "code": "605268",
+   "name": "王力安防",
+   "sector": "定制家居",
+   "price": 10.12,
+   "prevClose": 10.22,
+   "chg": -0.0098,
+   "stop": 9.35,
+   "target": 11.27,
+   "signals": [],
+   "volRatio": 0.39,
+   "warn": []
+  },
+  {
+   "secid": "0.002419",
+   "code": "002419",
+   "name": "天虹股份",
+   "sector": "百货",
+   "price": 5.09,
+   "prevClose": 4.63,
+   "chg": 0.0994,
+   "stop": 4.77,
+   "target": 5.57,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.94,
+   "warn": []
+  },
+  {
+   "secid": "1.603127",
+   "code": "603127",
+   "name": "昭衍新药",
+   "sector": "医疗研发外包",
+   "price": 49.3,
+   "prevClose": 44.82,
+   "chg": 0.1,
+   "stop": 43.84,
+   "target": 57.49,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.09,
+   "warn": []
+  },
+  {
+   "secid": "1.688185",
+   "code": "688185",
+   "name": "康希诺",
+   "sector": "疫苗",
+   "price": 102.64,
+   "prevClose": 85.53,
+   "chg": 0.2,
+   "stop": 89.04,
+   "target": 123.04,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.08,
+   "warn": []
+  },
+  {
+   "secid": "0.300638",
+   "code": "300638",
+   "name": "广和通",
+   "sector": "通信终端及配件",
+   "price": 19.72,
+   "prevClose": 19.82,
+   "chg": -0.005,
+   "stop": 18.4,
+   "target": 21.7,
+   "signals": [],
+   "volRatio": 0.79,
+   "warn": []
+  },
+  {
+   "secid": "1.603099",
+   "code": "603099",
+   "name": "长白山",
+   "sector": "自然景区",
+   "price": 40.68,
+   "prevClose": 39.78,
+   "chg": 0.0226,
+   "stop": 36.5,
+   "target": 46.95,
+   "signals": [],
+   "volRatio": 0.61,
+   "warn": []
+  },
+  {
+   "secid": "0.301356",
+   "code": "301356",
+   "name": "天振股份",
+   "sector": "瓷砖地板",
+   "price": 19.74,
+   "prevClose": 19.77,
+   "chg": -0.0015,
+   "stop": 17.63,
+   "target": 22.9,
+   "signals": [],
+   "volRatio": 0.85,
+   "warn": []
+  },
+  {
+   "secid": "0.300601",
+   "code": "300601",
+   "name": "康泰生物",
+   "sector": "疫苗",
+   "price": 13.58,
+   "prevClose": 12.79,
+   "chg": 0.0618,
+   "stop": 12.56,
+   "target": 15.11,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 1.5,
+   "warn": []
+  }
+ ],
+ "indices": [
+  {
+   "secid": "1.000001",
+   "name": "上证指数",
+   "price": 3842.19,
+   "chg": 0.0031,
+   "signals": []
+  },
+  {
+   "secid": "0.399001",
+   "name": "深证成指",
+   "price": 12887.62,
+   "chg": -0.0011,
+   "signals": []
+  },
+  {
+   "secid": "0.399006",
+   "name": "创业板指",
+   "price": 3135.28,
+   "chg": -0.0023,
+   "signals": []
+  }
+ ],
+ "note": "盘中数据基于60分钟K线, 仅供参考; 最终信号以收盘后日线定稿为准"
+}
