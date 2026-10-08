@@ -1,0 +1,45 @@
+name: 保活（防止定时任务被 GitHub 休眠）
+
+# 背景：GitHub 对「60 天无人工提交」的仓库会自动停用 schedule 定时任务，
+# 且 cron 触发的机器人提交不计入活跃度。实测本仓库出现过定时静默停摆
+# （2026-10-08 全天零次 schedule 运行）。
+#
+# 本 workflow 每月 1 日和 15 日各提交一次时间戳文件，作为「人工活性」信号，
+# 让 schedule 保持启用。它同时也是定时任务健康检查的锚点。
+
+on:
+  schedule:
+    - cron: "17 3 1,15 * *"   # 每月 1 日、15 日 11:17（北京时间）
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: keepalive
+  cancel-in-progress: false
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 写入心跳时间戳并提交
+        run: |
+          set -e
+          TZ=Asia/Shanghai date '+%F %T %z' > .keepalive
+          git config user.name  "quant-bot"
+          git config user.email "actions@github.com"
+          git add .keepalive
+          if git diff --cached --quiet; then
+            echo "心跳无变化，跳过提交"
+          else
+            git commit -m "chore: keepalive $(TZ=Asia/Shanghai date '+%F %T')"
+            git pull --rebase --autostash || true
+            git push
+          fi
+
+      - name: 输出心跳内容
+        run: cat .keepalive

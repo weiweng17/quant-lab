@@ -37,6 +37,17 @@ jobs:
           python fetch_intraday.py || true
           python build_site.py
 
+      - name: 校验站点产物（防止空/残缺页面被发布）
+        run: |
+          set -e
+          SZ=$(stat -c%s deploy/index.html)
+          echo "deploy/index.html = $SZ bytes"
+          if [ "$SZ" -lt 600000 ]; then
+            echo "::error::deploy/index.html 体积异常（$SZ < 600000），拒绝发布"
+            exit 1
+          fi
+          grep -q "$(TZ=Asia/Shanghai date '+%Y-%m-%d')" deploy/index.html             && echo "已包含今日日期标记"             || echo "::warning::页面内未找到今日日期标记，请检查 build_site.py"
+
       - name: 提交最新数据与站点文件
         run: |
           git config user.name  "quant-bot"
