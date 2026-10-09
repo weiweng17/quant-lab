@@ -1,19 +1,19 @@
 {
- "ts": "2026-10-08 22:50",
- "phase": "收盘定稿",
+ "ts": "2026-10-09 12:32",
+ "phase": "午间休市",
  "picks": [
   {
    "secid": "1.605268",
    "code": "605268",
    "name": "王力安防",
    "sector": "定制家居",
-   "price": 10.05,
-   "prevClose": 10.12,
-   "chg": -0.0069,
+   "price": 10.03,
+   "prevClose": 10.05,
+   "chg": -0.002,
    "stop": 9.28,
-   "target": 11.21,
+   "target": 11.15,
    "signals": [],
-   "volRatio": 0.5,
+   "volRatio": 0.48,
    "warn": []
   },
   {
@@ -21,17 +21,16 @@
    "code": "002419",
    "name": "天虹股份",
    "sector": "百货",
-   "price": 4.9,
-   "prevClose": 5.09,
-   "chg": -0.0373,
-   "stop": 4.55,
-   "target": 5.43,
+   "price": 4.89,
+   "prevClose": 4.9,
+   "chg": -0.002,
+   "stop": 4.56,
+   "target": 5.38,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 2.11,
+   "volRatio": 1.06,
    "warn": []
   },
   {
@@ -39,33 +38,33 @@
    "code": "603127",
    "name": "昭衍新药",
    "sector": "医疗研发外包",
-   "price": 52.06,
-   "prevClose": 49.3,
-   "chg": 0.056,
-   "stop": 46.16,
-   "target": 60.91,
+   "price": 51.32,
+   "prevClose": 52.06,
+   "chg": -0.0142,
+   "stop": 45.31,
+   "target": 60.33,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.79,
+   "volRatio": 0.64,
    "warn": []
   },
   {
-   "secid": "1.688185",
-   "code": "688185",
-   "name": "康希诺",
+   "secid": "0.300122",
+   "code": "300122",
+   "name": "智飞生物",
    "sector": "疫苗",
-   "price": 99.56,
-   "prevClose": 102.64,
-   "chg": -0.03,
-   "stop": 85.02,
-   "target": 121.37,
+   "price": 13.38,
+   "prevClose": 13.59,
+   "chg": -0.0155,
+   "stop": 12.29,
+   "target": 15.02,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头"
+    "MACD小时死叉"
    ],
-   "volRatio": 0.9,
+   "volRatio": 0.54,
    "warn": []
   },
   {
@@ -73,16 +72,16 @@
    "code": "603099",
    "name": "长白山",
    "sector": "自然景区",
-   "price": 43.12,
-   "prevClose": 40.68,
-   "chg": 0.06,
-   "stop": 38.45,
-   "target": 50.12,
+   "price": 42.77,
+   "prevClose": 43.12,
+   "chg": -0.0081,
+   "stop": 37.96,
+   "target": 49.99,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.87,
+   "volRatio": 0.51,
    "warn": []
   },
   {
@@ -90,33 +89,32 @@
    "code": "002162",
    "name": "悦心健康",
    "sector": "瓷砖地板",
-   "price": 4.23,
-   "prevClose": 4.19,
-   "chg": 0.0095,
-   "stop": 3.82,
-   "target": 4.85,
+   "price": 4.28,
+   "prevClose": 4.23,
+   "chg": 0.0118,
+   "stop": 3.91,
+   "target": 4.84,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.92,
+   "volRatio": 0.71,
    "warn": []
   },
   {
-   "secid": "0.300601",
-   "code": "300601",
-   "name": "康泰生物",
+   "secid": "1.688185",
+   "code": "688185",
+   "name": "康希诺",
    "sector": "疫苗",
-   "price": 13.23,
-   "prevClose": 13.58,
-   "chg": -0.0258,
-   "stop": 12.15,
-   "target": 14.85,
+   "price": 94.4,
+   "prevClose": 99.56,
+   "chg": -0.0518,
+   "stop": 80.24,
+   "target": 115.64,
    "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.76,
+   "volRatio": 0.52,
    "warn": []
   },
   {
@@ -124,16 +122,16 @@
    "code": "300142",
    "name": "沃森生物",
    "sector": "疫苗",
-   "price": 14.08,
-   "prevClose": 14.23,
-   "chg": -0.0105,
-   "stop": 12.85,
-   "target": 15.93,
+   "price": 14.15,
+   "prevClose": 14.08,
+   "chg": 0.005,
+   "stop": 12.9,
+   "target": 16.02,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.57,
+   "volRatio": 0.64,
    "warn": []
   }
  ],
@@ -141,22 +139,22 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3811.9,
-   "chg": -0.0079,
+   "price": 3765.71,
+   "chg": -0.0121,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 12620.9,
-   "chg": -0.0207,
+   "price": 12356.56,
+   "chg": -0.0209,
    "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 3036.66,
-   "chg": -0.0315,
+   "price": 2957.32,
+   "chg": -0.0261,
    "signals": []
   }
  ],
