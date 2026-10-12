@@ -1,6 +1,6 @@
 {
- "ts": "2026-10-12 17:03",
- "phase": "收盘定稿",
+ "ts": "2026-10-13 00:57",
+ "phase": "盘前",
  "picks": [
   {
    "secid": "1.603216",
@@ -8,16 +8,16 @@
    "name": "梦天家居",
    "sector": "定制家居",
    "price": 24.45,
-   "prevClose": 24.1,
-   "chg": 0.0145,
-   "stop": 20.79,
-   "target": 29.07,
+   "prevClose": 24.45,
+   "chg": 0.0,
+   "stop": 21.28,
+   "target": 29.2,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
     "放量"
    ],
-   "volRatio": 1.52,
+   "volRatio": 1.51,
    "warn": []
   },
   {
@@ -26,10 +26,10 @@
    "name": "天虹股份",
    "sector": "百货",
    "price": 4.84,
-   "prevClose": 4.94,
-   "chg": -0.0202,
-   "stop": 4.6,
-   "target": 5.45,
+   "prevClose": 4.84,
+   "chg": 0.0,
+   "stop": 4.49,
+   "target": 5.36,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -42,15 +42,15 @@
    "name": "昭衍新药",
    "sector": "医疗研发外包",
    "price": 50.73,
-   "prevClose": 52.6,
-   "chg": -0.0356,
-   "stop": 46.59,
-   "target": 61.61,
+   "prevClose": 50.73,
+   "chg": 0.0,
+   "stop": 44.39,
+   "target": 60.24,
    "signals": [
     "小时MA5>MA20",
     "MACD小时死叉"
    ],
-   "volRatio": 0.7,
+   "volRatio": 0.69,
    "warn": []
   },
   {
@@ -59,10 +59,10 @@
    "name": "智飞生物",
    "sector": "疫苗",
    "price": 13.28,
-   "prevClose": 13.7,
-   "chg": -0.0307,
-   "stop": 12.59,
-   "target": 15.36,
+   "prevClose": 13.28,
+   "chg": 0.0,
+   "stop": 12.13,
+   "target": 15.0,
    "signals": [
     "小时死叉"
    ],
@@ -75,10 +75,10 @@
    "name": "长白山",
    "sector": "自然景区",
    "price": 41.68,
-   "prevClose": 42.82,
-   "chg": -0.0266,
-   "stop": 38.01,
-   "target": 50.04,
+   "prevClose": 41.68,
+   "chg": 0.0,
+   "stop": 36.72,
+   "target": 49.12,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -91,10 +91,10 @@
    "name": "天振股份",
    "sector": "瓷砖地板",
    "price": 21.77,
-   "prevClose": 20.08,
-   "chg": 0.0842,
-   "stop": 17.82,
-   "target": 23.47,
+   "prevClose": 21.77,
+   "chg": 0.0,
+   "stop": 19.25,
+   "target": 25.55,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -103,34 +103,33 @@
    "warn": []
   },
   {
-   "secid": "0.003012",
-   "code": "003012",
-   "name": "东鹏控股",
-   "sector": "瓷砖地板",
-   "price": 4.69,
-   "prevClose": 4.72,
-   "chg": -0.0064,
-   "stop": 4.45,
-   "target": 5.12,
-   "signals": [
-    "小时MA5>MA20",
-    "放量"
-   ],
-   "volRatio": 1.51,
-   "warn": []
-  },
-  {
    "secid": "1.688185",
    "code": "688185",
    "name": "康希诺",
    "sector": "疫苗",
    "price": 90.82,
-   "prevClose": 98.46,
-   "chg": -0.0776,
-   "stop": 83.69,
-   "target": 120.61,
+   "prevClose": 90.82,
+   "chg": 0.0,
+   "stop": 77.2,
+   "target": 111.25,
    "signals": [],
    "volRatio": 0.89,
+   "warn": []
+  },
+  {
+   "secid": "0.300142",
+   "code": "300142",
+   "name": "沃森生物",
+   "sector": "疫苗",
+   "price": 14.05,
+   "prevClose": 14.05,
+   "chg": 0.0,
+   "stop": 12.67,
+   "target": 16.12,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 0.61,
    "warn": []
   }
  ],
@@ -139,7 +138,7 @@
    "secid": "1.000001",
    "name": "上证指数",
    "price": 3797.24,
-   "chg": -0.0043,
+   "chg": 0.0,
    "signals": [
     "小时MACD多头"
    ]
@@ -148,7 +147,7 @@
    "secid": "0.399001",
    "name": "深证成指",
    "price": 12384.87,
-   "chg": -0.0203,
+   "chg": 0.0,
    "signals": [
     "小时MACD多头"
    ]
@@ -157,7 +156,7 @@
    "secid": "0.399006",
    "name": "创业板指",
    "price": 2963.82,
-   "chg": -0.0261,
+   "chg": 0.0,
    "signals": [
     "小时MACD多头"
    ]
