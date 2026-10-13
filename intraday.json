@@ -1,116 +1,7 @@
 {
- "ts": "2026-10-13 17:17",
+ "ts": "2026-10-13 23:15",
  "phase": "收盘定稿",
  "picks": [
-  {
-   "secid": "1.603216",
-   "code": "603216",
-   "name": "梦天家居",
-   "sector": "定制家居",
-   "price": 24.88,
-   "prevClose": 24.45,
-   "chg": 0.0176,
-   "stop": 21.28,
-   "target": 29.2,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 1.3,
-   "warn": []
-  },
-  {
-   "secid": "0.002419",
-   "code": "002419",
-   "name": "天虹股份",
-   "sector": "百货",
-   "price": 4.94,
-   "prevClose": 4.84,
-   "chg": 0.0207,
-   "stop": 4.49,
-   "target": 5.36,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.57,
-   "warn": []
-  },
-  {
-   "secid": "1.603127",
-   "code": "603127",
-   "name": "昭衍新药",
-   "sector": "医疗研发外包",
-   "price": 50.42,
-   "prevClose": 50.73,
-   "chg": -0.0061,
-   "stop": 44.39,
-   "target": 60.24,
-   "signals": [],
-   "volRatio": 0.36,
-   "warn": []
-  },
-  {
-   "secid": "0.300122",
-   "code": "300122",
-   "name": "智飞生物",
-   "sector": "疫苗",
-   "price": 13.01,
-   "prevClose": 13.28,
-   "chg": -0.0203,
-   "stop": 12.13,
-   "target": 15.0,
-   "signals": [],
-   "volRatio": 0.44,
-   "warn": []
-  },
-  {
-   "secid": "1.603099",
-   "code": "603099",
-   "name": "长白山",
-   "sector": "自然景区",
-   "price": 45.85,
-   "prevClose": 41.68,
-   "chg": 0.1,
-   "stop": 36.72,
-   "target": 49.12,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.76,
-   "warn": []
-  },
-  {
-   "secid": "0.301356",
-   "code": "301356",
-   "name": "天振股份",
-   "sector": "瓷砖地板",
-   "price": 20.83,
-   "prevClose": 21.77,
-   "chg": -0.0432,
-   "stop": 19.25,
-   "target": 25.55,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.64,
-   "warn": []
-  },
-  {
-   "secid": "1.688185",
-   "code": "688185",
-   "name": "康希诺",
-   "sector": "疫苗",
-   "price": 88.04,
-   "prevClose": 90.82,
-   "chg": -0.0306,
-   "stop": 77.2,
-   "target": 111.25,
-   "signals": [],
-   "volRatio": 0.5,
-   "warn": []
-  },
   {
    "secid": "0.300142",
    "code": "300142",
@@ -119,10 +10,120 @@
    "price": 14.08,
    "prevClose": 14.05,
    "chg": 0.0021,
-   "stop": 12.67,
-   "target": 16.12,
+   "stop": 12.69,
+   "target": 16.16,
    "signals": [],
    "volRatio": 0.37,
+   "warn": []
+  },
+  {
+   "secid": "0.002292",
+   "code": "002292",
+   "name": "奥飞娱乐",
+   "sector": "娱乐用品",
+   "price": 9.16,
+   "prevClose": 8.93,
+   "chg": 0.0258,
+   "stop": 8.24,
+   "target": 10.54,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.92,
+   "warn": []
+  },
+  {
+   "secid": "1.600597",
+   "code": "600597",
+   "name": "光明乳业",
+   "sector": "乳品",
+   "price": 6.9,
+   "prevClose": 6.98,
+   "chg": -0.0115,
+   "stop": 6.61,
+   "target": 7.34,
+   "signals": [],
+   "volRatio": 0.62,
+   "warn": []
+  },
+  {
+   "secid": "1.603259",
+   "code": "603259",
+   "name": "药明康德",
+   "sector": "医疗研发外包",
+   "price": 157.35,
+   "prevClose": 157.85,
+   "chg": -0.0032,
+   "stop": 142.54,
+   "target": 179.56,
+   "signals": [],
+   "volRatio": 0.38,
+   "warn": []
+  },
+  {
+   "secid": "0.300832",
+   "code": "300832",
+   "name": "新产业",
+   "sector": "体外诊断",
+   "price": 52.05,
+   "prevClose": 51.94,
+   "chg": 0.0021,
+   "stop": 48.75,
+   "target": 57.0,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.67,
+   "warn": []
+  },
+  {
+   "secid": "0.002044",
+   "code": "002044",
+   "name": "美年健康",
+   "sector": "医院",
+   "price": 4.79,
+   "prevClose": 4.88,
+   "chg": -0.0184,
+   "stop": 4.36,
+   "target": 5.43,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.83,
+   "warn": []
+  },
+  {
+   "secid": "1.601229",
+   "code": "601229",
+   "name": "上海银行",
+   "sector": "城商行Ⅲ",
+   "price": 9.67,
+   "prevClose": 9.77,
+   "chg": -0.0102,
+   "stop": 9.34,
+   "target": 10.16,
+   "signals": [],
+   "volRatio": 1.18,
+   "warn": []
+  },
+  {
+   "secid": "1.603216",
+   "code": "603216",
+   "name": "梦天家居",
+   "sector": "定制家居",
+   "price": 24.88,
+   "prevClose": 24.45,
+   "chg": 0.0176,
+   "stop": 21.38,
+   "target": 30.13,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 1.3,
    "warn": []
   }
  ],
