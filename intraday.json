@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-15 20:50",
+ "ts": "2026-10-16 15:02",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,16 +7,15 @@
    "code": "002292",
    "name": "奥飞娱乐",
    "sector": "娱乐用品",
-   "price": 9.13,
-   "prevClose": 9.43,
-   "chg": -0.0318,
+   "price": 9.14,
+   "prevClose": 9.13,
+   "chg": 0.0011,
    "stop": 8.14,
    "target": 10.62,
    "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.69,
+   "volRatio": 0.66,
    "warn": []
   },
   {
@@ -24,13 +23,13 @@
    "code": "600597",
    "name": "光明乳业",
    "sector": "乳品",
-   "price": 6.94,
-   "prevClose": 7.02,
-   "chg": -0.0114,
+   "price": 6.86,
+   "prevClose": 6.94,
+   "chg": -0.0115,
    "stop": 6.63,
    "target": 7.41,
    "signals": [],
-   "volRatio": 0.49,
+   "volRatio": 1.33,
    "warn": []
   },
   {
@@ -38,15 +37,13 @@
    "code": "300832",
    "name": "新产业",
    "sector": "体外诊断",
-   "price": 51.63,
-   "prevClose": 52.76,
-   "chg": -0.0214,
+   "price": 50.38,
+   "prevClose": 51.63,
+   "chg": -0.0242,
    "stop": 48.01,
    "target": 57.06,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 1.14,
+   "signals": [],
+   "volRatio": 1.25,
    "warn": []
   },
   {
@@ -55,12 +52,12 @@
    "name": "美年健康",
    "sector": "医院",
    "price": 4.64,
-   "prevClose": 4.77,
-   "chg": -0.0273,
+   "prevClose": 4.64,
+   "chg": 0.0,
    "stop": 4.18,
    "target": 5.33,
    "signals": [],
-   "volRatio": 0.35,
+   "volRatio": 0.68,
    "warn": []
   },
   {
@@ -68,13 +65,13 @@
    "code": "601229",
    "name": "上海银行",
    "sector": "城商行Ⅲ",
-   "price": 9.65,
-   "prevClose": 9.68,
-   "chg": -0.0031,
+   "price": 9.61,
+   "prevClose": 9.65,
+   "chg": -0.0041,
    "stop": 9.32,
    "target": 10.14,
    "signals": [],
-   "volRatio": 1.37,
+   "volRatio": 1.22,
    "warn": []
   },
   {
@@ -82,16 +79,13 @@
    "code": "603216",
    "name": "梦天家居",
    "sector": "定制家居",
-   "price": 24.72,
-   "prevClose": 26.2,
-   "chg": -0.0565,
+   "price": 24.94,
+   "prevClose": 24.72,
+   "chg": 0.0089,
    "stop": 21.01,
    "target": 30.28,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ],
-   "volRatio": 0.9,
+   "signals": [],
+   "volRatio": 0.51,
    "warn": []
   },
   {
@@ -99,17 +93,15 @@
    "code": "605299",
    "name": "舒华体育",
    "sector": "娱乐用品",
-   "price": 12.98,
-   "prevClose": 12.52,
-   "chg": 0.0367,
+   "price": 12.25,
+   "prevClose": 12.98,
+   "chg": -0.0562,
    "stop": 11.78,
    "target": 14.78,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
+    "小时MA5>MA20"
    ],
-   "volRatio": 1.85,
+   "volRatio": 1.31,
    "warn": []
   },
   {
@@ -117,15 +109,15 @@
    "code": "002946",
    "name": "新乳业",
    "sector": "乳品",
-   "price": 15.2,
-   "prevClose": 15.16,
-   "chg": 0.0026,
+   "price": 15.04,
+   "prevClose": 15.2,
+   "chg": -0.0105,
    "stop": 14.28,
    "target": 16.58,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 0.62,
+   "volRatio": 0.64,
    "warn": []
   }
  ],
@@ -133,22 +125,22 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3707.48,
-   "chg": -0.0159,
+   "price": 3716.28,
+   "chg": 0.0024,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11816.79,
-   "chg": -0.0243,
+   "price": 11802.46,
+   "chg": -0.0012,
    "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2783.17,
-   "chg": -0.0292,
+   "price": 2772.38,
+   "chg": -0.0039,
    "signals": []
   }
  ],
