@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-16 20:19",
+ "ts": "2026-10-16 20:42",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,7 +10,7 @@
    "price": 9.14,
    "prevClose": 9.13,
    "chg": 0.0011,
-   "stop": 8.14,
+   "stop": 8.15,
    "target": 10.62,
    "signals": [
     "小时MA5>MA20"
@@ -26,8 +26,8 @@
    "price": 6.86,
    "prevClose": 6.94,
    "chg": -0.0115,
-   "stop": 6.63,
-   "target": 7.41,
+   "stop": 6.53,
+   "target": 7.36,
    "signals": [],
    "volRatio": 1.33,
    "warn": []
@@ -40,8 +40,8 @@
    "price": 50.38,
    "prevClose": 51.63,
    "chg": -0.0242,
-   "stop": 48.01,
-   "target": 57.06,
+   "stop": 46.48,
+   "target": 56.23,
    "signals": [],
    "volRatio": 1.25,
    "warn": []
@@ -54,24 +54,10 @@
    "price": 4.64,
    "prevClose": 4.64,
    "chg": 0.0,
-   "stop": 4.18,
-   "target": 5.33,
+   "stop": 4.13,
+   "target": 5.4,
    "signals": [],
    "volRatio": 0.68,
-   "warn": []
-  },
-  {
-   "secid": "1.601229",
-   "code": "601229",
-   "name": "上海银行",
-   "sector": "城商行Ⅲ",
-   "price": 9.61,
-   "prevClose": 9.65,
-   "chg": -0.0041,
-   "stop": 9.32,
-   "target": 10.14,
-   "signals": [],
-   "volRatio": 1.22,
    "warn": []
   },
   {
@@ -82,26 +68,10 @@
    "price": 24.94,
    "prevClose": 24.72,
    "chg": 0.0089,
-   "stop": 21.01,
-   "target": 30.28,
+   "stop": 21.2,
+   "target": 30.55,
    "signals": [],
    "volRatio": 0.51,
-   "warn": []
-  },
-  {
-   "secid": "1.605299",
-   "code": "605299",
-   "name": "舒华体育",
-   "sector": "娱乐用品",
-   "price": 12.25,
-   "prevClose": 12.98,
-   "chg": -0.0562,
-   "stop": 11.78,
-   "target": 14.78,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 1.32,
    "warn": []
   },
   {
@@ -112,12 +82,28 @@
    "price": 15.04,
    "prevClose": 15.2,
    "chg": -0.0105,
-   "stop": 14.28,
-   "target": 16.58,
+   "stop": 14.08,
+   "target": 16.48,
    "signals": [
     "小时MA5>MA20"
    ],
    "volRatio": 0.64,
+   "warn": []
+  },
+  {
+   "secid": "1.605299",
+   "code": "605299",
+   "name": "舒华体育",
+   "sector": "娱乐用品",
+   "price": 12.25,
+   "prevClose": 12.98,
+   "chg": -0.0562,
+   "stop": 10.96,
+   "target": 14.18,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 1.31,
    "warn": []
   }
  ],
