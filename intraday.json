@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-19 15:39",
+ "ts": "2026-10-19 22:57",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,24 +10,28 @@
    "price": 8.95,
    "prevClose": 9.14,
    "chg": -0.0208,
-   "stop": 8.15,
-   "target": 10.62,
+   "stop": 7.96,
+   "target": 10.43,
    "signals": [],
    "volRatio": 0.37,
    "warn": []
   },
   {
-   "secid": "1.600597",
-   "code": "600597",
-   "name": "光明乳业",
+   "secid": "0.002946",
+   "code": "002946",
+   "name": "新乳业",
    "sector": "乳品",
-   "price": 6.82,
-   "prevClose": 6.86,
-   "chg": -0.0058,
-   "stop": 6.53,
-   "target": 7.36,
-   "signals": [],
-   "volRatio": 0.66,
+   "price": 15.53,
+   "prevClose": 15.04,
+   "chg": 0.0326,
+   "stop": 14.48,
+   "target": 17.1,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头",
+    "放量"
+   ],
+   "volRatio": 2.09,
    "warn": []
   },
   {
@@ -38,8 +42,8 @@
    "price": 53.32,
    "prevClose": 50.38,
    "chg": 0.0584,
-   "stop": 46.48,
-   "target": 56.23,
+   "stop": 48.89,
+   "target": 59.97,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -55,10 +59,27 @@
    "price": 4.73,
    "prevClose": 4.64,
    "chg": 0.0194,
-   "stop": 4.13,
-   "target": 5.4,
+   "stop": 4.23,
+   "target": 5.48,
    "signals": [],
    "volRatio": 0.77,
+   "warn": []
+  },
+  {
+   "secid": "1.600926",
+   "code": "600926",
+   "name": "杭州银行",
+   "sector": "城商行Ⅲ",
+   "price": 17.28,
+   "prevClose": 16.83,
+   "chg": 0.0267,
+   "stop": 16.55,
+   "target": 18.38,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.84,
    "warn": []
   },
   {
@@ -69,42 +90,41 @@
    "price": 24.96,
    "prevClose": 24.94,
    "chg": 0.0008,
-   "stop": 21.2,
-   "target": 30.55,
+   "stop": 21.22,
+   "target": 30.57,
    "signals": [],
    "volRatio": 0.6,
    "warn": []
   },
   {
-   "secid": "0.002946",
-   "code": "002946",
-   "name": "新乳业",
+   "secid": "1.600882",
+   "code": "600882",
+   "name": "妙可蓝多",
    "sector": "乳品",
-   "price": 15.53,
-   "prevClose": 15.04,
-   "chg": 0.0326,
-   "stop": 14.08,
-   "target": 16.48,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
-   ],
-   "volRatio": 2.09,
+   "price": 19.25,
+   "prevClose": 18.96,
+   "chg": 0.0153,
+   "stop": 17.47,
+   "target": 21.92,
+   "signals": [],
+   "volRatio": 0.37,
    "warn": []
   },
   {
-   "secid": "1.605299",
-   "code": "605299",
-   "name": "舒华体育",
-   "sector": "娱乐用品",
-   "price": 11.85,
-   "prevClose": 12.25,
-   "chg": -0.0327,
-   "stop": 10.96,
-   "target": 14.18,
-   "signals": [],
-   "volRatio": 0.59,
+   "secid": "1.603833",
+   "code": "603833",
+   "name": "欧派家居",
+   "sector": "定制家居",
+   "price": 32.28,
+   "prevClose": 31.1,
+   "chg": 0.0379,
+   "stop": 29.81,
+   "target": 35.99,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.79,
    "warn": []
   }
  ],
