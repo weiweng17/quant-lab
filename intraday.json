@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-20 15:25",
+ "ts": "2026-10-20 20:56",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,10 +10,10 @@
    "price": 9.29,
    "prevClose": 8.95,
    "chg": 0.038,
-   "stop": 7.96,
-   "target": 10.43,
+   "stop": 8.25,
+   "target": 10.85,
    "signals": [],
-   "volRatio": 0.55,
+   "volRatio": 0.54,
    "warn": []
   },
   {
@@ -24,13 +24,29 @@
    "price": 15.85,
    "prevClose": 15.53,
    "chg": 0.0206,
-   "stop": 14.48,
-   "target": 17.1,
+   "stop": 14.75,
+   "target": 17.5,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 1.46,
+   "warn": []
+  },
+  {
+   "secid": "1.603127",
+   "code": "603127",
+   "name": "昭衍新药",
+   "sector": "医疗研发外包",
+   "price": 49.6,
+   "prevClose": 45.9,
+   "chg": 0.0806,
+   "stop": 42.16,
+   "target": 60.76,
+   "signals": [
+    "小时MACD多头"
+   ],
+   "volRatio": 0.62,
    "warn": []
   },
   {
@@ -41,8 +57,8 @@
    "price": 53.33,
    "prevClose": 53.32,
    "chg": 0.0002,
-   "stop": 48.89,
-   "target": 59.97,
+   "stop": 48.76,
+   "target": 60.19,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
@@ -59,33 +75,14 @@
    "price": 4.89,
    "prevClose": 4.73,
    "chg": 0.0338,
-   "stop": 4.23,
-   "target": 5.48,
+   "stop": 4.37,
+   "target": 5.67,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 0.96,
    "warn": []
-  },
-  {
-   "secid": "1.600926",
-   "code": "600926",
-   "name": "杭州银行",
-   "sector": "城商行Ⅲ",
-   "price": 16.85,
-   "prevClose": 17.28,
-   "chg": -0.0249,
-   "stop": 16.55,
-   "target": 18.38,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ],
-   "volRatio": 0.89,
-   "warn": [
-    "接近止损(1.8%)"
-   ]
   },
   {
    "secid": "1.603216",
@@ -95,44 +92,41 @@
    "price": 23.88,
    "prevClose": 24.96,
    "chg": -0.0433,
-   "stop": 21.22,
-   "target": 30.57,
+   "stop": 20.3,
+   "target": 29.25,
    "signals": [],
    "volRatio": 0.91,
    "warn": []
   },
   {
-   "secid": "1.600882",
-   "code": "600882",
-   "name": "妙可蓝多",
-   "sector": "乳品",
-   "price": 19.5,
-   "prevClose": 19.25,
-   "chg": 0.013,
-   "stop": 17.47,
-   "target": 21.92,
+   "secid": "0.300406",
+   "code": "300406",
+   "name": "九强生物",
+   "sector": "体外诊断",
+   "price": 11.95,
+   "prevClose": 12.08,
+   "chg": -0.0108,
+   "stop": 11.23,
+   "target": 13.03,
    "signals": [
-    "小时MACD多头",
-    "MACD小时金叉"
+    "小时MA5>MA20",
+    "小时MACD多头"
    ],
-   "volRatio": 0.68,
+   "volRatio": 1.07,
    "warn": []
   },
   {
-   "secid": "1.603833",
-   "code": "603833",
-   "name": "欧派家居",
-   "sector": "定制家居",
-   "price": 31.46,
-   "prevClose": 32.28,
-   "chg": -0.0254,
-   "stop": 29.81,
-   "target": 35.99,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ],
-   "volRatio": 0.64,
+   "secid": "1.600887",
+   "code": "600887",
+   "name": "伊利股份",
+   "sector": "乳品",
+   "price": 28.07,
+   "prevClose": 27.76,
+   "chg": 0.0112,
+   "stop": 27.14,
+   "target": 29.46,
+   "signals": [],
+   "volRatio": 0.97,
    "warn": []
   }
  ],
