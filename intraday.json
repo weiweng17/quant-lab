@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-21 15:28",
+ "ts": "2026-10-21 21:08",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,8 +10,8 @@
    "price": 9.33,
    "prevClose": 9.29,
    "chg": 0.0043,
-   "stop": 8.25,
-   "target": 10.85,
+   "stop": 8.29,
+   "target": 10.89,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -20,38 +20,17 @@
    "warn": []
   },
   {
-   "secid": "0.002946",
-   "code": "002946",
-   "name": "新乳业",
+   "secid": "1.600887",
+   "code": "600887",
+   "name": "伊利股份",
    "sector": "乳品",
-   "price": 15.09,
-   "prevClose": 15.85,
-   "chg": -0.0479,
-   "stop": 14.75,
-   "target": 17.5,
-   "signals": [
-    "小时死叉"
-   ],
-   "volRatio": 0.63,
-   "warn": [
-    "接近止损(2.3%)"
-   ]
-  },
-  {
-   "secid": "1.603127",
-   "code": "603127",
-   "name": "昭衍新药",
-   "sector": "医疗研发外包",
-   "price": 48.61,
-   "prevClose": 49.6,
-   "chg": -0.02,
-   "stop": 42.16,
-   "target": 60.76,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.51,
+   "price": 27.6,
+   "prevClose": 28.07,
+   "chg": -0.0167,
+   "stop": 26.64,
+   "target": 29.04,
+   "signals": [],
+   "volRatio": 1.08,
    "warn": []
   },
   {
@@ -62,8 +41,8 @@
    "price": 53.03,
    "prevClose": 53.33,
    "chg": -0.0056,
-   "stop": 48.76,
-   "target": 60.19,
+   "stop": 48.32,
+   "target": 60.09,
    "signals": [
     "小时MA5>MA20",
     "MACD小时死叉"
@@ -79,8 +58,8 @@
    "price": 4.92,
    "prevClose": 4.89,
    "chg": 0.0061,
-   "stop": 4.37,
-   "target": 5.67,
+   "stop": 4.39,
+   "target": 5.71,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -89,17 +68,20 @@
    "warn": []
   },
   {
-   "secid": "1.603216",
-   "code": "603216",
-   "name": "梦天家居",
+   "secid": "0.301227",
+   "code": "301227",
+   "name": "森鹰窗业",
    "sector": "定制家居",
-   "price": 23.89,
-   "prevClose": 23.88,
-   "chg": 0.0004,
-   "stop": 20.3,
-   "target": 29.25,
-   "signals": [],
-   "volRatio": 0.51,
+   "price": 32.8,
+   "prevClose": 32.48,
+   "chg": 0.0099,
+   "stop": 27.88,
+   "target": 40.18,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.78,
    "warn": []
   },
   {
@@ -110,8 +92,8 @@
    "price": 11.98,
    "prevClose": 11.95,
    "chg": 0.0025,
-   "stop": 11.23,
-   "target": 13.03,
+   "stop": 11.26,
+   "target": 13.06,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -120,20 +102,18 @@
    "warn": []
   },
   {
-   "secid": "1.600887",
-   "code": "600887",
-   "name": "伊利股份",
-   "sector": "乳品",
-   "price": 27.6,
-   "prevClose": 28.07,
-   "chg": -0.0167,
-   "stop": 27.14,
-   "target": 29.46,
+   "secid": "1.603216",
+   "code": "603216",
+   "name": "梦天家居",
+   "sector": "定制家居",
+   "price": 23.89,
+   "prevClose": 23.88,
+   "chg": 0.0004,
+   "stop": 20.31,
+   "target": 29.26,
    "signals": [],
-   "volRatio": 1.08,
-   "warn": [
-    "接近止损(1.7%)"
-   ]
+   "volRatio": 0.51,
+   "warn": []
   }
  ],
  "indices": [
