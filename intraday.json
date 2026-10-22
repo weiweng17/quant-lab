@@ -1,52 +1,22 @@
 {
- "ts": "2026-10-22 15:28",
+ "ts": "2026-10-22 21:09",
  "phase": "收盘定稿",
  "picks": [
   {
-   "secid": "0.002292",
-   "code": "002292",
-   "name": "奥飞娱乐",
-   "sector": "娱乐用品",
-   "price": 8.72,
-   "prevClose": 9.33,
-   "chg": -0.0654,
-   "stop": 8.29,
-   "target": 10.89,
-   "signals": [],
-   "volRatio": 0.94,
-   "warn": []
-  },
-  {
-   "secid": "1.600887",
-   "code": "600887",
-   "name": "伊利股份",
-   "sector": "乳品",
-   "price": 27.8,
-   "prevClose": 27.6,
-   "chg": 0.0072,
-   "stop": 26.64,
-   "target": 29.04,
-   "signals": [
-    "放量"
-   ],
-   "volRatio": 1.59,
-   "warn": []
-  },
-  {
-   "secid": "0.300832",
-   "code": "300832",
-   "name": "新产业",
+   "secid": "1.603658",
+   "code": "603658",
+   "name": "安图生物",
    "sector": "体外诊断",
-   "price": 53.6,
-   "prevClose": 53.03,
-   "chg": 0.0107,
-   "stop": 48.32,
-   "target": 60.09,
+   "price": 34.4,
+   "prevClose": 34.07,
+   "chg": 0.0097,
+   "stop": 32.16,
+   "target": 37.76,
    "signals": [
     "小时MA5>MA20",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 1.82,
+   "volRatio": 1.11,
    "warn": []
   },
   {
@@ -57,32 +27,13 @@
    "price": 4.75,
    "prevClose": 4.92,
    "chg": -0.0346,
-   "stop": 4.39,
-   "target": 5.71,
+   "stop": 4.22,
+   "target": 5.54,
    "signals": [
     "小时MA5>MA20"
    ],
    "volRatio": 0.57,
    "warn": []
-  },
-  {
-   "secid": "0.301227",
-   "code": "301227",
-   "name": "森鹰窗业",
-   "sector": "定制家居",
-   "price": 26.24,
-   "prevClose": 32.8,
-   "chg": -0.2,
-   "stop": 27.88,
-   "target": 40.18,
-   "signals": [
-    "小时死叉",
-    "放量"
-   ],
-   "volRatio": 2.45,
-   "warn": [
-    "跌破止损位"
-   ]
   },
   {
    "secid": "0.300406",
@@ -92,8 +43,8 @@
    "price": 11.88,
    "prevClose": 11.98,
    "chg": -0.0083,
-   "stop": 11.26,
-   "target": 13.06,
+   "stop": 11.16,
+   "target": 12.96,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -102,17 +53,20 @@
    "warn": []
   },
   {
-   "secid": "1.603216",
-   "code": "603216",
-   "name": "梦天家居",
-   "sector": "定制家居",
-   "price": 22.29,
-   "prevClose": 23.89,
-   "chg": -0.067,
-   "stop": 20.31,
-   "target": 29.26,
-   "signals": [],
-   "volRatio": 0.72,
+   "secid": "0.300832",
+   "code": "300832",
+   "name": "新产业",
+   "sector": "体外诊断",
+   "price": 53.6,
+   "prevClose": 53.03,
+   "chg": 0.0107,
+   "stop": 48.9,
+   "target": 60.65,
+   "signals": [
+    "小时MA5>MA20",
+    "放量"
+   ],
+   "volRatio": 1.82,
    "warn": []
   }
  ],
