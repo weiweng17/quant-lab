@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-22 21:09",
+ "ts": "2026-10-23 15:21",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,16 +7,16 @@
    "code": "603658",
    "name": "安图生物",
    "sector": "体外诊断",
-   "price": 34.4,
-   "prevClose": 34.07,
-   "chg": 0.0097,
+   "price": 35.05,
+   "prevClose": 34.4,
+   "chg": 0.0189,
    "stop": 32.16,
    "target": 37.76,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.11,
+   "volRatio": 1.09,
    "warn": []
   },
   {
@@ -24,15 +24,13 @@
    "code": "002044",
    "name": "美年健康",
    "sector": "医院",
-   "price": 4.75,
-   "prevClose": 4.92,
-   "chg": -0.0346,
+   "price": 4.92,
+   "prevClose": 4.75,
+   "chg": 0.0358,
    "stop": 4.22,
    "target": 5.54,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.57,
+   "signals": [],
+   "volRatio": 1.08,
    "warn": []
   },
   {
@@ -40,16 +38,13 @@
    "code": "300406",
    "name": "九强生物",
    "sector": "体外诊断",
-   "price": 11.88,
-   "prevClose": 11.98,
-   "chg": -0.0083,
+   "price": 11.94,
+   "prevClose": 11.88,
+   "chg": 0.0051,
    "stop": 11.16,
    "target": 12.96,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.57,
+   "signals": [],
+   "volRatio": 1.06,
    "warn": []
   },
   {
@@ -57,16 +52,16 @@
    "code": "300832",
    "name": "新产业",
    "sector": "体外诊断",
-   "price": 53.6,
-   "prevClose": 53.03,
-   "chg": 0.0107,
+   "price": 56.66,
+   "prevClose": 53.6,
+   "chg": 0.0571,
    "stop": 48.9,
    "target": 60.65,
    "signals": [
     "小时MA5>MA20",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 1.82,
+   "volRatio": 1.03,
    "warn": []
   }
  ],
@@ -74,23 +69,29 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3658.03,
-   "chg": -0.0148,
+   "price": 3690.48,
+   "chg": 0.0089,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11357.32,
-   "chg": -0.0296,
-   "signals": []
+   "price": 11673.83,
+   "chg": 0.0279,
+   "signals": [
+    "小时MACD多头",
+    "MACD小时金叉"
+   ]
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2576.9,
-   "chg": -0.0437,
-   "signals": []
+   "price": 2684.1,
+   "chg": 0.0416,
+   "signals": [
+    "小时MACD多头",
+    "MACD小时金叉"
+   ]
   }
  ],
  "note": "盘中数据基于60分钟K线, 仅供参考; 最终信号以收盘后日线定稿为准"
