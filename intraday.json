@@ -1,7 +1,24 @@
 {
- "ts": "2026-10-23 15:21",
+ "ts": "2026-10-23 20:49",
  "phase": "收盘定稿",
  "picks": [
+  {
+   "secid": "1.600887",
+   "code": "600887",
+   "name": "伊利股份",
+   "sector": "乳品",
+   "price": 28.19,
+   "prevClose": 27.8,
+   "chg": 0.014,
+   "stop": 27.13,
+   "target": 29.78,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 1.33,
+   "warn": []
+  },
   {
    "secid": "1.603658",
    "code": "603658",
@@ -10,8 +27,8 @@
    "price": 35.05,
    "prevClose": 34.4,
    "chg": 0.0189,
-   "stop": 32.16,
-   "target": 37.76,
+   "stop": 32.78,
+   "target": 38.45,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -20,17 +37,20 @@
    "warn": []
   },
   {
-   "secid": "0.002044",
-   "code": "002044",
-   "name": "美年健康",
+   "secid": "0.300015",
+   "code": "300015",
+   "name": "爱尔眼科",
    "sector": "医院",
-   "price": 4.92,
-   "prevClose": 4.75,
-   "chg": 0.0358,
-   "stop": 4.22,
-   "target": 5.54,
-   "signals": [],
-   "volRatio": 1.08,
+   "price": 8.14,
+   "prevClose": 7.97,
+   "chg": 0.0213,
+   "stop": 7.8,
+   "target": 8.65,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 1.18,
    "warn": []
   },
   {
@@ -41,8 +61,8 @@
    "price": 11.94,
    "prevClose": 11.88,
    "chg": 0.0051,
-   "stop": 11.16,
-   "target": 12.96,
+   "stop": 11.18,
+   "target": 13.08,
    "signals": [],
    "volRatio": 1.06,
    "warn": []
@@ -55,13 +75,27 @@
    "price": 56.66,
    "prevClose": 53.6,
    "chg": 0.0571,
-   "stop": 48.9,
-   "target": 60.65,
+   "stop": 51.63,
+   "target": 64.2,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 1.03,
+   "warn": []
+  },
+  {
+   "secid": "0.002044",
+   "code": "002044",
+   "name": "美年健康",
+   "sector": "医院",
+   "price": 4.92,
+   "prevClose": 4.75,
+   "chg": 0.0358,
+   "stop": 4.36,
+   "target": 5.76,
+   "signals": [],
+   "volRatio": 1.08,
    "warn": []
   }
  ],
