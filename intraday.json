@@ -1,7 +1,24 @@
 {
- "ts": "2026-10-26 15:42",
+ "ts": "2026-10-26 22:32",
  "phase": "收盘定稿",
  "picks": [
+  {
+   "secid": "0.002292",
+   "code": "002292",
+   "name": "奥飞娱乐",
+   "sector": "娱乐用品",
+   "price": 9.37,
+   "prevClose": 9.13,
+   "chg": 0.0263,
+   "stop": 8.08,
+   "target": 11.3,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.79,
+   "warn": []
+  },
   {
    "secid": "1.600887",
    "code": "600887",
@@ -10,8 +27,8 @@
    "price": 28.6,
    "prevClose": 28.19,
    "chg": 0.0145,
-   "stop": 27.13,
-   "target": 29.78,
+   "stop": 27.53,
+   "target": 30.21,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
@@ -28,8 +45,8 @@
    "price": 36.15,
    "prevClose": 35.05,
    "chg": 0.0314,
-   "stop": 32.78,
-   "target": 38.45,
+   "stop": 33.81,
+   "target": 39.66,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -45,8 +62,8 @@
    "price": 8.42,
    "prevClose": 8.14,
    "chg": 0.0344,
-   "stop": 7.8,
-   "target": 8.65,
+   "stop": 8.04,
+   "target": 8.99,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
@@ -63,8 +80,8 @@
    "price": 12.26,
    "prevClose": 11.94,
    "chg": 0.0268,
-   "stop": 11.18,
-   "target": 13.08,
+   "stop": 11.44,
+   "target": 13.49,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -80,30 +97,13 @@
    "price": 61.95,
    "prevClose": 56.66,
    "chg": 0.0934,
-   "stop": 51.63,
-   "target": 64.2,
+   "stop": 56.02,
+   "target": 70.84,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 1.13,
-   "warn": []
-  },
-  {
-   "secid": "0.002044",
-   "code": "002044",
-   "name": "美年健康",
-   "sector": "医院",
-   "price": 4.97,
-   "prevClose": 4.92,
-   "chg": 0.0102,
-   "stop": 4.36,
-   "target": 5.76,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.59,
    "warn": []
   }
  ],
