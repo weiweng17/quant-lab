@@ -1,24 +1,7 @@
 {
- "ts": "2026-10-27 15:41",
+ "ts": "2026-10-27 21:32",
  "phase": "收盘定稿",
  "picks": [
-  {
-   "secid": "0.002292",
-   "code": "002292",
-   "name": "奥飞娱乐",
-   "sector": "娱乐用品",
-   "price": 9.1,
-   "prevClose": 9.37,
-   "chg": -0.0288,
-   "stop": 8.08,
-   "target": 11.3,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.65,
-   "warn": []
-  },
   {
    "secid": "1.600887",
    "code": "600887",
@@ -27,8 +10,8 @@
    "price": 28.89,
    "prevClose": 28.6,
    "chg": 0.0101,
-   "stop": 27.53,
-   "target": 30.21,
+   "stop": 27.77,
+   "target": 30.57,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -44,8 +27,8 @@
    "price": 38.19,
    "prevClose": 36.15,
    "chg": 0.0564,
-   "stop": 33.81,
-   "target": 39.66,
+   "stop": 35.47,
+   "target": 42.27,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
@@ -62,16 +45,14 @@
    "price": 8.25,
    "prevClose": 8.42,
    "chg": -0.0202,
-   "stop": 8.04,
-   "target": 8.99,
+   "stop": 7.86,
+   "target": 8.83,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 0.89,
-   "warn": [
-    "接近止损(2.6%)"
-   ]
+   "warn": []
   },
   {
    "secid": "0.300406",
@@ -81,14 +62,31 @@
    "price": 12.52,
    "prevClose": 12.26,
    "chg": 0.0212,
-   "stop": 11.44,
-   "target": 13.49,
+   "stop": 11.65,
+   "target": 13.82,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
     "放量"
    ],
    "volRatio": 3.25,
+   "warn": []
+  },
+  {
+   "secid": "1.600763",
+   "code": "600763",
+   "name": "通策医疗",
+   "sector": "医院",
+   "price": 33.78,
+   "prevClose": 34.57,
+   "chg": -0.0229,
+   "stop": 31.75,
+   "target": 36.83,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 1.09,
    "warn": []
   },
   {
@@ -99,8 +97,8 @@
    "price": 59.98,
    "prevClose": 61.95,
    "chg": -0.0318,
-   "stop": 56.02,
-   "target": 70.84,
+   "stop": 53.78,
+   "target": 69.28,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
