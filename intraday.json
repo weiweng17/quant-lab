@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-27 21:32",
+ "ts": "2026-10-28 16:18",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,16 +7,16 @@
    "code": "600887",
    "name": "伊利股份",
    "sector": "乳品",
-   "price": 28.89,
-   "prevClose": 28.6,
-   "chg": 0.0101,
+   "price": 28.69,
+   "prevClose": 28.89,
+   "chg": -0.0069,
    "stop": 27.77,
    "target": 30.57,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.18,
+   "volRatio": 0.81,
    "warn": []
   },
   {
@@ -24,17 +24,16 @@
    "code": "603658",
    "name": "安图生物",
    "sector": "体外诊断",
-   "price": 38.19,
-   "prevClose": 36.15,
-   "chg": 0.0564,
+   "price": 38.15,
+   "prevClose": 38.19,
+   "chg": -0.001,
    "stop": 35.47,
    "target": 42.27,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 1.75,
+   "volRatio": 0.86,
    "warn": []
   },
   {
@@ -42,16 +41,15 @@
    "code": "300015",
    "name": "爱尔眼科",
    "sector": "医院",
-   "price": 8.25,
-   "prevClose": 8.42,
-   "chg": -0.0202,
+   "price": 8.12,
+   "prevClose": 8.25,
+   "chg": -0.0158,
    "stop": 7.86,
    "target": 8.83,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时死叉"
    ],
-   "volRatio": 0.89,
+   "volRatio": 0.57,
    "warn": []
   },
   {
@@ -59,9 +57,9 @@
    "code": "300406",
    "name": "九强生物",
    "sector": "体外诊断",
-   "price": 12.52,
-   "prevClose": 12.26,
-   "chg": 0.0212,
+   "price": 12.8,
+   "prevClose": 12.52,
+   "chg": 0.0224,
    "stop": 11.65,
    "target": 13.82,
    "signals": [
@@ -69,7 +67,7 @@
     "小时MACD多头",
     "放量"
    ],
-   "volRatio": 3.25,
+   "volRatio": 2.01,
    "warn": []
   },
   {
@@ -77,16 +75,16 @@
    "code": "600763",
    "name": "通策医疗",
    "sector": "医院",
-   "price": 33.78,
-   "prevClose": 34.57,
-   "chg": -0.0229,
+   "price": 34.06,
+   "prevClose": 33.78,
+   "chg": 0.0083,
    "stop": 31.75,
    "target": 36.83,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.09,
+   "volRatio": 0.56,
    "warn": []
   },
   {
@@ -94,16 +92,15 @@
    "code": "300832",
    "name": "新产业",
    "sector": "体外诊断",
-   "price": 59.98,
-   "prevClose": 61.95,
-   "chg": -0.0318,
+   "price": 58.23,
+   "prevClose": 59.98,
+   "chg": -0.0292,
    "stop": 53.78,
    "target": 69.28,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.93,
+   "volRatio": 0.49,
    "warn": []
   }
  ],
@@ -111,18 +108,17 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3648.3,
-   "chg": -0.0133,
+   "price": 3681.47,
+   "chg": 0.0091,
    "signals": [
-    "小时MA5>MA20",
     "小时MACD多头"
    ]
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11245.73,
-   "chg": -0.025,
+   "price": 11473.18,
+   "chg": 0.0202,
    "signals": [
     "小时MACD多头"
    ]
@@ -130,8 +126,8 @@
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2548.15,
-   "chg": -0.0341,
+   "price": 2634.76,
+   "chg": 0.034,
    "signals": [
     "小时MACD多头"
    ]
