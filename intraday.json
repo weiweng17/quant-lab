@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-28 22:22",
+ "ts": "2026-10-29 16:21",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,9 +7,9 @@
    "code": "605080",
    "name": "浙江自然",
    "sector": "娱乐用品",
-   "price": 23.72,
-   "prevClose": 23.63,
-   "chg": 0.0038,
+   "price": 23.67,
+   "prevClose": 23.72,
+   "chg": -0.0021,
    "stop": 20.91,
    "target": 27.93,
    "signals": [
@@ -24,16 +24,16 @@
    "code": "600887",
    "name": "伊利股份",
    "sector": "乳品",
-   "price": 28.69,
-   "prevClose": 28.89,
-   "chg": -0.0069,
+   "price": 29.45,
+   "prevClose": 28.69,
+   "chg": 0.0265,
    "stop": 27.51,
    "target": 30.46,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.81,
+   "volRatio": 1.18,
    "warn": []
   },
   {
@@ -41,17 +41,16 @@
    "code": "300406",
    "name": "九强生物",
    "sector": "体外诊断",
-   "price": 12.8,
-   "prevClose": 12.52,
-   "chg": 0.0224,
+   "price": 12.5,
+   "prevClose": 12.8,
+   "chg": -0.0234,
    "stop": 11.91,
    "target": 14.14,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 2.01,
+   "volRatio": 0.74,
    "warn": []
   },
   {
@@ -59,17 +58,16 @@
    "code": "000516",
    "name": "国际医学",
    "sector": "医院",
-   "price": 4.43,
-   "prevClose": 4.34,
-   "chg": 0.0207,
+   "price": 4.38,
+   "prevClose": 4.43,
+   "chg": -0.0113,
    "stop": 4.15,
    "target": 4.85,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头",
-    "MACD小时金叉"
+    "MACD小时死叉"
    ],
-   "volRatio": 1.0,
+   "volRatio": 0.42,
    "warn": []
   },
   {
@@ -77,16 +75,15 @@
    "code": "603658",
    "name": "安图生物",
    "sector": "体外诊断",
-   "price": 38.15,
-   "prevClose": 38.19,
-   "chg": -0.001,
+   "price": 37.5,
+   "prevClose": 38.15,
+   "chg": -0.017,
    "stop": 35.45,
    "target": 42.2,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.86,
+   "volRatio": 0.46,
    "warn": []
   },
   {
@@ -94,16 +91,15 @@
    "code": "600763",
    "name": "通策医疗",
    "sector": "医院",
-   "price": 34.06,
-   "prevClose": 33.78,
-   "chg": 0.0083,
+   "price": 34.21,
+   "prevClose": 34.06,
+   "chg": 0.0044,
    "stop": 32.05,
    "target": 37.08,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.56,
+   "volRatio": 1.31,
    "warn": []
   },
   {
@@ -111,15 +107,13 @@
    "code": "300015",
    "name": "爱尔眼科",
    "sector": "医院",
-   "price": 8.12,
-   "prevClose": 8.25,
-   "chg": -0.0158,
+   "price": 8.22,
+   "prevClose": 8.12,
+   "chg": 0.0123,
    "stop": 7.73,
    "target": 8.7,
-   "signals": [
-    "小时死叉"
-   ],
-   "volRatio": 0.57,
+   "signals": [],
+   "volRatio": 0.95,
    "warn": []
   },
   {
@@ -127,16 +121,15 @@
    "code": "301267",
    "name": "华厦眼科",
    "sector": "医院",
-   "price": 15.09,
-   "prevClose": 15.16,
-   "chg": -0.0046,
+   "price": 14.96,
+   "prevClose": 15.09,
+   "chg": -0.0086,
    "stop": 14.23,
    "target": 16.38,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.56,
+   "volRatio": 0.53,
    "warn": []
   }
  ],
@@ -144,8 +137,8 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3681.47,
-   "chg": 0.0091,
+   "price": 3651.43,
+   "chg": -0.0082,
    "signals": [
     "小时MACD多头"
    ]
@@ -153,19 +146,17 @@
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11473.18,
-   "chg": 0.0202,
-   "signals": [
-    "小时MACD多头"
-   ]
+   "price": 11138.2,
+   "chg": -0.0292,
+   "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2634.76,
-   "chg": 0.034,
+   "price": 2517.59,
+   "chg": -0.0445,
    "signals": [
-    "小时MACD多头"
+    "MACD小时死叉"
    ]
   }
  ],
