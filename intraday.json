@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-29 16:21",
+ "ts": "2026-10-29 22:38",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,8 +10,8 @@
    "price": 23.67,
    "prevClose": 23.72,
    "chg": -0.0021,
-   "stop": 20.91,
-   "target": 27.93,
+   "stop": 20.98,
+   "target": 27.71,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -27,47 +27,13 @@
    "price": 29.45,
    "prevClose": 28.69,
    "chg": 0.0265,
-   "stop": 27.51,
-   "target": 30.46,
+   "stop": 28.22,
+   "target": 31.3,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 1.18,
-   "warn": []
-  },
-  {
-   "secid": "0.300406",
-   "code": "300406",
-   "name": "九强生物",
-   "sector": "体外诊断",
-   "price": 12.5,
-   "prevClose": 12.8,
-   "chg": -0.0234,
-   "stop": 11.91,
-   "target": 14.14,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.74,
-   "warn": []
-  },
-  {
-   "secid": "0.000516",
-   "code": "000516",
-   "name": "国际医学",
-   "sector": "医院",
-   "price": 4.38,
-   "prevClose": 4.43,
-   "chg": -0.0113,
-   "stop": 4.15,
-   "target": 4.85,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ],
-   "volRatio": 0.42,
    "warn": []
   },
   {
@@ -78,8 +44,8 @@
    "price": 37.5,
    "prevClose": 38.15,
    "chg": -0.017,
-   "stop": 35.45,
-   "target": 42.2,
+   "stop": 34.72,
+   "target": 41.67,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -87,49 +53,87 @@
    "warn": []
   },
   {
-   "secid": "1.600763",
-   "code": "600763",
-   "name": "通策医疗",
+   "secid": "0.000516",
+   "code": "000516",
+   "name": "国际医学",
    "sector": "医院",
-   "price": 34.21,
-   "prevClose": 34.06,
-   "chg": 0.0044,
-   "stop": 32.05,
-   "target": 37.08,
+   "price": 4.38,
+   "prevClose": 4.43,
+   "chg": -0.0113,
+   "stop": 4.11,
+   "target": 4.78,
    "signals": [
-    "小时MA5>MA20"
+    "小时MA5>MA20",
+    "MACD小时死叉"
    ],
-   "volRatio": 1.31,
+   "volRatio": 0.42,
    "warn": []
   },
   {
-   "secid": "0.300015",
-   "code": "300015",
-   "name": "爱尔眼科",
-   "sector": "医院",
-   "price": 8.22,
-   "prevClose": 8.12,
-   "chg": 0.0123,
-   "stop": 7.73,
-   "target": 8.7,
-   "signals": [],
-   "volRatio": 0.95,
+   "secid": "1.600919",
+   "code": "600919",
+   "name": "江苏银行",
+   "sector": "城商行Ⅲ",
+   "price": 12.73,
+   "prevClose": 12.42,
+   "chg": 0.025,
+   "stop": 12.09,
+   "target": 13.69,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.79,
    "warn": []
   },
   {
-   "secid": "0.301267",
-   "code": "301267",
-   "name": "华厦眼科",
-   "sector": "医院",
-   "price": 14.96,
-   "prevClose": 15.09,
-   "chg": -0.0086,
-   "stop": 14.23,
-   "target": 16.38,
+   "secid": "1.601838",
+   "code": "601838",
+   "name": "成都银行",
+   "sector": "城商行Ⅲ",
+   "price": 19.9,
+   "prevClose": 18.76,
+   "chg": 0.0608,
+   "stop": 18.76,
+   "target": 21.61,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.91,
+   "warn": []
+  },
+  {
+   "secid": "0.300685",
+   "code": "300685",
+   "name": "艾德生物",
+   "sector": "体外诊断",
+   "price": 19.79,
+   "prevClose": 20.12,
+   "chg": -0.0164,
+   "stop": 17.71,
+   "target": 22.91,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 0.53,
+   "volRatio": 0.44,
+   "warn": []
+  },
+  {
+   "secid": "0.300406",
+   "code": "300406",
+   "name": "九强生物",
+   "sector": "体外诊断",
+   "price": 12.5,
+   "prevClose": 12.8,
+   "chg": -0.0234,
+   "stop": 11.59,
+   "target": 13.87,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.74,
    "warn": []
   }
  ],
