@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-29 22:38",
+ "ts": "2026-10-30 16:30",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,16 +7,13 @@
    "code": "605080",
    "name": "浙江自然",
    "sector": "娱乐用品",
-   "price": 23.67,
-   "prevClose": 23.72,
-   "chg": -0.0021,
+   "price": 22.84,
+   "prevClose": 23.67,
+   "chg": -0.0351,
    "stop": 20.98,
    "target": 27.71,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.56,
+   "signals": [],
+   "volRatio": 0.58,
    "warn": []
   },
   {
@@ -24,16 +21,17 @@
    "code": "600887",
    "name": "伊利股份",
    "sector": "乳品",
-   "price": 29.45,
-   "prevClose": 28.69,
-   "chg": 0.0265,
+   "price": 30.15,
+   "prevClose": 29.45,
+   "chg": 0.0238,
    "stop": 28.22,
    "target": 31.3,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MACD多头",
+    "放量"
    ],
-   "volRatio": 1.18,
+   "volRatio": 1.75,
    "warn": []
   },
   {
@@ -41,15 +39,15 @@
    "code": "603658",
    "name": "安图生物",
    "sector": "体外诊断",
-   "price": 37.5,
-   "prevClose": 38.15,
-   "chg": -0.017,
+   "price": 38.18,
+   "prevClose": 37.5,
+   "chg": 0.0181,
    "stop": 34.72,
    "target": 41.67,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 0.46,
+   "volRatio": 0.59,
    "warn": []
   },
   {
@@ -57,16 +55,16 @@
    "code": "000516",
    "name": "国际医学",
    "sector": "医院",
-   "price": 4.38,
-   "prevClose": 4.43,
-   "chg": -0.0113,
+   "price": 4.4,
+   "prevClose": 4.38,
+   "chg": 0.0046,
    "stop": 4.11,
    "target": 4.78,
    "signals": [
     "小时MA5>MA20",
-    "MACD小时死叉"
+    "小时MACD多头"
    ],
-   "volRatio": 0.42,
+   "volRatio": 1.02,
    "warn": []
   },
   {
@@ -74,16 +72,16 @@
    "code": "600919",
    "name": "江苏银行",
    "sector": "城商行Ⅲ",
-   "price": 12.73,
-   "prevClose": 12.42,
-   "chg": 0.025,
+   "price": 12.96,
+   "prevClose": 12.73,
+   "chg": 0.0181,
    "stop": 12.09,
    "target": 13.69,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.79,
+   "volRatio": 0.89,
    "warn": []
   },
   {
@@ -91,16 +89,16 @@
    "code": "601838",
    "name": "成都银行",
    "sector": "城商行Ⅲ",
-   "price": 19.9,
-   "prevClose": 18.76,
-   "chg": 0.0608,
+   "price": 19.94,
+   "prevClose": 19.9,
+   "chg": 0.002,
    "stop": 18.76,
    "target": 21.61,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.91,
+   "volRatio": 0.89,
    "warn": []
   },
   {
@@ -108,15 +106,13 @@
    "code": "300685",
    "name": "艾德生物",
    "sector": "体外诊断",
-   "price": 19.79,
-   "prevClose": 20.12,
-   "chg": -0.0164,
+   "price": 19.09,
+   "prevClose": 19.79,
+   "chg": -0.0354,
    "stop": 17.71,
    "target": 22.91,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.44,
+   "signals": [],
+   "volRatio": 0.86,
    "warn": []
   },
   {
@@ -124,16 +120,15 @@
    "code": "300406",
    "name": "九强生物",
    "sector": "体外诊断",
-   "price": 12.5,
-   "prevClose": 12.8,
-   "chg": -0.0234,
+   "price": 12.46,
+   "prevClose": 12.5,
+   "chg": -0.0032,
    "stop": 11.59,
    "target": 13.87,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.74,
+   "volRatio": 0.68,
    "warn": []
   }
  ],
@@ -141,27 +136,23 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3651.43,
-   "chg": -0.0082,
-   "signals": [
-    "小时MACD多头"
-   ]
+   "price": 3599.02,
+   "chg": -0.0144,
+   "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11138.2,
-   "chg": -0.0292,
+   "price": 10833.78,
+   "chg": -0.0273,
    "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2517.59,
-   "chg": -0.0445,
-   "signals": [
-    "MACD小时死叉"
-   ]
+   "price": 2413.63,
+   "chg": -0.0413,
+   "signals": []
   }
  ],
  "note": "盘中数据基于60分钟K线, 仅供参考; 最终信号以收盘后日线定稿为准"
