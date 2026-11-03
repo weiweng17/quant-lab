@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-03 17:26",
+ "ts": "2026-11-03 23:28",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,8 +10,8 @@
    "price": 14.56,
    "prevClose": 13.87,
    "chg": 0.0497,
-   "stop": 12.86,
-   "target": 15.38,
+   "stop": 13.44,
+   "target": 16.24,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -27,27 +27,43 @@
    "price": 22.15,
    "prevClose": 22.63,
    "chg": -0.0212,
-   "stop": 20.12,
-   "target": 26.39,
+   "stop": 19.64,
+   "target": 25.91,
    "signals": [],
    "volRatio": 0.75,
    "warn": []
   },
   {
-   "secid": "1.600887",
-   "code": "600887",
-   "name": "伊利股份",
+   "secid": "0.002946",
+   "code": "002946",
+   "name": "新乳业",
    "sector": "乳品",
-   "price": 31.47,
-   "prevClose": 30.62,
-   "chg": 0.0278,
-   "stop": 29.14,
-   "target": 32.84,
+   "price": 16.81,
+   "prevClose": 15.8,
+   "chg": 0.0639,
+   "stop": 14.99,
+   "target": 19.54,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.35,
+   "volRatio": 1.24,
+   "warn": []
+  },
+  {
+   "secid": "0.300363",
+   "code": "300363",
+   "name": "博腾股份",
+   "sector": "医疗研发外包",
+   "price": 22.44,
+   "prevClose": 23.11,
+   "chg": -0.029,
+   "stop": 19.07,
+   "target": 27.5,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 0.48,
    "warn": []
   },
   {
@@ -58,8 +74,8 @@
    "price": 12.54,
    "prevClose": 12.69,
    "chg": -0.0118,
-   "stop": 11.77,
-   "target": 14.07,
+   "stop": 11.6,
+   "target": 13.95,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -74,8 +90,8 @@
    "price": 37.11,
    "prevClose": 36.51,
    "chg": 0.0164,
-   "stop": 34.1,
-   "target": 40.12,
+   "stop": 34.56,
+   "target": 40.93,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -91,7 +107,7 @@
    "price": 5.86,
    "prevClose": 5.87,
    "chg": -0.0017,
-   "stop": 5.6,
+   "stop": 5.58,
    "target": 6.28,
    "signals": [
     "小时MA5>MA20",
@@ -108,28 +124,14 @@
    "price": 32.33,
    "prevClose": 31.25,
    "chg": 0.0346,
-   "stop": 28.81,
-   "target": 34.91,
+   "stop": 29.77,
+   "target": 36.17,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
     "放量"
    ],
    "volRatio": 1.54,
-   "warn": []
-  },
-  {
-   "secid": "1.600919",
-   "code": "600919",
-   "name": "江苏银行",
-   "sector": "城商行Ⅲ",
-   "price": 12.6,
-   "prevClose": 12.72,
-   "chg": -0.0094,
-   "stop": 12.07,
-   "target": 13.7,
-   "signals": [],
-   "volRatio": 1.13,
    "warn": []
   }
  ],
