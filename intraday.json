@@ -1,140 +1,136 @@
 {
- "ts": "2026-11-04 16:58",
+ "ts": "2026-11-04 23:47",
  "phase": "收盘定稿",
  "picks": [
   {
-   "secid": "0.300122",
-   "code": "300122",
-   "name": "智飞生物",
-   "sector": "疫苗",
-   "price": 14.74,
-   "prevClose": 14.56,
-   "chg": 0.0124,
-   "stop": 13.44,
-   "target": 16.24,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.99,
-   "warn": []
-  },
-  {
-   "secid": "1.605080",
-   "code": "605080",
-   "name": "浙江自然",
-   "sector": "娱乐用品",
-   "price": 23.01,
-   "prevClose": 22.15,
-   "chg": 0.0388,
-   "stop": 19.64,
-   "target": 25.91,
-   "signals": [],
-   "volRatio": 1.1,
-   "warn": []
-  },
-  {
-   "secid": "0.002946",
-   "code": "002946",
-   "name": "新乳业",
-   "sector": "乳品",
-   "price": 16.9,
-   "prevClose": 16.81,
-   "chg": 0.0054,
-   "stop": 14.99,
-   "target": 19.54,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.61,
-   "warn": []
-  },
-  {
-   "secid": "0.300363",
-   "code": "300363",
-   "name": "博腾股份",
-   "sector": "医疗研发外包",
-   "price": 24.09,
-   "prevClose": 22.44,
-   "chg": 0.0735,
-   "stop": 19.07,
-   "target": 27.5,
-   "signals": [
-    "小时MA5>MA20",
-    "小时金叉",
-    "小时MACD多头",
-    "MACD小时金叉"
-   ],
-   "volRatio": 1.25,
-   "warn": []
-  },
-  {
-   "secid": "0.300406",
-   "code": "300406",
-   "name": "九强生物",
-   "sector": "体外诊断",
-   "price": 12.67,
-   "prevClose": 12.54,
-   "chg": 0.0104,
-   "stop": 11.6,
-   "target": 13.95,
+   "secid": "1.600809",
+   "code": "600809",
+   "name": "山西汾酒",
+   "sector": "白酒Ⅲ",
+   "price": 129.0,
+   "prevClose": 133.08,
+   "chg": -0.0307,
+   "stop": 117.44,
+   "target": 146.34,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 1.12,
+   "volRatio": 0.86,
    "warn": []
   },
   {
-   "secid": "1.600763",
-   "code": "600763",
-   "name": "通策医疗",
-   "sector": "医院",
-   "price": 37.45,
-   "prevClose": 37.11,
-   "chg": 0.0092,
-   "stop": 34.56,
-   "target": 40.93,
+   "secid": "1.600729",
+   "code": "600729",
+   "name": "重百集团",
+   "sector": "多业态零售",
+   "price": 19.26,
+   "prevClose": 19.47,
+   "chg": -0.0108,
+   "stop": 18.19,
+   "target": 20.87,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.83,
+   "volRatio": 1.43,
    "warn": []
   },
   {
-   "secid": "1.601169",
-   "code": "601169",
-   "name": "北京银行",
+   "secid": "1.600919",
+   "code": "600919",
+   "name": "江苏银行",
    "sector": "城商行Ⅲ",
-   "price": 5.85,
-   "prevClose": 5.86,
-   "chg": -0.0017,
-   "stop": 5.58,
-   "target": 6.28,
+   "price": 12.55,
+   "prevClose": 12.6,
+   "chg": -0.004,
+   "stop": 11.88,
+   "target": 13.55,
+   "signals": [],
+   "volRatio": 1.07,
+   "warn": []
+  },
+  {
+   "secid": "1.601086",
+   "code": "601086",
+   "name": "国芳集团",
+   "sector": "百货",
+   "price": 13.53,
+   "prevClose": 14.0,
+   "chg": -0.0336,
+   "stop": 11.5,
+   "target": 16.57,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 0.87,
+   "warn": []
+  },
+  {
+   "secid": "0.301267",
+   "code": "301267",
+   "name": "华厦眼科",
+   "sector": "医院",
+   "price": 15.35,
+   "prevClose": 15.23,
+   "chg": 0.0079,
+   "stop": 14.4,
+   "target": 16.77,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.8,
+   "volRatio": 1.04,
    "warn": []
   },
   {
-   "secid": "1.603833",
-   "code": "603833",
-   "name": "欧派家居",
-   "sector": "定制家居",
-   "price": 31.31,
-   "prevClose": 32.33,
-   "chg": -0.0315,
-   "stop": 29.77,
-   "target": 36.17,
+   "secid": "1.603317",
+   "code": "603317",
+   "name": "天味食品",
+   "sector": "调味发酵品Ⅲ",
+   "price": 13.71,
+   "prevClose": 13.79,
+   "chg": -0.0058,
+   "stop": 12.7,
+   "target": 15.23,
    "signals": [
     "小时MA5>MA20",
-    "MACD小时死叉",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 2.24,
+   "volRatio": 0.68,
+   "warn": []
+  },
+  {
+   "secid": "0.301015",
+   "code": "301015",
+   "name": "百洋医药",
+   "sector": "医药流通",
+   "price": 25.72,
+   "prevClose": 26.25,
+   "chg": -0.0202,
+   "stop": 21.86,
+   "target": 31.51,
+   "signals": [
+    "小时MA5>MA20",
+    "MACD小时死叉"
+   ],
+   "volRatio": 0.75,
+   "warn": []
+  },
+  {
+   "secid": "1.603199",
+   "code": "603199",
+   "name": "九华旅游",
+   "sector": "自然景区",
+   "price": 34.08,
+   "prevClose": 34.8,
+   "chg": -0.0207,
+   "stop": 31.82,
+   "target": 37.47,
+   "signals": [
+    "小时MA5>MA20",
+    "MACD小时死叉"
+   ],
+   "volRatio": 1.22,
    "warn": []
   }
  ],
