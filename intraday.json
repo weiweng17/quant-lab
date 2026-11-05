@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-04 23:47",
+ "ts": "2026-11-05 17:21",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,15 +7,15 @@
    "code": "600809",
    "name": "山西汾酒",
    "sector": "白酒Ⅲ",
-   "price": 129.0,
-   "prevClose": 133.08,
-   "chg": -0.0307,
+   "price": 130.32,
+   "prevClose": 129.0,
+   "chg": 0.0102,
    "stop": 117.44,
    "target": 146.34,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 0.86,
+   "volRatio": 0.33,
    "warn": []
   },
   {
@@ -23,58 +23,11 @@
    "code": "600729",
    "name": "重百集团",
    "sector": "多业态零售",
-   "price": 19.26,
-   "prevClose": 19.47,
-   "chg": -0.0108,
+   "price": 19.48,
+   "prevClose": 19.26,
+   "chg": 0.0114,
    "stop": 18.19,
    "target": 20.87,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 1.43,
-   "warn": []
-  },
-  {
-   "secid": "1.600919",
-   "code": "600919",
-   "name": "江苏银行",
-   "sector": "城商行Ⅲ",
-   "price": 12.55,
-   "prevClose": 12.6,
-   "chg": -0.004,
-   "stop": 11.88,
-   "target": 13.55,
-   "signals": [],
-   "volRatio": 1.07,
-   "warn": []
-  },
-  {
-   "secid": "1.601086",
-   "code": "601086",
-   "name": "国芳集团",
-   "sector": "百货",
-   "price": 13.53,
-   "prevClose": 14.0,
-   "chg": -0.0336,
-   "stop": 11.5,
-   "target": 16.57,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.87,
-   "warn": []
-  },
-  {
-   "secid": "0.301267",
-   "code": "301267",
-   "name": "华厦眼科",
-   "sector": "医院",
-   "price": 15.35,
-   "prevClose": 15.23,
-   "chg": 0.0079,
-   "stop": 14.4,
-   "target": 16.77,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -83,20 +36,68 @@
    "warn": []
   },
   {
+   "secid": "1.600919",
+   "code": "600919",
+   "name": "江苏银行",
+   "sector": "城商行Ⅲ",
+   "price": 12.51,
+   "prevClose": 12.55,
+   "chg": -0.0032,
+   "stop": 11.88,
+   "target": 13.55,
+   "signals": [],
+   "volRatio": 0.6,
+   "warn": []
+  },
+  {
+   "secid": "1.601086",
+   "code": "601086",
+   "name": "国芳集团",
+   "sector": "百货",
+   "price": 14.02,
+   "prevClose": 13.53,
+   "chg": 0.0362,
+   "stop": 11.5,
+   "target": 16.57,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.66,
+   "warn": []
+  },
+  {
+   "secid": "0.301267",
+   "code": "301267",
+   "name": "华厦眼科",
+   "sector": "医院",
+   "price": 15.5,
+   "prevClose": 15.35,
+   "chg": 0.0098,
+   "stop": 14.4,
+   "target": 16.77,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.79,
+   "warn": []
+  },
+  {
    "secid": "1.603317",
    "code": "603317",
    "name": "天味食品",
    "sector": "调味发酵品Ⅲ",
-   "price": 13.71,
-   "prevClose": 13.79,
-   "chg": -0.0058,
+   "price": 14.02,
+   "prevClose": 13.71,
+   "chg": 0.0226,
    "stop": 12.7,
    "target": 15.23,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.68,
+   "volRatio": 0.42,
    "warn": []
   },
   {
@@ -104,16 +105,15 @@
    "code": "301015",
    "name": "百洋医药",
    "sector": "医药流通",
-   "price": 25.72,
-   "prevClose": 26.25,
-   "chg": -0.0202,
+   "price": 25.76,
+   "prevClose": 25.72,
+   "chg": 0.0016,
    "stop": 21.86,
    "target": 31.51,
    "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.75,
+   "volRatio": 0.38,
    "warn": []
   },
   {
@@ -121,16 +121,15 @@
    "code": "603199",
    "name": "九华旅游",
    "sector": "自然景区",
-   "price": 34.08,
-   "prevClose": 34.8,
-   "chg": -0.0207,
+   "price": 34.37,
+   "prevClose": 34.08,
+   "chg": 0.0085,
    "stop": 31.82,
    "target": 37.47,
    "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
+    "小时MA5>MA20"
    ],
-   "volRatio": 1.22,
+   "volRatio": 0.36,
    "warn": []
   }
  ],
@@ -138,31 +137,30 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3686.17,
-   "chg": 0.0216,
+   "price": 3689.91,
+   "chg": 0.001,
    "signals": [
     "小时MA5>MA20",
-    "小时金叉",
     "小时MACD多头"
    ]
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11335.69,
-   "chg": 0.0422,
+   "price": 11471.09,
+   "chg": 0.0119,
    "signals": [
     "小时MA5>MA20",
-    "小时金叉",
     "小时MACD多头"
    ]
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2544.73,
-   "chg": 0.064,
+   "price": 2566.8,
+   "chg": 0.0087,
    "signals": [
+    "小时MA5>MA20",
     "小时MACD多头"
    ]
   }
