@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-05 17:21",
+ "ts": "2026-11-05 23:44",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,8 +10,8 @@
    "price": 130.32,
    "prevClose": 129.0,
    "chg": 0.0102,
-   "stop": 117.44,
-   "target": 146.34,
+   "stop": 118.6,
+   "target": 147.9,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -26,27 +26,13 @@
    "price": 19.48,
    "prevClose": 19.26,
    "chg": 0.0114,
-   "stop": 18.19,
-   "target": 20.87,
+   "stop": 18.4,
+   "target": 21.1,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 1.04,
-   "warn": []
-  },
-  {
-   "secid": "1.600919",
-   "code": "600919",
-   "name": "江苏银行",
-   "sector": "城商行Ⅲ",
-   "price": 12.51,
-   "prevClose": 12.55,
-   "chg": -0.0032,
-   "stop": 11.88,
-   "target": 13.55,
-   "signals": [],
-   "volRatio": 0.6,
    "warn": []
   },
   {
@@ -57,8 +43,8 @@
    "price": 14.02,
    "prevClose": 13.53,
    "chg": 0.0362,
-   "stop": 11.5,
-   "target": 16.57,
+   "stop": 11.92,
+   "target": 17.17,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -67,20 +53,53 @@
    "warn": []
   },
   {
-   "secid": "0.301267",
-   "code": "301267",
-   "name": "华厦眼科",
+   "secid": "0.000516",
+   "code": "000516",
+   "name": "国际医学",
    "sector": "医院",
-   "price": 15.5,
-   "prevClose": 15.35,
-   "chg": 0.0098,
-   "stop": 14.4,
-   "target": 16.77,
+   "price": 4.71,
+   "prevClose": 4.58,
+   "chg": 0.0284,
+   "stop": 4.41,
+   "target": 5.16,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.79,
+   "volRatio": 0.93,
+   "warn": []
+  },
+  {
+   "secid": "0.002946",
+   "code": "002946",
+   "name": "新乳业",
+   "sector": "乳品",
+   "price": 17.13,
+   "prevClose": 16.9,
+   "chg": 0.0136,
+   "stop": 15.34,
+   "target": 19.81,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.32,
+   "warn": []
+  },
+  {
+   "secid": "1.601169",
+   "code": "601169",
+   "name": "北京银行",
+   "sector": "城商行Ⅲ",
+   "price": 5.77,
+   "prevClose": 5.85,
+   "chg": -0.0137,
+   "stop": 5.48,
+   "target": 6.2,
+   "signals": [
+    "小时死叉"
+   ],
+   "volRatio": 0.62,
    "warn": []
   },
   {
@@ -91,8 +110,8 @@
    "price": 14.02,
    "prevClose": 13.71,
    "chg": 0.0226,
-   "stop": 12.7,
-   "target": 15.23,
+   "stop": 13.01,
+   "target": 15.54,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -101,35 +120,17 @@
    "warn": []
   },
   {
-   "secid": "0.301015",
-   "code": "301015",
-   "name": "百洋医药",
-   "sector": "医药流通",
-   "price": 25.76,
-   "prevClose": 25.72,
-   "chg": 0.0016,
-   "stop": 21.86,
-   "target": 31.51,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.38,
-   "warn": []
-  },
-  {
-   "secid": "1.603199",
-   "code": "603199",
-   "name": "九华旅游",
+   "secid": "1.600576",
+   "code": "600576",
+   "name": "祥源文旅",
    "sector": "自然景区",
-   "price": 34.37,
-   "prevClose": 34.08,
-   "chg": 0.0085,
-   "stop": 31.82,
-   "target": 37.47,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.36,
+   "price": 5.45,
+   "prevClose": 5.37,
+   "chg": 0.0149,
+   "stop": 4.71,
+   "target": 6.56,
+   "signals": [],
+   "volRatio": 0.53,
    "warn": []
   }
  ],
