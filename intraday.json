@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-06 17:15",
+ "ts": "2026-11-06 23:20",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,77 +10,12 @@
    "price": 132.0,
    "prevClose": 130.32,
    "chg": 0.0129,
-   "stop": 118.6,
-   "target": 147.9,
+   "stop": 120.73,
+   "target": 148.91,
    "signals": [
     "小时MA5>MA20"
    ],
    "volRatio": 0.53,
-   "warn": []
-  },
-  {
-   "secid": "1.600729",
-   "code": "600729",
-   "name": "重百集团",
-   "sector": "多业态零售",
-   "price": 19.51,
-   "prevClose": 19.48,
-   "chg": 0.0015,
-   "stop": 18.4,
-   "target": 21.1,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.6,
-   "warn": []
-  },
-  {
-   "secid": "1.601086",
-   "code": "601086",
-   "name": "国芳集团",
-   "sector": "百货",
-   "price": 12.71,
-   "prevClose": 14.02,
-   "chg": -0.0934,
-   "stop": 11.92,
-   "target": 17.17,
-   "signals": [
-    "小时死叉"
-   ],
-   "volRatio": 0.76,
-   "warn": []
-  },
-  {
-   "secid": "0.000516",
-   "code": "000516",
-   "name": "国际医学",
-   "sector": "医院",
-   "price": 4.6,
-   "prevClose": 4.71,
-   "chg": -0.0234,
-   "stop": 4.41,
-   "target": 5.16,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.93,
-   "warn": []
-  },
-  {
-   "secid": "0.002946",
-   "code": "002946",
-   "name": "新乳业",
-   "sector": "乳品",
-   "price": 17.26,
-   "prevClose": 17.13,
-   "chg": 0.0076,
-   "stop": 15.34,
-   "target": 19.81,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.55,
    "warn": []
   },
   {
@@ -91,10 +26,27 @@
    "price": 5.86,
    "prevClose": 5.77,
    "chg": 0.0156,
-   "stop": 5.48,
-   "target": 6.2,
+   "stop": 5.56,
+   "target": 6.31,
    "signals": [],
    "volRatio": 0.69,
+   "warn": []
+  },
+  {
+   "secid": "0.002044",
+   "code": "002044",
+   "name": "美年健康",
+   "sector": "医院",
+   "price": 4.96,
+   "prevClose": 4.97,
+   "chg": -0.002,
+   "stop": 4.48,
+   "target": 5.68,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.6,
    "warn": []
   },
   {
@@ -105,12 +57,28 @@
    "price": 14.1,
    "prevClose": 14.02,
    "chg": 0.0057,
-   "stop": 13.01,
-   "target": 15.54,
+   "stop": 13.1,
+   "target": 15.6,
    "signals": [
     "小时MA5>MA20"
    ],
    "volRatio": 0.66,
+   "warn": []
+  },
+  {
+   "secid": "1.601086",
+   "code": "601086",
+   "name": "国芳集团",
+   "sector": "百货",
+   "price": 12.71,
+   "prevClose": 14.02,
+   "chg": -0.0934,
+   "stop": 10.8,
+   "target": 15.58,
+   "signals": [
+    "小时死叉"
+   ],
+   "volRatio": 0.76,
    "warn": []
   },
   {
@@ -121,10 +89,43 @@
    "price": 5.3,
    "prevClose": 5.45,
    "chg": -0.0275,
-   "stop": 4.71,
-   "target": 6.56,
+   "stop": 4.55,
+   "target": 6.42,
    "signals": [],
    "volRatio": 0.45,
+   "warn": []
+  },
+  {
+   "secid": "1.600729",
+   "code": "600729",
+   "name": "重百集团",
+   "sector": "多业态零售",
+   "price": 19.51,
+   "prevClose": 19.48,
+   "chg": 0.0015,
+   "stop": 18.46,
+   "target": 21.09,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 0.6,
+   "warn": []
+  },
+  {
+   "secid": "0.300049",
+   "code": "300049",
+   "name": "福瑞医科",
+   "sector": "医疗设备",
+   "price": 47.89,
+   "prevClose": 49.32,
+   "chg": -0.029,
+   "stop": 40.77,
+   "target": 58.57,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 1.1,
    "warn": []
   }
  ],
