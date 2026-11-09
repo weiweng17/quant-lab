@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-06 23:20",
+ "ts": "2026-11-09 17:37",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -7,15 +7,15 @@
    "code": "600809",
    "name": "山西汾酒",
    "sector": "白酒Ⅲ",
-   "price": 132.0,
-   "prevClose": 130.32,
-   "chg": 0.0129,
+   "price": 130.6,
+   "prevClose": 132.0,
+   "chg": -0.0106,
    "stop": 120.73,
    "target": 148.91,
    "signals": [
-    "小时MA5>MA20"
+    "小时死叉"
    ],
-   "volRatio": 0.53,
+   "volRatio": 0.47,
    "warn": []
   },
   {
@@ -23,13 +23,16 @@
    "code": "601169",
    "name": "北京银行",
    "sector": "城商行Ⅲ",
-   "price": 5.86,
-   "prevClose": 5.77,
-   "chg": 0.0156,
+   "price": 5.94,
+   "prevClose": 5.86,
+   "chg": 0.0137,
    "stop": 5.56,
    "target": 6.31,
-   "signals": [],
-   "volRatio": 0.69,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.55,
    "warn": []
   },
   {
@@ -37,16 +40,16 @@
    "code": "002044",
    "name": "美年健康",
    "sector": "医院",
-   "price": 4.96,
-   "prevClose": 4.97,
-   "chg": -0.002,
+   "price": 4.89,
+   "prevClose": 4.96,
+   "chg": -0.0141,
    "stop": 4.48,
    "target": 5.68,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头"
+    "MACD小时死叉"
    ],
-   "volRatio": 0.6,
+   "volRatio": 0.59,
    "warn": []
   },
   {
@@ -54,15 +57,15 @@
    "code": "603317",
    "name": "天味食品",
    "sector": "调味发酵品Ⅲ",
-   "price": 14.1,
-   "prevClose": 14.02,
-   "chg": 0.0057,
+   "price": 13.86,
+   "prevClose": 14.1,
+   "chg": -0.017,
    "stop": 13.1,
    "target": 15.6,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 0.66,
+   "volRatio": 0.56,
    "warn": []
   },
   {
@@ -70,15 +73,13 @@
    "code": "601086",
    "name": "国芳集团",
    "sector": "百货",
-   "price": 12.71,
-   "prevClose": 14.02,
-   "chg": -0.0934,
+   "price": 13.39,
+   "prevClose": 12.71,
+   "chg": 0.0535,
    "stop": 10.8,
    "target": 15.58,
-   "signals": [
-    "小时死叉"
-   ],
-   "volRatio": 0.76,
+   "signals": [],
+   "volRatio": 0.43,
    "warn": []
   },
   {
@@ -86,9 +87,9 @@
    "code": "600576",
    "name": "祥源文旅",
    "sector": "自然景区",
-   "price": 5.3,
-   "prevClose": 5.45,
-   "chg": -0.0275,
+   "price": 5.46,
+   "prevClose": 5.3,
+   "chg": 0.0302,
    "stop": 4.55,
    "target": 6.42,
    "signals": [],
@@ -100,15 +101,15 @@
    "code": "600729",
    "name": "重百集团",
    "sector": "多业态零售",
-   "price": 19.51,
-   "prevClose": 19.48,
-   "chg": 0.0015,
+   "price": 19.34,
+   "prevClose": 19.51,
+   "chg": -0.0087,
    "stop": 18.46,
    "target": 21.09,
    "signals": [
     "小时MA5>MA20"
    ],
-   "volRatio": 0.6,
+   "volRatio": 0.45,
    "warn": []
   },
   {
@@ -116,16 +117,15 @@
    "code": "300049",
    "name": "福瑞医科",
    "sector": "医疗设备",
-   "price": 47.89,
-   "prevClose": 49.32,
-   "chg": -0.029,
+   "price": 46.81,
+   "prevClose": 47.89,
+   "chg": -0.0226,
    "stop": 40.77,
    "target": 58.57,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 1.1,
+   "volRatio": 0.52,
    "warn": []
   }
  ],
@@ -133,8 +133,8 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3649.18,
-   "chg": -0.011,
+   "price": 3660.79,
+   "chg": 0.0032,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -143,20 +143,19 @@
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11175.78,
-   "chg": -0.0257,
+   "price": 11145.49,
+   "chg": -0.0027,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头"
+    "MACD小时死叉"
    ]
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2465.23,
-   "chg": -0.0396,
+   "price": 2458.56,
+   "chg": -0.0027,
    "signals": [
-    "小时MA5>MA20",
     "小时MACD多头"
    ]
   }
