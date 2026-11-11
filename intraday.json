@@ -1,22 +1,22 @@
 {
- "ts": "2026-11-11 17:13",
+ "ts": "2026-11-11 23:34",
  "phase": "收盘定稿",
  "picks": [
   {
-   "secid": "1.601366",
-   "code": "601366",
-   "name": "利群股份",
+   "secid": "1.600694",
+   "code": "600694",
+   "name": "大商股份",
    "sector": "多业态零售",
-   "price": 3.77,
-   "prevClose": 3.71,
-   "chg": 0.0162,
-   "stop": 3.34,
-   "target": 4.27,
+   "price": 15.0,
+   "prevClose": 15.12,
+   "chg": -0.0079,
+   "stop": 14.17,
+   "target": 16.25,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.69,
+   "volRatio": 0.8,
    "warn": []
   },
   {
@@ -27,8 +27,8 @@
    "price": 103.05,
    "prevClose": 107.78,
    "chg": -0.0439,
-   "stop": 97.05,
-   "target": 123.88,
+   "stop": 91.75,
+   "target": 120.0,
    "signals": [
     "小时死叉"
    ],
@@ -36,20 +36,20 @@
    "warn": []
   },
   {
-   "secid": "1.600327",
-   "code": "600327",
-   "name": "大东方",
+   "secid": "0.002419",
+   "code": "002419",
+   "name": "天虹股份",
    "sector": "百货",
-   "price": 6.53,
-   "prevClose": 5.94,
-   "chg": 0.0993,
-   "stop": 5.18,
-   "target": 7.08,
+   "price": 4.94,
+   "prevClose": 4.86,
+   "chg": 0.0165,
+   "stop": 4.39,
+   "target": 5.77,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.08,
+   "volRatio": 0.94,
    "warn": []
   },
   {
@@ -60,8 +60,8 @@
    "price": 17.2,
    "prevClose": 17.33,
    "chg": -0.0075,
-   "stop": 16.51,
-   "target": 18.56,
+   "stop": 16.4,
+   "target": 18.4,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -77,24 +77,24 @@
    "price": 4.94,
    "prevClose": 4.94,
    "chg": 0.0,
-   "stop": 4.48,
-   "target": 5.63,
+   "stop": 4.5,
+   "target": 5.6,
    "signals": [],
    "volRatio": 0.51,
    "warn": []
   },
   {
-   "secid": "1.600305",
-   "code": "600305",
-   "name": "恒顺醋业",
+   "secid": "1.603317",
+   "code": "603317",
+   "name": "天味食品",
    "sector": "调味发酵品Ⅲ",
-   "price": 6.79,
-   "prevClose": 6.85,
-   "chg": -0.0088,
-   "stop": 6.55,
-   "target": 7.3,
+   "price": 13.51,
+   "prevClose": 13.79,
+   "chg": -0.0203,
+   "stop": 12.5,
+   "target": 15.02,
    "signals": [],
-   "volRatio": 0.83,
+   "volRatio": 0.8,
    "warn": []
   },
   {
@@ -105,8 +105,8 @@
    "price": 13.65,
    "prevClose": 12.41,
    "chg": 0.0999,
-   "stop": 11.1,
-   "target": 14.38,
+   "stop": 12.12,
+   "target": 15.95,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头",
@@ -116,17 +116,17 @@
    "warn": []
   },
   {
-   "secid": "0.002946",
-   "code": "002946",
-   "name": "新乳业",
+   "secid": "1.600882",
+   "code": "600882",
+   "name": "妙可蓝多",
    "sector": "乳品",
-   "price": 16.74,
-   "prevClose": 17.07,
-   "chg": -0.0193,
-   "stop": 15.39,
-   "target": 19.59,
+   "price": 19.2,
+   "prevClose": 19.62,
+   "chg": -0.0214,
+   "stop": 17.25,
+   "target": 22.12,
    "signals": [],
-   "volRatio": 0.61,
+   "volRatio": 0.47,
    "warn": []
   }
  ],
