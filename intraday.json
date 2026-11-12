@@ -1,6 +1,6 @@
 {
- "ts": "2026-11-12 17:41",
- "phase": "收盘定稿",
+ "ts": "2026-11-13 00:11",
+ "phase": "盘前",
  "picks": [
   {
    "secid": "1.600694",
@@ -8,10 +8,10 @@
    "name": "大商股份",
    "sector": "多业态零售",
    "price": 15.17,
-   "prevClose": 15.0,
-   "chg": 0.0113,
-   "stop": 14.17,
-   "target": 16.25,
+   "prevClose": 15.17,
+   "chg": 0.0,
+   "stop": 14.33,
+   "target": 16.43,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -25,10 +25,10 @@
    "name": "古井贡酒",
    "sector": "白酒Ⅲ",
    "price": 105.8,
-   "prevClose": 103.05,
-   "chg": 0.0267,
-   "stop": 91.75,
-   "target": 120.0,
+   "prevClose": 105.8,
+   "chg": 0.0,
+   "stop": 94.39,
+   "target": 122.91,
    "signals": [
     "小时MA5>MA20",
     "小时金叉"
@@ -42,15 +42,15 @@
    "name": "天虹股份",
    "sector": "百货",
    "price": 5.04,
-   "prevClose": 4.94,
-   "chg": 0.0202,
-   "stop": 4.39,
-   "target": 5.77,
+   "prevClose": 5.04,
+   "chg": 0.0,
+   "stop": 4.47,
+   "target": 5.9,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.0,
+   "volRatio": 0.99,
    "warn": []
   },
   {
@@ -59,10 +59,10 @@
    "name": "杭州银行",
    "sector": "城商行Ⅲ",
    "price": 17.26,
-   "prevClose": 17.2,
-   "chg": 0.0035,
-   "stop": 16.4,
-   "target": 18.4,
+   "prevClose": 17.26,
+   "chg": 0.0,
+   "stop": 16.47,
+   "target": 18.45,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -75,14 +75,14 @@
    "name": "美年健康",
    "sector": "医院",
    "price": 4.84,
-   "prevClose": 4.94,
-   "chg": -0.0202,
-   "stop": 4.5,
-   "target": 5.6,
+   "prevClose": 4.84,
+   "chg": 0.0,
+   "stop": 4.41,
+   "target": 5.48,
    "signals": [
     "小时死叉"
    ],
-   "volRatio": 1.0,
+   "volRatio": 0.99,
    "warn": []
   },
   {
@@ -91,10 +91,10 @@
    "name": "天味食品",
    "sector": "调味发酵品Ⅲ",
    "price": 13.63,
-   "prevClose": 13.51,
-   "chg": 0.0089,
-   "stop": 12.5,
-   "target": 15.02,
+   "prevClose": 13.63,
+   "chg": 0.0,
+   "stop": 12.61,
+   "target": 15.16,
    "signals": [],
    "volRatio": 1.17,
    "warn": []
@@ -105,10 +105,10 @@
    "name": "东方通信",
    "sector": "其他通信设备",
    "price": 12.59,
-   "prevClose": 13.65,
-   "chg": -0.0777,
-   "stop": 12.12,
-   "target": 15.95,
+   "prevClose": 12.59,
+   "chg": 0.0,
+   "stop": 11.02,
+   "target": 14.95,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -122,10 +122,10 @@
    "name": "妙可蓝多",
    "sector": "乳品",
    "price": 19.02,
-   "prevClose": 19.2,
-   "chg": -0.0094,
-   "stop": 17.25,
-   "target": 22.12,
+   "prevClose": 19.02,
+   "chg": 0.0,
+   "stop": 17.11,
+   "target": 21.88,
    "signals": [],
    "volRatio": 0.7,
    "warn": []
@@ -136,7 +136,7 @@
    "secid": "1.000001",
    "name": "上证指数",
    "price": 3655.83,
-   "chg": -0.0067,
+   "chg": 0.0,
    "signals": [
     "小时MA5>MA20",
     "MACD小时死叉"
@@ -146,7 +146,7 @@
    "secid": "0.399001",
    "name": "深证成指",
    "price": 11197.98,
-   "chg": -0.0168,
+   "chg": 0.0,
    "signals": [
     "小时MA5>MA20",
     "MACD小时死叉"
@@ -156,7 +156,7 @@
    "secid": "0.399006",
    "name": "创业板指",
    "price": 2509.43,
-   "chg": -0.0244,
+   "chg": 0.0,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
