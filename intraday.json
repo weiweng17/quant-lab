@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-13 17:25",
+ "ts": "2026-11-13 23:40",
  "phase": "收盘定稿",
  "picks": [
   {
@@ -10,8 +10,8 @@
    "price": 15.17,
    "prevClose": 15.17,
    "chg": 0.0,
-   "stop": 14.33,
-   "target": 16.43,
+   "stop": 14.37,
+   "target": 16.37,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -27,8 +27,8 @@
    "price": 112.0,
    "prevClose": 105.8,
    "chg": 0.0586,
-   "stop": 94.39,
-   "target": 122.91,
+   "stop": 99.61,
+   "target": 130.59,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
@@ -44,8 +44,8 @@
    "price": 4.91,
    "prevClose": 5.04,
    "chg": -0.0258,
-   "stop": 4.47,
-   "target": 5.9,
+   "stop": 4.32,
+   "target": 5.79,
    "signals": [
     "小时MA5>MA20"
    ],
@@ -60,13 +60,13 @@
    "price": 17.52,
    "prevClose": 17.26,
    "chg": 0.0151,
-   "stop": 16.47,
-   "target": 18.45,
+   "stop": 16.7,
+   "target": 18.75,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.06,
+   "volRatio": 1.05,
    "warn": []
   },
   {
@@ -77,27 +77,10 @@
    "price": 4.74,
    "prevClose": 4.84,
    "chg": -0.0207,
-   "stop": 4.41,
-   "target": 5.48,
+   "stop": 4.31,
+   "target": 5.39,
    "signals": [],
    "volRatio": 0.94,
-   "warn": []
-  },
-  {
-   "secid": "1.603317",
-   "code": "603317",
-   "name": "天味食品",
-   "sector": "调味发酵品Ⅲ",
-   "price": 13.71,
-   "prevClose": 13.63,
-   "chg": 0.0059,
-   "stop": 12.61,
-   "target": 15.16,
-   "signals": [
-    "小时MA5>MA20",
-    "小时金叉"
-   ],
-   "volRatio": 0.74,
    "warn": []
   },
   {
@@ -108,24 +91,42 @@
    "price": 11.66,
    "prevClose": 12.59,
    "chg": -0.0739,
-   "stop": 11.02,
-   "target": 14.95,
+   "stop": 9.98,
+   "target": 14.18,
    "signals": [],
-   "volRatio": 0.55,
+   "volRatio": 0.54,
    "warn": []
   },
   {
-   "secid": "1.600882",
-   "code": "600882",
-   "name": "妙可蓝多",
+   "secid": "0.002946",
+   "code": "002946",
+   "name": "新乳业",
    "sector": "乳品",
-   "price": 19.15,
-   "prevClose": 19.02,
-   "chg": 0.0068,
-   "stop": 17.11,
-   "target": 21.88,
-   "signals": [],
-   "volRatio": 1.4,
+   "price": 17.17,
+   "prevClose": 16.79,
+   "chg": 0.0226,
+   "stop": 15.39,
+   "target": 19.84,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 0.75,
+   "warn": []
+  },
+  {
+   "secid": "1.600824",
+   "code": "600824",
+   "name": "益民集团",
+   "sector": "多业态零售",
+   "price": 3.69,
+   "prevClose": 3.74,
+   "chg": -0.0134,
+   "stop": 3.46,
+   "target": 4.04,
+   "signals": [
+    "小时MA5>MA20"
+   ],
+   "volRatio": 0.83,
    "warn": []
   }
  ],
