@@ -1,6 +1,6 @@
 {
- "ts": "2026-11-13 00:11",
- "phase": "盘前",
+ "ts": "2026-11-13 17:25",
+ "phase": "收盘定稿",
  "picks": [
   {
    "secid": "1.600694",
@@ -16,7 +16,7 @@
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.39,
+   "volRatio": 0.92,
    "warn": []
   },
   {
@@ -24,16 +24,16 @@
    "code": "000596",
    "name": "古井贡酒",
    "sector": "白酒Ⅲ",
-   "price": 105.8,
+   "price": 112.0,
    "prevClose": 105.8,
-   "chg": 0.0,
+   "chg": 0.0586,
    "stop": 94.39,
    "target": 122.91,
    "signals": [
     "小时MA5>MA20",
-    "小时金叉"
+    "小时MACD多头"
    ],
-   "volRatio": 0.77,
+   "volRatio": 0.97,
    "warn": []
   },
   {
@@ -41,16 +41,15 @@
    "code": "002419",
    "name": "天虹股份",
    "sector": "百货",
-   "price": 5.04,
+   "price": 4.91,
    "prevClose": 5.04,
-   "chg": 0.0,
+   "chg": -0.0258,
    "stop": 4.47,
    "target": 5.9,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.99,
+   "volRatio": 0.65,
    "warn": []
   },
   {
@@ -58,15 +57,16 @@
    "code": "600926",
    "name": "杭州银行",
    "sector": "城商行Ⅲ",
-   "price": 17.26,
+   "price": 17.52,
    "prevClose": 17.26,
-   "chg": 0.0,
+   "chg": 0.0151,
    "stop": 16.47,
    "target": 18.45,
    "signals": [
-    "小时MA5>MA20"
+    "小时MA5>MA20",
+    "小时MACD多头"
    ],
-   "volRatio": 0.85,
+   "volRatio": 1.06,
    "warn": []
   },
   {
@@ -74,15 +74,13 @@
    "code": "002044",
    "name": "美年健康",
    "sector": "医院",
-   "price": 4.84,
+   "price": 4.74,
    "prevClose": 4.84,
-   "chg": 0.0,
+   "chg": -0.0207,
    "stop": 4.41,
    "target": 5.48,
-   "signals": [
-    "小时死叉"
-   ],
-   "volRatio": 0.99,
+   "signals": [],
+   "volRatio": 0.94,
    "warn": []
   },
   {
@@ -90,13 +88,16 @@
    "code": "603317",
    "name": "天味食品",
    "sector": "调味发酵品Ⅲ",
-   "price": 13.63,
+   "price": 13.71,
    "prevClose": 13.63,
-   "chg": 0.0,
+   "chg": 0.0059,
    "stop": 12.61,
    "target": 15.16,
-   "signals": [],
-   "volRatio": 1.17,
+   "signals": [
+    "小时MA5>MA20",
+    "小时金叉"
+   ],
+   "volRatio": 0.74,
    "warn": []
   },
   {
@@ -104,16 +105,13 @@
    "code": "600776",
    "name": "东方通信",
    "sector": "其他通信设备",
-   "price": 12.59,
+   "price": 11.66,
    "prevClose": 12.59,
-   "chg": 0.0,
+   "chg": -0.0739,
    "stop": 11.02,
    "target": 14.95,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 1.16,
+   "signals": [],
+   "volRatio": 0.55,
    "warn": []
   },
   {
@@ -121,13 +119,13 @@
    "code": "600882",
    "name": "妙可蓝多",
    "sector": "乳品",
-   "price": 19.02,
+   "price": 19.15,
    "prevClose": 19.02,
-   "chg": 0.0,
+   "chg": 0.0068,
    "stop": 17.11,
    "target": 21.88,
    "signals": [],
-   "volRatio": 0.7,
+   "volRatio": 1.4,
    "warn": []
   }
  ],
@@ -135,32 +133,23 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3655.83,
-   "chg": 0.0,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ]
+   "price": 3634.35,
+   "chg": -0.0059,
+   "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 11197.98,
-   "chg": 0.0,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ]
+   "price": 10968.79,
+   "chg": -0.0205,
+   "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2509.43,
-   "chg": 0.0,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ]
+   "price": 2426.08,
+   "chg": -0.0332,
+   "signals": []
   }
  ],
  "note": "盘中数据基于60分钟K线, 仅供参考; 最终信号以收盘后日线定稿为准"
