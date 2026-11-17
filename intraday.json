@@ -1,23 +1,22 @@
 {
- "ts": "2026-11-17 01:22",
- "phase": "盘前",
+ "ts": "2026-11-17 18:31",
+ "phase": "收盘定稿",
  "picks": [
   {
    "secid": "1.600694",
    "code": "600694",
    "name": "大商股份",
    "sector": "多业态零售",
-   "price": 15.28,
+   "price": 15.25,
    "prevClose": 15.28,
-   "chg": 0.0,
+   "chg": -0.002,
    "stop": 14.47,
    "target": 16.49,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 1.66,
+   "volRatio": 0.98,
    "warn": []
   },
   {
@@ -25,16 +24,15 @@
    "code": "000596",
    "name": "古井贡酒",
    "sector": "白酒Ⅲ",
-   "price": 112.71,
+   "price": 111.53,
    "prevClose": 112.71,
-   "chg": 0.0,
+   "chg": -0.0105,
    "stop": 99.09,
    "target": 133.14,
    "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
+    "小时MA5>MA20"
    ],
-   "volRatio": 0.65,
+   "volRatio": 0.87,
    "warn": []
   },
   {
@@ -42,16 +40,16 @@
    "code": "002419",
    "name": "天虹股份",
    "sector": "百货",
-   "price": 5.4,
+   "price": 5.34,
    "prevClose": 5.4,
-   "chg": 0.0,
+   "chg": -0.0111,
    "stop": 4.75,
    "target": 6.38,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.3,
+   "volRatio": 0.93,
    "warn": []
   },
   {
@@ -59,16 +57,16 @@
    "code": "600926",
    "name": "杭州银行",
    "sector": "城商行Ⅲ",
-   "price": 17.77,
+   "price": 17.9,
    "prevClose": 17.77,
-   "chg": 0.0,
+   "chg": 0.0073,
    "stop": 16.96,
    "target": 18.98,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.49,
+   "volRatio": 0.84,
    "warn": []
   },
   {
@@ -76,16 +74,16 @@
    "code": "603288",
    "name": "海天味业",
    "sector": "调味发酵品Ⅲ",
-   "price": 35.76,
+   "price": 36.2,
    "prevClose": 35.76,
-   "chg": 0.0,
+   "chg": 0.0123,
    "stop": 33.46,
    "target": 39.21,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 1.46,
+   "volRatio": 1.12,
    "warn": []
   },
   {
@@ -93,13 +91,13 @@
    "code": "600776",
    "name": "东方通信",
    "sector": "其他通信设备",
-   "price": 11.85,
+   "price": 10.95,
    "prevClose": 11.85,
-   "chg": 0.0,
+   "chg": -0.0759,
    "stop": 10.13,
    "target": 14.43,
    "signals": [],
-   "volRatio": 0.41,
+   "volRatio": 0.62,
    "warn": []
   },
   {
@@ -107,17 +105,16 @@
    "code": "600882",
    "name": "妙可蓝多",
    "sector": "乳品",
-   "price": 20.13,
+   "price": 19.85,
    "prevClose": 20.13,
-   "chg": 0.0,
+   "chg": -0.0139,
    "stop": 18.18,
    "target": 23.05,
    "signals": [
     "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
+    "小时MACD多头"
    ],
-   "volRatio": 2.06,
+   "volRatio": 1.0,
    "warn": []
   },
   {
@@ -125,9 +122,9 @@
    "code": "002966",
    "name": "苏州银行",
    "sector": "城商行Ⅲ",
-   "price": 10.02,
+   "price": 10.12,
    "prevClose": 10.02,
-   "chg": 0.0,
+   "chg": 0.01,
    "stop": 9.34,
    "target": 11.04,
    "signals": [
@@ -135,7 +132,7 @@
     "小时MACD多头",
     "放量"
    ],
-   "volRatio": 2.66,
+   "volRatio": 1.74,
    "warn": []
   }
  ],
@@ -143,22 +140,22 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3602.57,
-   "chg": 0.0,
+   "price": 3584.58,
+   "chg": -0.005,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 10690.78,
-   "chg": 0.0,
+   "price": 10638.52,
+   "chg": -0.0049,
    "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2320.02,
-   "chg": 0.0,
+   "price": 2292.2,
+   "chg": -0.012,
    "signals": []
   }
  ],
