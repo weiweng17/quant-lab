@@ -378,13 +378,7 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
     <div class="logo"><span class="mark">◆</span><em>QuantLab</em><span class="cn">&nbsp;量化实验室</span></div>
     <div class="nav-links">
       <a href="#market" data-tab>大盘</a>
-      <a href="#intraday" data-tab>盘中</a>
-      <a href="#picks" data-tab>精选</a>
-      <a href="#themes" data-tab>题材</a>
-      <a href="#track" data-tab>跟踪</a>
-      <a href="#sectors" data-tab>板块</a>
-      <a href="#radar" data-tab>雷达</a>
-      <a href="#analytics" data-tab>体检</a>
+      <a href="#picks" data-tab>选股</a>
       <a href="#backtest" data-tab>回测</a>
     </div>
     <div class="nav-right">
@@ -401,13 +395,7 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   <!-- 手机端快捷导航（sticky 随顶栏常驻，横向滑动） -->
   <div class="mtabs" id="mtabs" aria-label="页面快捷导航">
     <a href="#market" data-tab>大盘</a>
-    <a href="#intraday" data-tab>快照</a>
-    <a href="#picks" data-tab>精选</a>
-    <a href="#themes" data-tab>题材</a>
-    <a href="#track" data-tab>跟踪</a>
-    <a href="#sectors" data-tab>板块</a>
-    <a href="#radar" data-tab>雷达</a>
-    <a href="#analytics" data-tab>体检</a>
+    <a href="#picks" data-tab>选股</a>
     <a href="#backtest" data-tab>回测</a>
     <a href="#" data-top>顶部</a>
   </div>
@@ -1343,13 +1331,21 @@ function startBuildWatch(){
 }
 
 /* ============ 标签分页 ============ */
-const TAB_IDS = ['market','intraday','picks','themes','track','sectors','radar','analytics','backtest'];
+/* 3 个大页, 每页聚合相关区块(避免一次摊开 9 个标签) */
+const TABS = {
+  market:   ['market','intraday'],                          /* 大盘: 指数研判 + 盘中快照 */
+  picks:    ['picks','themes','track','sectors'],           /* 选股: 精选 + 题材热度 + 历史跟踪 + 板块扫描 */
+  backtest: ['radar','analytics','backtest']                /* 回测: 策略雷达 + 数据体检 + 回测对比 */
+};
+const TAB_IDS = Object.keys(TABS);
+function tabFor(id){ return TAB_IDS.find(t=>TABS[t].includes(id)); }
 function switchTab(id, push=true){
-  if(!TAB_IDS.includes(id)) id = 'market';
-  document.querySelectorAll('.wrap > section').forEach(s=>s.classList.toggle('hide', s.id!==id));
-  document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+id));
+  const tab = TAB_IDS.includes(id) ? id : tabFor(id) || 'market';
+  const show = TABS[tab];
+  document.querySelectorAll('.wrap > section').forEach(s=>s.classList.toggle('hide', !show.includes(s.id)));
+  document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+tab));
   window.scrollTo(0,0);
-  if(id==='backtest') requestAnimationFrame(draw);   // 画布在隐藏态 clientWidth=0, 显示后重绘
+  if(show.includes('backtest')) requestAnimationFrame(draw);   // 画布在隐藏态 clientWidth=0, 显示后重绘
   if(push) history.replaceState(null,'','#'+id);
 }
 document.addEventListener('click', e=>{
