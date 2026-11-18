@@ -1,39 +1,22 @@
 {
- "ts": "2026-11-18 10:21",
- "phase": "盘中快照",
+ "ts": "2026-11-18 12:44",
+ "phase": "午间休市",
  "picks": [
   {
    "secid": "0.002142",
    "code": "002142",
    "name": "宁波银行",
    "sector": "城商行Ⅲ",
-   "price": 35.15,
+   "price": 35.18,
    "prevClose": 35.53,
-   "chg": -0.0107,
-   "stop": 33.63,
-   "target": 38.38,
+   "chg": -0.0099,
+   "stop": 33.34,
+   "target": 37.94,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
-   "volRatio": 0.81,
-   "warn": []
-  },
-  {
-   "secid": "0.000568",
-   "code": "000568",
-   "name": "泸州老窖",
-   "sector": "白酒Ⅲ",
-   "price": 81.28,
-   "prevClose": 81.77,
-   "chg": -0.006,
-   "stop": 75.69,
-   "target": 90.89,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 1.02,
+   "volRatio": 0.8,
    "warn": []
   },
   {
@@ -41,103 +24,32 @@
    "code": "002419",
    "name": "天虹股份",
    "sector": "百货",
-   "price": 4.94,
+   "price": 4.97,
    "prevClose": 5.34,
-   "chg": -0.0749,
-   "stop": 4.71,
-   "target": 6.29,
+   "chg": -0.0693,
+   "stop": 4.29,
+   "target": 5.99,
    "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉",
-    "放量"
+    "小时MA5>MA20"
    ],
-   "volRatio": 4.97,
+   "volRatio": 0.58,
    "warn": []
   },
   {
-   "secid": "1.600337",
-   "code": "600337",
-   "name": "ST美克",
+   "secid": "0.301376",
+   "code": "301376",
+   "name": "致欧科技",
    "sector": "成品家居",
-   "price": 3.68,
-   "prevClose": 3.71,
-   "chg": -0.0081,
-   "stop": 3.44,
-   "target": 4.12,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头",
-    "放量"
-   ],
-   "volRatio": 2.31,
-   "warn": []
-  },
-  {
-   "secid": "1.600694",
-   "code": "600694",
-   "name": "大商股份",
-   "sector": "多业态零售",
-   "price": 15.14,
-   "prevClose": 15.25,
-   "chg": -0.0072,
-   "stop": 14.43,
-   "target": 16.48,
+   "price": 21.97,
+   "prevClose": 22.8,
+   "chg": -0.0364,
+   "stop": 19.41,
+   "target": 25.81,
    "signals": [
     "小时MA5>MA20",
     "MACD小时死叉"
    ],
-   "volRatio": 0.67,
-   "warn": []
-  },
-  {
-   "secid": "1.603288",
-   "code": "603288",
-   "name": "海天味业",
-   "sector": "调味发酵品Ⅲ",
-   "price": 36.0,
-   "prevClose": 36.2,
-   "chg": -0.0055,
-   "stop": 33.96,
-   "target": 39.56,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 1.1,
-   "warn": []
-  },
-  {
-   "secid": "1.600710",
-   "code": "600710",
-   "name": "苏美达",
-   "sector": "贸易Ⅲ",
-   "price": 11.64,
-   "prevClose": 11.67,
-   "chg": -0.0026,
-   "stop": 10.92,
-   "target": 12.79,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 1.23,
-   "warn": []
-  },
-  {
-   "secid": "1.600103",
-   "code": "600103",
-   "name": "青山纸业",
-   "sector": "特种纸",
-   "price": 3.15,
-   "prevClose": 3.35,
-   "chg": -0.0597,
-   "stop": 2.94,
-   "target": 3.97,
-   "signals": [
-    "小时MA5>MA20",
-    "放量"
-   ],
-   "volRatio": 1.83,
+   "volRatio": 0.78,
    "warn": []
   }
  ],
@@ -145,22 +57,22 @@
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3577.84,
-   "chg": -0.0019,
+   "price": 3570.21,
+   "chg": -0.004,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 10580.27,
-   "chg": -0.0055,
+   "price": 10558.59,
+   "chg": -0.0075,
    "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2281.61,
-   "chg": -0.0046,
+   "price": 2278.82,
+   "chg": -0.0058,
    "signals": []
   }
  ],
