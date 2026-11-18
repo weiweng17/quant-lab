@@ -112,6 +112,16 @@ section.hide{display:none}
 .hot-tags{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px}
 .hot-tags span{font-size:11px;padding:2px 8px;border-radius:99px;color:var(--gold);
   border:1px solid rgba(240,180,60,.4);background:rgba(240,180,60,.08)}
+/* ---------- 游资模式回测 ---------- */
+.yz-why{background:linear-gradient(135deg,rgba(240,180,60,.09),rgba(79,124,255,.06));
+  border:1px solid rgba(240,180,60,.28);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.yz-why-h{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:12px}
+.yz-why-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px}
+@media(max-width:860px){.yz-why-grid{grid-template-columns:1fr}}
+.yz-why-grid div{font-size:12.5px;line-height:1.75;color:var(--mut)}
+.yz-why-grid b{color:var(--txt);display:block;margin-bottom:2px;font-size:13px}
+.yz-sent{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.yz-sent-h{font-size:13px;font-weight:600;margin-bottom:8px;color:var(--txt)}
 .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
 .sec-head h2{font-size:20px;font-weight:700;letter-spacing:.3px}
 .sec-head h2::before{content:"";display:inline-block;width:4px;height:18px;border-radius:3px;
@@ -416,6 +426,7 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
       <div class="mstat"><div><div class="lbl">扫描板块</div><div class="val mono" id="heroSectors"></div></div></div>
       <div class="mstat"><div><div class="lbl">个股池</div><div class="val mono" id="heroUniverse"></div></div></div>
       <div class="mstat"><div><div class="lbl">今日推荐</div><div class="val mono" id="heroPicks"></div></div></div>
+      <div class="mstat"><div><div class="lbl">建议仓位</div><div class="val mono" id="heroPos"></div></div></div>
     </div>
   </div>
 
@@ -486,6 +497,43 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   </section>
 
   <!-- RADAR -->
+  <!-- YOUZI 游资模式回测 -->
+  <section id="youzi">
+    <div class="sec-head"><h2>游资模式回测</h2><span class="tagline" id="yzTag">打板接力 · 次日开盘买 · 持有1-3日 · -7%止损</span></div>
+    <div class="yz-why">
+      <div class="yz-why-h">为什么游资收益能那么高？我们差在哪</div>
+      <div class="yz-why-grid">
+        <div><b>① 幸存者偏差</b>你看到的都是活下来的。龙虎榜、财经号只报道赢家，亏损的游资不会发声——用榜单收益当"平均水平"本身就是错觉。</div>
+        <div><b>② 只做情绪上升期</b>游资在退潮期空仓，一年只做几十个交易日。我们的策略每天满仓运行，弱市里的亏损把强市收益吃掉了。</div>
+        <div><b>③ 盈亏比而非胜率</b>他们胜率常只有 45-50%，但错了 -5% 立刻走、对了吃 +15~30%（连板）。靠盈亏比 3:1 赚钱，不是靠猜得准。</div>
+        <div><b>④ 执行优势</b>盘中抢筹速度、席位通道、资金体量带来的定价权。日线回测天然复现不了这一层——所以下面的数字是"规则层面的上限参考"，不是能拿到的收益。</div>
+      </div>
+    </div>
+    <div class="yz-sent">
+      <div class="yz-sent-h">情绪曲线 · 每日涨停家数（退潮日不宜接力）</div>
+      <div id="yzSentChart"></div>
+    </div>
+    <div class="card" style="padding:10px 14px;margin-bottom:16px">
+      <div class="tbl-wrap tbl-scroll">
+        <table id="yzTable">
+          <thead><tr><th>玩法</th><th>笔数</th><th>胜率</th><th>平均收益</th><th>盈亏比</th><th>止损率</th><th>累计(等权)</th><th>最大回撤</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="yzNote" style="font-size:11.5px;color:var(--dim);padding:8px 2px 2px"></div>
+    </div>
+    <div class="card" style="padding:10px 14px">
+      <div style="font-size:13.5px;font-weight:700;margin:2px 0 8px">最近成交明细（全部涨停·持有1日）</div>
+      <div class="tbl-wrap tbl-scroll">
+        <table id="yzRecent">
+          <thead><tr><th>信号日</th><th>标的</th><th>连板</th><th>行业</th><th>买入</th><th>卖出</th><th>收益</th><th>结果</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- RADAR 策略雷达 -->
   <section id="radar">
     <div class="sec-head"><h2>策略雷达</h2><span class="tagline">全股票池回测统计：哪个策略平均收益最高、最常跑赢基准</span></div>
     <div class="grid radar-grid">
@@ -582,6 +630,7 @@ const RES = __RES__;
 const INTRADAY = __INTRADAY__;
 const TRACK = __TRACK__;
 const ANAL = __ANAL__;
+const YOUZI = __YOUZI__;
 
 /* ============ 工具 ============ */
 const $ = s => document.querySelector(s);
@@ -772,6 +821,12 @@ function renderMarket(){
   $('#heroSectors').textContent = SCAN.meta.sectors + ' 个';
   $('#heroUniverse').textContent = SCAN.meta.universe + ' 只';
   $('#heroPicks').textContent = SCAN.picks.length + ' 只';
+  const pos = SCAN.meta.position;
+  if(pos != null){
+    const el = $('#heroPos');
+    el.textContent = pos + ' 成';
+    el.style.color = pos >= 6 ? 'var(--up)' : pos >= 4 ? 'var(--gold)' : 'var(--down)';
+  }
 }
 
 /* ============ 渲染: 精选 ============ */
@@ -865,6 +920,76 @@ function renderSectors(){
       <div class="trend ${s.trend?'up':'down'}">${s.trend?'▲':'▼'}</div>
     </div>`);
   });
+}
+
+/* ============ 渲染: 游资模式回测 ============ */
+function renderYouzi(){
+  const Y = YOUZI || {};
+  const vs = Y.variants || [];
+  const tb = $('#yzTable tbody');
+  if(!vs.length){
+    tb.innerHTML = '<tr><td colspan="8" style="color:var(--mut);padding:18px">游资回测数据未生成（工作流首次运行后出现）</td></tr>';
+    return;
+  }
+  const m = Y.meta || {};
+  $('#yzTag').textContent =
+    `${m.period ? m.period[0]+' ~ '+m.period[1] : ''} · ${m.days||0}个交易日 · 信号${m.signals||0}笔 · ${m.rules||''}`;
+  $('#yzNote').textContent =
+    `口径：${m.fee||''}；次日开盘接近涨停（买不进）剔除 ${m.gapSkipped||0} 笔；` +
+    `累计为每笔等权线性累加（非复利），回撤基于累加曲线；` +
+    `涨停池历史窗口约 ${m.days||15} 个交易日，样本偏短，数字只代表规则层面的水平，不等于可拿到手的收益。`;
+
+  /* 情绪曲线 */
+  const d = Y.daily || [];
+  if(d.length){
+    const W = 680, H = 110, padL = 28, padB = 18, padT = 8;
+    const maxV = Math.max(...d.map(x=>x.ztCount), 60) * 1.1;
+    const bw = (W - padL - 8) / d.length;
+    let bars = '';
+    d.forEach((x,i)=>{
+      const h = (H - padB - padT) * x.ztCount / maxV;
+      const col = x.ztCount >= 60 ? '#ff4d4f' : x.ztCount >= 40 ? '#f5c451' : '#00c48c';
+      bars += `<rect x="${(padL + i*bw + 0.5).toFixed(1)}" y="${(H-padB-h).toFixed(1)}" width="${Math.max(1.5, bw-2).toFixed(1)}" height="${h.toFixed(1)}" rx="1" fill="${col}" opacity=".8"/>`;
+      if(i % Math.ceil(d.length/8) === 0){
+        bars += `<text x="${(padL + i*bw + bw/2).toFixed(1)}" y="${H-4}" font-size="9" fill="#5b6885" text-anchor="middle">${x.date.slice(5)}</text>`;
+      }
+    });
+    const y40 = H - padB - (H - padB - padT) * 40 / maxV;
+    bars += `<line x1="${padL}" y1="${y40.toFixed(1)}" x2="${W-6}" y2="${y40.toFixed(1)}" stroke="#f5c451" stroke-dasharray="4 4" stroke-width="1" opacity=".7"/>`;
+    bars += `<text x="${padL+2}" y="${(y40-4).toFixed(1)}" font-size="9" fill="#f5c451">40 家(退潮线)</text>`;
+    $('#yzSentChart').innerHTML =
+      `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${bars}</svg>`;
+  }
+
+  /* 变体对比 */
+  const best = vs.reduce((a,b)=> (b.sumRet > a.sumRet ? b : a), vs[0]);
+  tb.innerHTML = vs.map(v=>{
+    const isBest = v.id === best.id;
+    return `<tr${isBest?' style="background:rgba(240,180,60,.07)"':''}>
+      <td>${esc(v.name)}${isBest?' <span style="color:var(--gold);font-size:11px">最佳</span>':''}</td>
+      <td class="mono">${v.trades}</td>
+      <td class="mono">${(v.winRate*100).toFixed(1)}%</td>
+      <td class="mono ${cls(v.avgRet)}">${sign(v.avgRet)}${pct(v.avgRet,2)}</td>
+      <td class="mono">${v.payoff==null?'—':v.payoff+':1'}</td>
+      <td class="mono">${(v.stopRate*100).toFixed(0)}%</td>
+      <td class="mono ${cls(v.sumRet)}">${sign(v.sumRet)}${pct(v.sumRet,1)}</td>
+      <td class="mono down">${pct(v.mdd,1)}</td>
+    </tr>`;
+  }).join('');
+
+  /* 最近成交 */
+  const rb = $('#yzRecent tbody');
+  rb.innerHTML = (Y.recent||[]).map(t=>`
+    <tr>
+      <td class="mono">${t.date.slice(5)}</td>
+      <td>${esc(t.name)}<small style="color:var(--dim);margin-left:6px">${t.code}</small></td>
+      <td class="mono">${t.lbc}板</td>
+      <td style="color:var(--mut);font-size:12px">${esc((t.industry||'').slice(0,6))}</td>
+      <td class="mono">${fmt(t.buy)}</td>
+      <td class="mono">${fmt(t.sell)}</td>
+      <td class="mono ${cls(t.ret)}">${sign(t.ret)}${pct(t.ret,2)}</td>
+      <td style="font-size:11.5px;color:${t.reason==='stop'?'var(--down)':'var(--mut)'}">${t.reason==='stop'?`止损(${t.days}日)`:`持有${t.days}日`}</td>
+    </tr>`).join('') || '<tr><td colspan="8" style="color:var(--mut);padding:14px">暂无成交</td></tr>';
 }
 
 /* ============ 渲染: 策略雷达 ============ */
@@ -1335,7 +1460,7 @@ function startBuildWatch(){
 const TABS = {
   market:   ['market','intraday'],                          /* 大盘: 指数研判 + 盘中快照 */
   picks:    ['picks','themes','track','sectors'],           /* 选股: 精选 + 题材热度 + 历史跟踪 + 板块扫描 */
-  backtest: ['radar','analytics','backtest']                /* 回测: 策略雷达 + 数据体检 + 回测对比 */
+  backtest: ['youzi','radar','analytics','backtest']       /* 回测: 游资模式 + 策略雷达 + 数据体检 + 回测对比 */
 };
 const TAB_IDS = Object.keys(TABS);
 function tabFor(id){ return TAB_IDS.find(t=>TABS[t].includes(id)); }
@@ -1365,7 +1490,7 @@ window.addEventListener('hashchange', ()=>switchTab(location.hash.slice(1), fals
     $('#footWeights').textContent = `评分权重 ${SCAN.meta.weightsVersion}：技术${Math.round(fw.technical*100)}% / 题材${Math.round(fw.hotTheme*100)}% / 板块${Math.round(fw.sector*100)}%`;
   }
   $('#footTime').textContent = 'Generated ' + SCAN.meta.generated;
-  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar();
+  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar(); renderYouzi();
   renderIntraday();
   renderTrack(); renderAnalytics();
   renderControls(); renderTable();
@@ -1398,11 +1523,17 @@ def main():
         anl["opt"] = json.load(open("param_scan.json", encoding="utf-8")).get("rows", [])
     except Exception:
         anl = {"corr": None, "monthly": None, "opt": []}
+    try:
+        youzi = json.load(open("youzi.json", encoding="utf-8"))
+    except Exception:
+        youzi = {"variants": [], "recent": [], "daily": [],
+                 "meta": {"note": "游资回测暂未生成（工作流运行 youzi.py 后出现）"}}
     html = TEMPLATE.replace("__SCAN__", json.dumps(scan, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__RES__", json.dumps(res, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__INTRADAY__", json.dumps(intraday, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__TRACK__", json.dumps(track, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__ANAL__", json.dumps(anl, ensure_ascii=False, separators=(",", ":")))
+    html = html.replace("__YOUZI__", json.dumps(youzi, ensure_ascii=False, separators=(",", ":")))
     from datetime import datetime
     html = html.replace("__BUILD_TS__", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     out = "量化实验室.html"

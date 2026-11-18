@@ -29,6 +29,21 @@ def main():
     if sent:
         s.setdefault("meta", {})["sentiment"] = sent
         print(f"涨停情绪温度: {sent['score']}({sent['label']})")
+
+    # 建议仓位: 大盘趋势定基调 + 情绪温度修正 (与 scan.py 同一公式)
+    W = scan.load_weights()
+    TA = W.get("thresholdAdjust", scan.DEFAULT_WEIGHTS["thresholdAdjust"])
+    ms = (s.get("meta") or {}).get("marketScore")
+    if ms is not None:
+        pos = (8 if ms >= 70 else 6 if ms >= 55 else 4 if ms >= 40 else 2)
+        sent_now = (s.get("meta") or {}).get("sentiment")
+        if sent_now:
+            if sent_now["score"] < TA["sentimentIceBelow"]:
+                pos -= 2
+            elif sent_now["score"] > TA["sentimentHotAbove"]:
+                pos += 1
+        s["meta"]["position"] = max(0, min(9, pos))
+        print(f"建议仓位: {s['meta']['position']} 成")
     with open("scan.json", "w", encoding="utf-8") as f:
         json.dump(s, f, ensure_ascii=False, separators=(",", ":"))
     print("saved scan.json (hot/sentiment only)")

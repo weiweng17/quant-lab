@@ -475,10 +475,22 @@ def main():
                        f"，个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
                        f"建议以{ p['stop']}为止损参考，分批布局。")
 
+    # 建议仓位: 大盘趋势定基调, 情绪温度修正(冰点减仓/亢奋略加), 0-9 成
+    pos = (8 if market_score >= 70 else 6 if market_score >= 55 else
+           4 if market_score >= 40 else 2)
+    if sentiment:
+        if sentiment["score"] < TA["sentimentIceBelow"]:
+            pos -= 2
+        elif sentiment["score"] > TA["sentimentHotAbove"]:
+            pos += 1
+    pos = max(0, min(9, pos))
+    print(f"   建议仓位: {pos} 成")
+
     meta = {"generated": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "universe": len(universe), "sectors": len(sectors),
             "marketScore": market_score, "marketStatus": market_status,
             "pickThreshold": pick_th,
+            "position": pos,
             "weightsVersion": W["version"],
             "factorWeights": {"technical": FW["technical"], "hotTheme": FW["hotTheme"],
                               "sector": FW["sector"]},
