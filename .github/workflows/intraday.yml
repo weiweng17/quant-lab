@@ -37,7 +37,7 @@ jobs:
           set -e
           SZ=$(stat -c%s deploy/index.html)
           echo "deploy/index.html = $SZ bytes"
-          if [ "$SZ" -lt 600000 ]; then
+          if [ "$SZ" -lt 400000 ]; then
             echo "::error::deploy/index.html 体积异常（$SZ），拒绝发布"
             exit 1
           fi
