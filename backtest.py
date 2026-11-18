@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""回测引擎：经典技术指标策略对比 -> results.json"""
+"""回测引擎：经典技术指标策略对比 -> results.json
+
+成交口径: open_t1 —— 信号基于第 i 日收盘数据生成, 统一在次日开盘价执行,
+消除「收盘算信号、收盘价成交」的前视偏差。期末未平仓按末日收盘估值强平(仅统计用)。
+"""
 import json
 import math
 
@@ -64,54 +68,109 @@ def boll(closes, n=20, k=2.0):
 
 # ---------- 回测核心 ----------
 
-def run_long_short(closes, signals):
-    """signals[i] in {None, 1(持有), 0(空仓)}，收盘价成交，全仓进出。"""
+def run_long_short(closes, signals, opens=None):
+    """signals[i] in {None, 1(持有), 0(空仓)}，基于第 i 日收盘数据生成；
+    成交统一在次日开盘价执行(open_t1)，全仓进出。
+    i=0 的信号(仅买入持有的期初建仓)视为开盘即可得，以 open[0] 成交。"""
+    if opens is None:
+        opens = closes
     n = len(closes)
     cash, shares = INIT_CASH, 0.0
     equity = [0.0] * n
     trades = []          # {bi, si, bp, sp, ret}
     open_trade = None
     last_sig = 0
+    pending = None       # 收盘生成的挂单, 次日开盘执行
+
+    def _exec(i, sig):
+        nonlocal cash, shares, open_trade
+        if sig == 1 and cash > 0:
+            shares = cash * (1 - BUY_FEE) / opens[i]
+            cash = 0.0
+            open_trade = {"bi": i, "bp": opens[i]}
+        elif sig == 0 and shares > 0:
+            cash = shares * opens[i] * (1 - SELL_FEE)
+            shares = 0.0
+            trades.append({
+                "bi": open_trade["bi"], "si": i,
+                "bp": open_trade["bp"], "sp": opens[i],
+                "ret": opens[i] / open_trade["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE),
+            })
+            open_trade = None
+
     for i in range(n):
+        if pending is not None:               # 次日开盘执行昨日收盘信号
+            _exec(i, pending)
+            last_sig = pending
+            pending = None
         sig = signals[i]
-        # 指标类策略 sig[0] 恒为 None, 该条件只对买入持有(首日建仓)放行 i=0
         if sig is not None and sig != last_sig:
-            if sig == 1 and cash > 0:
-                shares = cash * (1 - BUY_FEE) / closes[i]
-                cash = 0.0
-                open_trade = {"bi": i, "bp": closes[i]}
-            elif sig == 0 and shares > 0:
-                cash = shares * closes[i] * (1 - SELL_FEE)
-                shares = 0.0
-                trades.append({
-                    "bi": open_trade["bi"], "si": i,
-                    "bp": open_trade["bp"], "sp": closes[i],
-                    "ret": closes[i] / open_trade["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE),
-                })
-                open_trade = None
-            last_sig = sig
+            if i == 0:
+                _exec(0, sig)                 # 期初建仓: 开盘即可成交, 无前视
+                last_sig = sig
+            else:
+                pending = sig                 # 收盘确认 -> 挂单待次日开盘
         equity[i] = cash + shares * closes[i]
-    # 平掉期末持仓(计入最后一笔, 标记未平仓)
+    # 期末: 挂单与持仓按末日收盘估值强平(仅用于统计, 非可执行价格)
+    if pending is not None:
+        if pending == 0 and shares > 0:
+            cash = shares * closes[-1] * (1 - SELL_FEE)
+            shares = 0.0
+            trades.append({
+                "bi": open_trade["bi"], "si": n - 1,
+                "bp": open_trade["bp"], "sp": closes[-1],
+                "ret": closes[-1] / open_trade["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE),
+                "open": True,
+            })
+            open_trade = None
+        # pending == 1(末日收盘出买入信号): 无次日开盘, 不建仓, 保持现金
+        last_sig = pending
+        pending = None
     if open_trade is not None:
-        i = n - 1
         trades.append({
-            "bi": open_trade["bi"], "si": i, "bp": open_trade["bp"], "sp": closes[i],
-            "pnl": None, "ret": closes[i] / open_trade["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE),
+            "bi": open_trade["bi"], "si": n - 1, "bp": open_trade["bp"], "sp": closes[-1],
+            "ret": closes[-1] / open_trade["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE),
             "open": True,
         })
     return equity, trades
 
 
-def run_grid(closes, grids=10, lookback=120):
-    """网格交易：滚动区间上下限分grids格，跌一格买一份，涨一格卖一份，资金等分。"""
+def run_grid(closes, grids=10, lookback=120, opens=None):
+    """网格交易：滚动区间上下限分grids格，跌一格买一份，涨一格卖一份，资金等分。
+    格位以第 i 日收盘价计算，变动在次日开盘价执行(open_t1)，消除前视偏差。"""
+    if opens is None:
+        opens = closes
     n = len(closes)
     cash = INIT_CASH
     lots = []           # 每份持仓 {idx, price, shares}
     unit_cache = None
     equity = [0.0] * n
     trades = []
-    grid_level = None   # 当前所在格位
+    grid_level = None   # 当前所在格位(含已排队未成交的目标格位)
+    pending = []        # 待执行队列: 'b'=次日开盘买一份, 's'=次日开盘卖一份
     for i in range(n):
+        # 次日开盘执行昨日收盘生成的网格变动
+        while pending:
+            act = pending.pop(0)
+            if act == "b":
+                if cash >= unit_cash and opens[i] > 0:
+                    sh = unit_cash * (1 - BUY_FEE) / opens[i]
+                    lots.append({"price": opens[i], "shares": sh})
+                    cash -= unit_cash
+                    trades.append({"bi": i, "si": None, "bp": opens[i], "sp": None})
+                else:
+                    grid_level += 1    # 资金不足未成交, 回补格位
+            else:  # "s"
+                if lots:
+                    lot = lots.pop(0)  # FIFO 卖出最早一份
+                    cash += lot["shares"] * opens[i] * (1 - SELL_FEE)
+                    t = next((t for t in trades if t["si"] is None), None)
+                    if t:
+                        t["si"] = i; t["sp"] = opens[i]
+                        t["ret"] = opens[i] / t["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE)
+                    grid_level += 1
+                else:
+                    grid_level -= 1    # 无仓可卖, 回补格位
         # 每隔 lookback 天重算网格区间(用历史数据, 避免未来函数)
         if i % lookback == 0 and i + lookback <= n and i >= 60:
             win = closes[max(0, i - lookback):i]
@@ -125,21 +184,14 @@ def run_grid(closes, grids=10, lookback=120):
             lvl = math.floor((closes[i] - lo_p) / step)
             lvl = max(0, min(grids, lvl))
             if grid_level is None:
-                grid_level = lvl
-            while lvl < grid_level and cash >= unit_cash and closes[i] > 0:
-                sh = unit_cash * (1 - BUY_FEE) / closes[i]
-                lots.append({"price": closes[i], "shares": sh})
-                cash -= unit_cash
-                trades.append({"bi": i, "si": None, "bp": closes[i], "sp": None})
-                grid_level -= 1
-            while lvl > grid_level and lots:
-                lot = lots.pop(0)   # FIFO 卖出最早一份
-                cash += lot["shares"] * closes[i] * (1 - SELL_FEE)
-                t = next((t for t in trades if t["si"] is None), None)  # FIFO 配对最早未平仓交易, 与 lot 弹出顺序一致
-                if t:
-                    t["si"] = i; t["sp"] = closes[i]
-                    t["ret"] = closes[i] / t["bp"] * (1 - SELL_FEE) - (1 + BUY_FEE)
-                grid_level += 1
+                grid_level = lvl       # 初始基准, 不追溯历史格位
+            else:
+                d = lvl - grid_level
+                if d < 0:
+                    pending.extend(["b"] * (-d))
+                elif d > 0:
+                    pending.extend(["s"] * d)
+                grid_level = lvl       # 乐观记账, 执行失败时回补
         equity[i] = cash + sum(l["shares"] * closes[i] for l in lots)
     # 期末强平统计
     for t in trades:
@@ -273,13 +325,16 @@ def metrics(dates, closes, equity, trades):
 
 def backtest_symbol(sym):
     closes = sym["close"]
+    opens = sym.get("open")
+    if not opens or len(opens) != len(closes):
+        raise ValueError(f"{sym.get('name')} 缺少 open 价格, open_t1 口径无法回测")
     out = []
     for s in STRATEGIES:
         if s["grid"]:
-            equity, trades = run_grid(closes)
+            equity, trades = run_grid(closes, opens=opens)
         else:
             sig, _ = s["fn"](closes)
-            equity, trades = run_long_short(closes, sig)
+            equity, trades = run_long_short(closes, sig, opens)
         m = metrics(sym["dates"], closes, equity, trades)
         # 净值曲线降采样: 全保留太长, 1861点其实可控, 保留全部
         nv = [round(e / INIT_CASH, 5) for e in equity]
@@ -325,7 +380,11 @@ def main():
     agg = {s["id"]: {"count": 0, "sumAnn": 0.0, "sumMdd": 0.0, "beats": 0,
                      "sumSharpe": 0.0, "wins": 0} for s in STRATEGIES}
     per_symbol = []
+    skipped_no_open = 0
     for sym in universe:
+        if not sym.get("open") or len(sym["open"]) != len(sym.get("close", [])):
+            skipped_no_open += 1
+            continue
         try:
             res = backtest_symbol(sym)
         except Exception:
@@ -364,10 +423,12 @@ def main():
     with open("results.json", "w", encoding="utf-8") as f:
         json.dump({"detail": results, "stats": stats, "perSymbol": per_symbol},
                   f, ensure_ascii=False, separators=(",", ":"))
-    print("\n策略全池统计(平均年化 从高到低):")
+    print("\n策略全池统计(平均年化 从高到低, 口径 open_t1):")
     for s in stats:
         print(f"  {s['name']:<12} 年化{s['avgAnn']*100:6.1f}% 回撤{s['avgMdd']*100:6.1f}% "
               f"跑赢基准 {s['beats']}/{s['count']}")
+    if skipped_no_open:
+        print(f"⚠ {skipped_no_open} 只标的缺 open 数据被跳过")
     print("saved results.json")
 
 if __name__ == "__main__":

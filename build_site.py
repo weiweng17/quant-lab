@@ -488,7 +488,7 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
 
   <!-- BACKTEST -->
   <section id="backtest">
-    <div class="sec-head"><h2>策略回测对比</h2><span class="tagline">同一标的跑 7 策略，含手续费印花税</span></div>
+    <div class="sec-head"><h2>策略回测对比</h2><span class="tagline">同一标的跑 7 策略 · 次日开盘成交（open_t1），无前视偏差</span></div>
     <div class="ctrl-row">
       <span class="ctrl-lbl">标的</span>
       <div class="ctrl-group" id="symChips"></div>
@@ -535,7 +535,7 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   <footer>
     <div class="warn">⚠ 免责声明：本站为技术研究与教学演示，不构成任何投资建议。量化策略存在失效风险，据此操作盈亏自负。</div>
     <div class="foot-in">
-      <span>数据来源：东方财富公开行情接口（前复权日线）· 回测含佣金万2.5 + 卖出印花税</span>
+      <span>数据来源：东方财富公开行情接口（前复权日线）· 回测口径：信号收盘确认、次日开盘价成交（open_t1，无前视偏差）· 含佣金万2.5 + 卖出印花税</span>
       <span class="mono" id="footTime"></span>
     </div>
   </footer>
@@ -742,6 +742,20 @@ function renderMarket(){
 /* ============ 渲染: 精选 ============ */
 function renderPicks(){
   const g = $('#picksGrid'); g.innerHTML = '';
+  const th = SCAN.meta.pickThreshold;
+  const tag = document.querySelector('#picks .tagline');
+  if(tag && th) tag.textContent = `强势板块 × 多信号共振 · 今日入选门槛 ${th} 分（大盘${SCAN.meta.marketStatus}）· 含参考价位`;
+  if(!SCAN.picks.length){
+    if(tag) tag.textContent = `今日无个股满足门槛 ${th} 分（大盘${SCAN.meta.marketStatus}）—— 弱市防守，空仓也是策略`;
+    g.insertAdjacentHTML('beforeend', `
+    <div class="card" style="grid-column:1/-1;text-align:center;padding:34px 20px">
+      <div style="font-size:15px;color:var(--gold);font-weight:600">今日无多信号共振个股</div>
+      <div style="font-size:13px;color:var(--mut);margin-top:8px">
+        入选门槛 ${th} 分，股票池最高分不足以通过 → 不强行凑数，等待市场转强。
+      </div>
+    </div>`);
+    return;
+  }
   SCAN.picks.forEach(p=>{
     const sigs = (p.signals||[]).slice(0,4);
     g.insertAdjacentHTML('beforeend', `

@@ -102,17 +102,19 @@ BUILDERS = {"ma": sig_ma, "macd": sig_macd, "rsi": sig_rsi,
             "boll": sig_boll, "mom": sig_mom, "kdj": sig_kdj}
 
 
-def run_window(closes):
-    """返回 {label: (ann, sharpe, mdd, beatBase)}"""
+def run_window(closes, opens=None):
+    """返回 {label: (ann, sharpe, mdd, beatBase)}；open_t1 口径与回测主引擎一致"""
+    if opens is None:
+        opens = closes
     # 基准(买入持有)
-    bh_eq, _ = bt.run_long_short(closes, [1] * len(closes))
+    bh_eq, _ = bt.run_long_short(closes, [1] * len(closes), opens)
     bh_ann = bt.metrics(None, closes, bh_eq, [])["annRet"]
     out = {}
     for sid, grid in GRIDS.items():
         fn = BUILDERS[sid]
         for label, args in grid:
             sig = fn(closes, args)
-            eq, trades = bt.run_long_short(closes, sig)
+            eq, trades = bt.run_long_short(closes, sig, opens)
             m = bt.metrics(None, closes, eq, trades)
             out[(sid, label)] = (m["annRet"], m["sharpe"], m["mdd"], m["annRet"] > bh_ann)
     return out
@@ -128,13 +130,17 @@ def main():
            for sid in GRIDS}
     for sym in universe:
         c = sym["close"]
+        o = sym.get("open")
         if not c or len(c) < 100:
             continue
+        if not o or len(o) != len(c):
+            continue   # 缺 open 数据, open_t1 口径无法回测, 跳过
         is_end = int(len(c) * 0.6)
         for win_name, win in (("is", c[:is_end]), ("oos", c[is_end:])):
             if len(win) < 60:
                 continue
-            res = run_window(win)
+            owin = o[:is_end] if win_name == "is" else o[is_end:]
+            res = run_window(win, owin)
             for sid in GRIDS:
                 for label, _ in GRIDS[sid]:
                     ann, sharpe, mdd, beat = res[(sid, label)]

@@ -265,6 +265,9 @@ def main():
         for code, name in members:
             if code in seen:
                 continue
+            if "ST" in name.upper() or name.startswith("*"):
+                seen.add(code)   # ST/退市风险股直接排除, 不进股票池
+                continue
             seen.add(code)
             try:
                 k = kline(secid_of(code))
@@ -288,14 +291,25 @@ def main():
     if len(universe) < 20:
         raise SystemExit(f"股票池仅{len(universe)}只(数据源异常), 中止; 自动化可改跑 rescan_tencent.py 兜底")
     universe.sort(key=lambda s: -s["score"])
-    good = [s for s in universe if s["score"] >= 55]
-    print("   评分>=55的候选:", len(good))
+
+    # 大盘状态与动态门槛: 市场越弱, 入选分数要求越高, 避免弱市凑数推荐
+    market_score = int(round(sum(i["score"] for i in indices) / len(indices)))
+    market_status = ("强势上行" if market_score >= 70 else
+                     "震荡偏强" if market_score >= 55 else
+                     "中性观望" if market_score >= 40 else "弱势防守")
+    pick_th = (55 if market_score >= 70 else
+               60 if market_score >= 55 else
+               65 if market_score >= 40 else 70)
+
+    good = [s for s in universe if s["score"] >= pick_th]
+    print(f"   大盘{market_status}(评分{market_score}) -> 入选门槛 {pick_th} 分, "
+          f"候选 {len(good)} 只")
 
     print("[4/4] 生成推荐列表...")
     # 板块多样性: 每个强势板块取最优 1 只, 优先; 不足则从全局高分补齐
     picks, used = [], set()
     for b in top_boards:
-        cand = [s for s in universe if s["sector"] == b["name"] and s["score"] >= 55]
+        cand = [s for s in universe if s["sector"] == b["name"] and s["score"] >= pick_th]
         if cand:
             picks.append(cand[0]); used.add(cand[0]["code"])
     for s in good:
@@ -308,14 +322,10 @@ def main():
                        f"个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
                        f"建议以{ p['stop']}为止损参考，分批布局。")
 
-    market_score = int(round(sum(i["score"] for i in indices) / len(indices)))
-    market_status = ("强势上行" if market_score >= 70 else
-                     "震荡偏强" if market_score >= 55 else
-                     "中性观望" if market_score >= 40 else "弱势防守")
-
     meta = {"generated": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "universe": len(universe), "sectors": len(sectors),
-            "marketScore": market_score, "marketStatus": market_status}
+            "marketScore": market_score, "marketStatus": market_status,
+            "pickThreshold": pick_th}
 
     # 回测/图表用的全量K线: 指数 + 推荐股 (复用已拉数据, 不重复请求)
     kline_out = []
@@ -335,7 +345,8 @@ def main():
     # 全股票池(供策略胜率统计, 不落K线图)
     with open("universe.json", "w", encoding="utf-8") as f:
         json.dump([{k2: v2 for k2, v2 in s.items() if k2 != "kline"}
-                   | {"close": s["kline"]["close"], "dates": s["kline"]["dates"]}
+                   | {"close": s["kline"]["close"], "open": s["kline"]["open"],
+                      "dates": s["kline"]["dates"]}
                    for s in universe], f, ensure_ascii=False, separators=(",", ":"))
 
     print("=" * 50)

@@ -91,6 +91,8 @@ def main():
     universe, sec_to_sector = [], {}
     sector_close = {}   # sector -> [成分股收盘chg]
     for s in old_uni:
+        if "ST" in s["name"].upper() or s["name"].startswith("*"):
+            continue   # ST/退市风险股直接排除
         k = tx_kline(to_tx(s["secid"]))
         if not k or len(k["close"]) < 80:
             print("  跳过", s["name"], "K线不足")
@@ -125,11 +127,21 @@ def main():
     top_boards = sorted(sectors, key=lambda s: -s.get("raw", 0))[:8]
 
     # ---------- [4/4] 收盘推荐 ----------
-    good = [s for s in universe if s["score"] >= 55]
+    # 大盘状态与动态门槛: 市场越弱, 入选分数要求越高, 避免弱市凑数推荐
+    market_score = int(round(sum(i["score"] for i in indices) / len(indices)))
+    market_status = ("强势上行" if market_score >= 70 else
+                     "震荡偏强" if market_score >= 55 else
+                     "中性观望" if market_score >= 40 else "弱势防守")
+    pick_th = (55 if market_score >= 70 else
+               60 if market_score >= 55 else
+               65 if market_score >= 40 else 70)
+    print(f"   大盘{market_status}(评分{market_score}) -> 入选门槛 {pick_th} 分")
+
+    good = [s for s in universe if s["score"] >= pick_th]
     picks, used = [], set()
     for b in top_boards:
         cand = [s for s in universe
-                if s["sector"] == b["name"] and s["score"] >= 55]
+                if s["sector"] == b["name"] and s["score"] >= pick_th]
         if cand:
             picks.append(cand[0]); used.add(cand[0]["code"])
     for s in good:
@@ -142,13 +154,9 @@ def main():
                        f"个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
                        f"建议以{p['stop']}为止损参考，分批布局。")
 
-    market_score = int(round(sum(i["score"] for i in indices) / len(indices)))
-    market_status = ("强势上行" if market_score >= 70 else
-                     "震荡偏强" if market_score >= 55 else
-                     "中性观望" if market_score >= 40 else "弱势防守")
     meta = {"generated": now, "universe": len(universe),
             "sectors": len(sectors), "marketScore": market_score,
-            "marketStatus": market_status,
+            "marketStatus": market_status, "pickThreshold": pick_th,
             "dataSource": "tencent-fallback(东财断连)",
             "note": "板块排名沿用盘中缓存, 指数/个股/推荐为收盘定稿"}
 
@@ -170,7 +178,8 @@ def main():
         json.dump(scan_out, f, ensure_ascii=False, separators=(",", ":"))
     with open("universe.json", "w", encoding="utf-8") as f:
         json.dump([{k2: v2 for k2, v2 in s.items() if k2 != "kline"}
-                   | {"close": s["kline"]["close"], "dates": s["kline"]["dates"]}
+                   | {"close": s["kline"]["close"], "open": s["kline"]["open"],
+                      "dates": s["kline"]["dates"]}
                    for s in universe], f, ensure_ascii=False, separators=(",", ":"))
 
     print("=" * 50)
