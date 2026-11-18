@@ -150,8 +150,8 @@ def load_weights(path="data/weights/v2.json"):
 
 # ---------- 题材热度 / 涨停情绪 数据源 ----------
 
-def fetch_ths_hot():
-    """同花顺当日强势股(零鉴权) + 题材归因 reason 标签(加号分隔)。失败返回 {}。"""
+def fetch_ths_rows():
+    """同花顺当日强势股(零鉴权) 全量行: [{code,name,tags}]。失败返回 []。"""
     url = (f"http://zx.10jqka.com.cn/event/api/getharden/"
            f"date/{datetime.now().strftime('%Y-%m-%d')}/orderby/date/orderway/desc/charset/GBK/")
     try:
@@ -161,18 +161,42 @@ def fetch_ths_hot():
         with urllib.request.urlopen(req, timeout=12) as r:
             d = json.loads(r.read().decode("gbk", "ignore"))
         if d.get("errocode", 0) != 0:
-            return {}
-        out = {}
+            return []
+        out = []
         for row in (d.get("data") or []):
             code = str(row.get("code", "")).zfill(6)
             reason = str(row.get("reason", "") or "")
             tags = [t.strip() for t in reason.split("+") if t.strip()]
             if code and tags:
-                out[code] = tags
+                out.append({"code": code, "name": str(row.get("name", "") or ""),
+                            "tags": tags})
         return out
     except Exception as e:
         print("   同花顺强势股拉取失败(题材因子中性化):", e)
-        return {}
+        return []
+
+
+def fetch_ths_hot():
+    """强势股 {code: tags} 映射(题材因子计分用), 基于 fetch_ths_rows。"""
+    return {r["code"]: r["tags"] for r in fetch_ths_rows()}
+
+
+def build_hot_payload(rows):
+    """热门题材榜 + 强势股池 payload(供 scan.json['hot'] 与页面题材专区)。
+    updated 为数据抓取时间: 盘中由 fetch_themes.py 每小时刷新, 降低滞后性。"""
+    if not rows:
+        return None
+    tag_counts = {}
+    for r in rows:
+        for t in r["tags"]:
+            tag_counts[t] = tag_counts.get(t, 0) + 1
+    themes = [{"tag": t, "count": c,
+               "stocks": [r["name"] for r in rows if t in r["tags"]]}
+              for t, c in sorted(tag_counts.items(), key=lambda x: -x[1])[:12]]
+    return {"updated": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "total": len(rows), "themes": themes,
+            "stocks": [{"code": r["code"], "name": r["name"], "tags": r["tags"]}
+                       for r in rows]}
 
 
 def hot_theme_score(code, name, hot_map, tag_counts):
@@ -300,7 +324,8 @@ def main():
     FW = W["factorWeights"]
     TA = W.get("thresholdAdjust", DEFAULT_WEIGHTS["thresholdAdjust"])
     print(f"   权重版本 {W['version']} · 技术{FW['technical']} 题材{FW['hotTheme']} 板块{FW['sector']}")
-    hot_map = fetch_ths_hot()
+    ths_rows = fetch_ths_rows()
+    hot_map = {r["code"]: r["tags"] for r in ths_rows}
     tag_counts = {}
     for tags in hot_map.values():
         for t in tags:
@@ -471,6 +496,7 @@ def main():
 
     scan = {"meta": meta, "indices": indices, "sectors": sectors[:12],
             "picks": [{k2: v2 for k2, v2 in p.items() if k2 != "kline"} for p in picks],
+            "hot": build_hot_payload(ths_rows),
             "kline": kline_out}
     with open("scan.json", "w", encoding="utf-8") as f:
         json.dump(scan, f, ensure_ascii=False, separators=(",", ":"))

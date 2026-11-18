@@ -87,6 +87,31 @@ nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
 
 /* ---------- sections ---------- */
 section{padding:34px 0 8px;scroll-margin-top:70px}
+section.hide{display:none}
+.nav-links a.on{color:var(--txt);background:rgba(79,124,255,.16);font-weight:600}
+.mtabs a.on{color:#fff;background:rgba(79,124,255,.35)}
+/* ---------- 题材热度专区 ---------- */
+.lag-note{display:flex;gap:10px;padding:12px 16px;border-radius:10px;margin-bottom:18px;
+  border:1px solid rgba(240,180,60,.35);background:rgba(240,180,60,.08);color:#e8d5a8;font-size:12.5px;line-height:1.7}
+.lag-note b{color:var(--gold)}
+.theme-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+@media(max-width:900px){.theme-wrap{grid-template-columns:1fr}}
+.theme-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.theme-row{display:flex;align-items:center;gap:10px;padding:7px 0}
+.theme-rank{width:26px;font-size:12px;color:var(--dim);font-family:Consolas,monospace;flex:0 0 auto}
+.theme-rank.top{color:var(--gold);font-weight:700}
+.theme-tag{flex:0 0 118px;font-size:13.5px;font-weight:600;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.theme-bar{flex:1;height:16px;border-radius:8px;background:rgba(148,163,184,.08);overflow:hidden}
+.theme-bar i{display:block;height:100%;background:linear-gradient(90deg,#4f7cff,#8f6bff)}
+.theme-count{flex:0 0 52px;text-align:right;font-size:12px;color:var(--mut);font-family:Consolas,monospace}
+.hot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px}
+.hot-card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;transition:.2s}
+.hot-card:hover{border-color:rgba(79,124,255,.45);transform:translateY(-1px)}
+.hot-name{font-size:13.5px;font-weight:600;color:var(--txt)}
+.hot-name small{color:var(--dim);font-weight:400;margin-left:6px;font-size:11px;font-family:Consolas,monospace}
+.hot-tags{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px}
+.hot-tags span{font-size:11px;padding:2px 8px;border-radius:99px;color:var(--gold);
+  border:1px solid rgba(240,180,60,.4);background:rgba(240,180,60,.08)}
 .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
 .sec-head h2{font-size:20px;font-weight:700;letter-spacing:.3px}
 .sec-head h2::before{content:"";display:inline-block;width:4px;height:18px;border-radius:3px;
@@ -352,11 +377,15 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   <div class="wrap nav-in">
     <div class="logo"><span class="mark">◆</span><em>QuantLab</em><span class="cn">&nbsp;量化实验室</span></div>
     <div class="nav-links">
-      <a href="#market">大盘扫描</a>
-      <a href="#picks">今日精选</a>
-      <a href="#sectors">板块扫描</a>
-      <a href="#radar">策略雷达</a>
-      <a href="#backtest">回测对比</a>
+      <a href="#market" data-tab>大盘</a>
+      <a href="#intraday" data-tab>盘中</a>
+      <a href="#picks" data-tab>精选</a>
+      <a href="#themes" data-tab>题材</a>
+      <a href="#track" data-tab>跟踪</a>
+      <a href="#sectors" data-tab>板块</a>
+      <a href="#radar" data-tab>雷达</a>
+      <a href="#analytics" data-tab>体检</a>
+      <a href="#backtest" data-tab>回测</a>
     </div>
     <div class="nav-right">
       <button class="nav-refresh" id="navRefresh" type="button" title="检查并加载最新数据" aria-label="刷新数据">
@@ -371,14 +400,15 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   </div>
   <!-- 手机端快捷导航（sticky 随顶栏常驻，横向滑动） -->
   <div class="mtabs" id="mtabs" aria-label="页面快捷导航">
-    <a href="#market">大盘</a>
-    <a href="#intraday">快照</a>
-    <a href="#picks">精选</a>
-    <a href="#track">跟踪</a>
-    <a href="#sectors">板块</a>
-    <a href="#radar">雷达</a>
-    <a href="#analytics">体检</a>
-    <a href="#backtest">回测</a>
+    <a href="#market" data-tab>大盘</a>
+    <a href="#intraday" data-tab>快照</a>
+    <a href="#picks" data-tab>精选</a>
+    <a href="#themes" data-tab>题材</a>
+    <a href="#track" data-tab>跟踪</a>
+    <a href="#sectors" data-tab>板块</a>
+    <a href="#radar" data-tab>雷达</a>
+    <a href="#analytics" data-tab>体检</a>
+    <a href="#backtest" data-tab>回测</a>
     <a href="#" data-top>顶部</a>
   </div>
 </nav>
@@ -426,6 +456,22 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   <section id="picks">
     <div class="sec-head"><h2>今日精选</h2><span class="tagline">强势板块 × 多信号共振 · 含参考价位</span></div>
     <div class="grid picks-grid" id="picksGrid"></div>
+  </section>
+
+  <!-- THEMES 题材热度 -->
+  <section id="themes">
+    <div class="sec-head"><h2>题材热度</h2><span class="tagline" id="themeTag">同花顺强势股池 · 题材归因聚合</span></div>
+    <div class="lag-note">⚠️ <span><b>滞后性须知：</b>题材热度为盘中快照，盘中每小时自动刷新（当前更新于 <span id="themeTs" class="mono">--</span>）。个股进入强势股池时往往已经涨过一波 —— 热度用于<b>确认板块方向与题材轮动</b>，不是追高买点；买点仍以「今日精选」的技术信号与参考价位为准。</span></div>
+    <div class="theme-wrap">
+      <div class="theme-card">
+        <div style="font-size:14px;font-weight:700;margin-bottom:8px">热门题材 TOP 12</div>
+        <div id="themeList"></div>
+      </div>
+      <div class="theme-card">
+        <div style="font-size:14px;font-weight:700;margin-bottom:8px">同花顺强势股池 <span id="themeTotal" style="color:var(--dim);font-size:12px;font-weight:400"></span></div>
+        <div class="hot-grid" id="hotGrid"></div>
+      </div>
+    </div>
   </section>
 
   <!-- TRACK 历史推荐跟踪 -->
@@ -785,6 +831,33 @@ function renderPicks(){
       <div class="pick-reason">${esc(p.reason)}</div>
     </div>`);
   });
+}
+
+/* ============ 渲染: 题材热度 ============ */
+function renderThemes(){
+  const hot = SCAN.hot;
+  const list = $('#themeList'), grid = $('#hotGrid');
+  if(!hot || !hot.themes || !hot.themes.length){
+    list.innerHTML = '<div style="color:var(--mut);font-size:13px;padding:14px 0">题材数据不可用（同花顺接口失败或未更新），选股不受影响，题材因子自动中性化。</div>';
+    grid.innerHTML = '';
+    $('#themeTs').textContent = '--';
+    return;
+  }
+  $('#themeTs').textContent = hot.updated || '--';
+  const maxC = hot.themes[0].count || 1;
+  list.innerHTML = hot.themes.map((t,i)=>`
+    <div class="theme-row">
+      <div class="theme-rank ${i<3?'top':''}">${String(i+1).padStart(2,'0')}</div>
+      <div class="theme-tag" title="${esc(t.stocks.slice(0,4).join(' / '))}">${esc(t.tag)}</div>
+      <div class="theme-bar"><i style="width:${(t.count/maxC*100).toFixed(0)}%"></i></div>
+      <div class="theme-count">${t.count} 只</div>
+    </div>`).join('');
+  $('#themeTotal').textContent = `${hot.total} 只 · 更新 ${hot.updated||''}`;
+  grid.innerHTML = hot.stocks.map(s=>`
+    <div class="hot-card">
+      <div class="hot-name">${esc(s.name)}<small>${s.code}</small></div>
+      <div class="hot-tags">${s.tags.slice(0,3).map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+    </div>`).join('');
 }
 
 /* ============ 渲染: 板块 ============ */
@@ -1269,6 +1342,24 @@ function startBuildWatch(){
   }, 300000);
 }
 
+/* ============ 标签分页 ============ */
+const TAB_IDS = ['market','intraday','picks','themes','track','sectors','radar','analytics','backtest'];
+function switchTab(id, push=true){
+  if(!TAB_IDS.includes(id)) id = 'market';
+  document.querySelectorAll('.wrap > section').forEach(s=>s.classList.toggle('hide', s.id!==id));
+  document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+id));
+  window.scrollTo(0,0);
+  if(id==='backtest') requestAnimationFrame(draw);   // 画布在隐藏态 clientWidth=0, 显示后重绘
+  if(push) history.replaceState(null,'','#'+id);
+}
+document.addEventListener('click', e=>{
+  const top = e.target.closest('a[data-top]');
+  if(top){ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); return; }
+  const a = e.target.closest('a[data-tab]');
+  if(a){ e.preventDefault(); switchTab(a.getAttribute('href').slice(1)); }
+});
+window.addEventListener('hashchange', ()=>switchTab(location.hash.slice(1), false));
+
 /* ============ init ============ */
 (function init(){
   selStrats = new Set(['bh','ma','macd']);
@@ -1278,10 +1369,11 @@ function startBuildWatch(){
     $('#footWeights').textContent = `评分权重 ${SCAN.meta.weightsVersion}：技术${Math.round(fw.technical*100)}% / 题材${Math.round(fw.hotTheme*100)}% / 板块${Math.round(fw.sector*100)}%`;
   }
   $('#footTime').textContent = 'Generated ' + SCAN.meta.generated;
-  renderMarket(); renderPicks(); renderSectors(); renderRadar();
+  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar();
   renderIntraday();
   renderTrack(); renderAnalytics();
-  renderControls(); draw(); renderTable();
+  renderControls(); renderTable();
+  switchTab(location.hash.slice(1), false);   // 按锚点深度链接进入对应标签
   startLiveQuotes();
   startBuildWatch();
   window.addEventListener('resize', draw);

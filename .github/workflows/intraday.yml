@@ -30,6 +30,7 @@ jobs:
         run: |
           set -x
           python fetch_intraday.py || true
+          python fetch_themes.py || true
           python build_site.py
 
       - name: 校验站点产物
