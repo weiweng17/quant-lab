@@ -1,0 +1,28 @@
+{
+  "version": "v2",
+  "updated": "2026-11-18",
+  "comment": "评分权重唯一事实源：调权重只改这个文件，页面底部会盖版本章。signalWeights 为个股技术信号原始分权重（总分=各权重之和）；factorWeights 为三大因子合成权重（合计应为 1.0）；thresholdAdjust 为情绪温度对入选门槛的修正分。",
+  "signalWeights": {
+    "maBull": 1.0,
+    "maCross": 1.5,
+    "macdBull": 1.0,
+    "macdCross": 1.5,
+    "rsiBand": 0.8,
+    "high20": 1.2,
+    "volume": 0.8,
+    "mom20": 0.6,
+    "ma60": 0.8
+  },
+  "factorWeights": {
+    "technical": 0.45,
+    "hotTheme": 0.35,
+    "sector": 0.20
+  },
+  "thresholdAdjust": {
+    "sentimentIce": 5,
+    "sentimentHot": -5,
+    "sentimentIceBelow": 30,
+    "sentimentHotAbove": 80
+  },
+  "notes": "参考 stock-picker 实测（30+因子/2.2年样本外）：题材热度为主菜、纯技术合计仅约6%权重，此处取 hotTheme 0.35 为保守起步值，待 T+1/3/5 跟踪命中率验证后再调。"
+}

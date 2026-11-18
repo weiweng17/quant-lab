@@ -59,6 +59,15 @@ def to_tx(secid):
 def main():
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
+    # ---------- 权重 + 题材/情绪(与 scan.py 同一套) ----------
+    W = scan.load_weights()
+    hot_map = scan.fetch_ths_hot()
+    tag_counts = {}
+    for tags in hot_map.values():
+        for t in tags:
+            tag_counts[t] = tag_counts.get(t, 0) + 1
+    sentiment = scan.fetch_limit_up_pool()
+
     # ---------- 旧缓存(板块结构) ----------
     old = json.load(open("scan.json", encoding="utf-8"))
     old_uni = json.load(open("universe.json", encoding="utf-8"))
@@ -98,13 +107,21 @@ def main():
             print("  跳过", s["name"], "K线不足")
             time.sleep(SLEEP)
             continue
-        sc, sigs = scan.stock_score(k)
+        sc, sigs = scan.stock_score(k, W["signalWeights"])
+        theme_sc, hot_tags = scan.hot_theme_score(s["code"], s["name"], hot_map, tag_counts)
+        fw = W["factorWeights"]
+        comp = (fw["technical"] * sc + fw["hotTheme"] * theme_sc
+                + fw["sector"] * s.get("sectorScore", 0))
         entry, stop, target = scan.stop_target(k)
         i = len(k["close"]) - 1
         universe.append({
             "secid": s["secid"], "code": s["code"], "name": s["name"],
             "sector": s["sector"], "sectorScore": s.get("sectorScore", 0),
-            "score": sc, "signals": sigs,
+            "score": int(round(comp)), "techScore": sc,
+            "themeScore": int(round(theme_sc)),
+            "isHot": bool(hot_map.get(s["code"])),
+            "hotTags": hot_tags,
+            "signals": sigs,
             "price": round(k["close"][i], 2),
             "chg": round(k["close"][i] / k["close"][i - 1] - 1, 4),
             "entry": entry, "stop": stop, "target": target,
@@ -150,13 +167,18 @@ def main():
         if s["code"] not in used:
             picks.append(s); used.add(s["code"])
     for p in picks:
-        p["reason"] = (f"{p['sector']}板块动量排名靠前(综合{p['sectorScore']}分)，"
-                       f"个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
+        hot_txt = f"，同花顺强势股题材：{'、'.join(p['hotTags'][:3])}" if p.get("hotTags") else ""
+        p["reason"] = (f"{p['sector']}板块动量排名靠前(综合{p['sectorScore']}分)"
+                       f"，技术{p['techScore']}/题材{p['themeScore']}{hot_txt}"
+                       f"，个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
                        f"建议以{p['stop']}为止损参考，分批布局。")
 
     meta = {"generated": now, "universe": len(universe),
             "sectors": len(sectors), "marketScore": market_score,
             "marketStatus": market_status, "pickThreshold": pick_th,
+            "weightsVersion": W["version"],
+            "factorWeights": {k2: W["factorWeights"][k2] for k2 in ("technical", "hotTheme", "sector")},
+            "sentiment": sentiment,
             "dataSource": "tencent-fallback(东财断连)",
             "note": "板块排名沿用盘中缓存, 指数/个股/推荐为收盘定稿"}
 

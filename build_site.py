@@ -535,7 +535,8 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   <footer>
     <div class="warn">⚠ 免责声明：本站为技术研究与教学演示，不构成任何投资建议。量化策略存在失效风险，据此操作盈亏自负。</div>
     <div class="foot-in">
-      <span>数据来源：东方财富公开行情接口（前复权日线）· 回测口径：信号收盘确认、次日开盘价成交（open_t1，无前视偏差）· 含佣金万2.5 + 卖出印花税</span>
+      <span>数据来源：东方财富公开行情接口（前复权日线）· 题材热度：同花顺强势股池 · 回测口径：信号收盘确认、次日开盘价成交（open_t1，无前视偏差）· 含佣金万2.5 + 卖出印花税</span>
+      <span class="mono" id="footWeights"></span>
       <span class="mono" id="footTime"></span>
     </div>
   </footer>
@@ -743,10 +744,12 @@ function renderMarket(){
 function renderPicks(){
   const g = $('#picksGrid'); g.innerHTML = '';
   const th = SCAN.meta.pickThreshold;
+  const sent = SCAN.meta.sentiment;
+  const sentTxt = sent ? ` · 涨停情绪 ${sent.score}°${sent.label}(${sent.ztCount}家涨停/最高${sent.maxLb}连板)` : '';
   const tag = document.querySelector('#picks .tagline');
-  if(tag && th) tag.textContent = `强势板块 × 多信号共振 · 今日入选门槛 ${th} 分（大盘${SCAN.meta.marketStatus}）· 含参考价位`;
+  if(tag && th) tag.textContent = `强势板块 × 题材热度 × 多信号共振 · 今日入选门槛 ${th} 分（大盘${SCAN.meta.marketStatus}${sentTxt}）· 含参考价位`;
   if(!SCAN.picks.length){
-    if(tag) tag.textContent = `今日无个股满足门槛 ${th} 分（大盘${SCAN.meta.marketStatus}）—— 弱市防守，空仓也是策略`;
+    if(tag) tag.textContent = `今日无个股满足门槛 ${th} 分（大盘${SCAN.meta.marketStatus}${sentTxt}）—— 弱市防守，空仓也是策略`;
     g.insertAdjacentHTML('beforeend', `
     <div class="card" style="grid-column:1/-1;text-align:center;padding:34px 20px">
       <div style="font-size:15px;color:var(--gold);font-weight:600">今日无多信号共振个股</div>
@@ -758,17 +761,22 @@ function renderPicks(){
   }
   SCAN.picks.forEach(p=>{
     const sigs = (p.signals||[]).slice(0,4);
+    const hot = p.hotTags||[];
+    const hotChips = hot.length ? `<div class="sig-row" style="margin-top:6px">${hot.map(t=>`<span class="chip" style="border-color:var(--gold);color:var(--gold)">🔥 ${esc(t)}</span>`).join('')}</div>` : '';
+    const split = (p.themeScore!=null) ? `<div style="font-size:11px;color:var(--mut);margin-top:4px" class="mono">技术 ${p.techScore} · 题材 ${p.themeScore} · 板块 ${p.sectorScore}</div>` : '';
     g.insertAdjacentHTML('beforeend', `
     <div class="card pick">
       <div class="pick-top">
         <div>
           <div class="pick-sect">${esc(p.sector)} · 板块评分 ${p.sectorScore}</div>
-          <div class="pick-name">${esc(p.name)}<small>${p.code}</small></div>
+          <div class="pick-name">${esc(p.name)}<small>${p.code}</small>${p.isHot?' <span style="color:var(--gold);font-size:12px">🔥强势股</span>':''}</div>
         </div>
         <div class="ring-wrap">${ringSVG(p.score,52)}<div class="ring-txt">${p.score}</div></div>
       </div>
       <div class="pick-price mono ${cls(p.chg)}">${fmt(p.price)} <span style="font-size:13px">${sign(p.chg)}${pct(p.chg)}</span></div>
+      ${split}
       <div class="sig-row">${sigs.map(s=>`<span class="chip">${esc(s)}</span>`).join('')}</div>
+      ${hotChips}
       <div class="pick-levels">
         <div class="lv"><div class="k">参考入场</div><div class="v in mono">${fmt(p.entry)}</div></div>
         <div class="lv"><div class="k">止损参考</div><div class="v stop mono">${fmt(p.stop)}</div></div>
@@ -1265,6 +1273,10 @@ function startBuildWatch(){
 (function init(){
   selStrats = new Set(['bh','ma','macd']);
   updateNavTime();
+  const fw = SCAN.meta.factorWeights;
+  if(fw && SCAN.meta.weightsVersion){
+    $('#footWeights').textContent = `评分权重 ${SCAN.meta.weightsVersion}：技术${Math.round(fw.technical*100)}% / 题材${Math.round(fw.hotTheme*100)}% / 板块${Math.round(fw.sector*100)}%`;
+  }
   $('#footTime').textContent = 'Generated ' + SCAN.meta.generated;
   renderMarket(); renderPicks(); renderSectors(); renderRadar();
   renderIntraday();

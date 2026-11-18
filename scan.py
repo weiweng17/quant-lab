@@ -125,6 +125,97 @@ def secid_of(code):
     return ("1." if code[0] == "6" else "0.") + code
 
 
+# ---------- 权重外置(data/weights/<ver>.json 为唯一事实源, 代码内兜底) ----------
+
+DEFAULT_WEIGHTS = {
+    "version": "code-fallback",
+    "signalWeights": {"maBull": 1.0, "maCross": 1.5, "macdBull": 1.0, "macdCross": 1.5,
+                      "rsiBand": 0.8, "high20": 1.2, "volume": 0.8, "mom20": 0.6, "ma60": 0.8},
+    "factorWeights": {"technical": 0.45, "hotTheme": 0.35, "sector": 0.20},
+    "thresholdAdjust": {"sentimentIce": 5, "sentimentHot": -5,
+                        "sentimentIceBelow": 30, "sentimentHotAbove": 80},
+}
+
+
+def load_weights(path="data/weights/v2.json"):
+    try:
+        with open(path, encoding="utf-8") as f:
+            w = json.load(f)
+        assert abs(sum(w["factorWeights"].values()) - 1.0) < 1e-6, "factorWeights 合计须为 1.0"
+        return w
+    except Exception as e:
+        print(f"   权重文件加载失败({e}), 使用代码内兜底权重")
+        return dict(DEFAULT_WEIGHTS)
+
+
+# ---------- 题材热度 / 涨停情绪 数据源 ----------
+
+def fetch_ths_hot():
+    """同花顺当日强势股(零鉴权) + 题材归因 reason 标签(加号分隔)。失败返回 {}。"""
+    url = (f"http://zx.10jqka.com.cn/event/api/getharden/"
+           f"date/{datetime.now().strftime('%Y-%m-%d')}/orderby/date/orderway/desc/charset/GBK/")
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Referer": "http://zx.10jqka.com.cn/"})
+        with urllib.request.urlopen(req, timeout=12) as r:
+            d = json.loads(r.read().decode("gbk", "ignore"))
+        if d.get("errocode", 0) != 0:
+            return {}
+        out = {}
+        for row in (d.get("data") or []):
+            code = str(row.get("code", "")).zfill(6)
+            reason = str(row.get("reason", "") or "")
+            tags = [t.strip() for t in reason.split("+") if t.strip()]
+            if code and tags:
+                out[code] = tags
+        return out
+    except Exception as e:
+        print("   同花顺强势股拉取失败(题材因子中性化):", e)
+        return {}
+
+
+def hot_theme_score(code, name, hot_map, tag_counts):
+    """题材热度 0-100: 在强势股池=基础加分, 题材标签的全局热度(同标签强势股数量)再加分。
+    hot_map 为空(接口失败)时全员中性 50, 合成分不受影响。"""
+    if not hot_map:
+        return 50, []
+    tags = hot_map.get(code)
+    if not tags:
+        return 40, []
+    score = 55.0
+    # 题材名气: 该股标签里热度最高的两个, 按全局出现次数加分(每个标签最多+10)
+    top = sorted(tags, key=lambda t: -tag_counts.get(t, 0))[:2]
+    for t in top:
+        score += min(10.0, tag_counts.get(t, 0) * 2.0)
+    return min(100.0, score), top
+
+
+def fetch_limit_up_pool():
+    """东财涨停池: 涨停家数/连板分布 -> 情绪温度。失败返回 None。"""
+    url = ("https://push2ex.eastmoney.com/getTopicZTPool?ut=7eea3edcaed734bea9cbfc24409ed989"
+           "&dpt=wz.ztzt&Pageindex=0&pagesize=320&sort=fbt%3Aasc"
+           f"&date={datetime.now().strftime('%Y%m%d')}")
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=12) as r:
+            d = json.loads(r.read().decode("utf-8"))
+        pool = (d.get("data") or {}).get("pool") or []
+        if not pool:
+            return None
+        max_lb = max(p.get("lbc", 1) or 1 for p in pool)
+        count = len(pool)
+        # 情绪温度: 家数为主(1分/家), 连板高度加成(每高一级+8), 上限100
+        score = int(min(100, count + (max_lb - 1) * 8))
+        label = ("冰点" if score < 30 else
+                 "降温" if score < 45 else
+                 "温和" if score < 70 else "亢奋")
+        return {"ztCount": count, "maxLb": max_lb, "score": score, "label": label}
+    except Exception as e:
+        print("   涨停池拉取失败(情绪温度缺失):", e)
+        return None
+
+
 # ---------- 指标打分 ----------
 
 def atr(high, low, close, n=14):
@@ -160,32 +251,35 @@ def sector_raw(k):
             "close": c[i], "chg": c[i] / c[i - 1] - 1 if i > 0 else 0.0}
 
 
-def stock_score(k):
+def stock_score(k, sig_w=None):
+    """技术信号打分(0-100)。信号权重来自 weights 文件(signalWeights), 代码内兜底。"""
+    sw = (sig_w or DEFAULT_WEIGHTS["signalWeights"])
+    w_sum = sum(sw.values()) or 1.0
     c = k["close"]; h = k["high"]; l = k["low"]; v = k["volume"]
     ma5 = sma(c, 5); ma20 = sma(c, 20); ma60 = sma(c, 60)
     dif, dea = macd(c); r = rsi(c, 14)
     i = len(c) - 1
     score = 0.0; sigs = []
-    if ma5[i] > ma20[i]: score += 1.0; sigs.append("MA5>MA20")
+    if ma5[i] > ma20[i]: score += sw["maBull"]; sigs.append("MA5>MA20")
     for j in range(max(0, i - 5), i + 1):
         if ma5[j] is not None and ma20[j] is not None and j > 0 \
            and ma5[j - 1] <= ma20[j - 1] and ma5[j] > ma20[j]:
-            score += 1.5; sigs.append("MA5上穿MA20"); break
-    if dif[i] > dea[i] and dif[i] > 0: score += 1.0; sigs.append("MACD多头")
+            score += sw["maCross"]; sigs.append("MA5上穿MA20"); break
+    if dif[i] > dea[i] and dif[i] > 0: score += sw["macdBull"]; sigs.append("MACD多头")
     for j in range(max(0, i - 10), i + 1):
         if dif[j] is not None and dea[j] is not None and j > 0 \
            and dif[j - 1] <= dea[j - 1] and dif[j] > dea[j]:
-            score += 1.5; sigs.append("MACD金叉"); break
-    if r[i] is not None and 45 <= r[i] <= 72: score += 0.8
+            score += sw["macdCross"]; sigs.append("MACD金叉"); break
+    if r[i] is not None and 45 <= r[i] <= 72: score += sw["rsiBand"]
     hi20 = max(h[max(0, i - 20):i]) if i >= 20 else max(h[:i])
-    if c[i] > hi20: score += 1.2; sigs.append("创20日新高")
+    if c[i] > hi20: score += sw["high20"]; sigs.append("创20日新高")
     v5 = sum(v[max(0, i - 4):i + 1]) / min(5, i + 1)
     v20 = sum(v[max(0, i - 19):i + 1]) / min(20, i + 1)
     vr = v5 / v20 if v20 > 0 else 1.0
-    if vr > 1.15: score += 0.8; sigs.append("温和放量")
-    if c[i] > c[max(0, i - 20)]: score += 0.6; sigs.append("20日上涨")
-    if ma60[i] is not None and c[i] > ma60[i]: score += 0.8; sigs.append("站上60日线")
-    return min(100, int(round(score / 9.0 * 100))), list(dict.fromkeys(sigs))
+    if vr > 1.15: score += sw["volume"]; sigs.append("温和放量")
+    if c[i] > c[max(0, i - 20)]: score += sw["mom20"]; sigs.append("20日上涨")
+    if ma60[i] is not None and c[i] > ma60[i]: score += sw["ma60"]; sigs.append("站上60日线")
+    return min(100, int(round(score / w_sum * 100))), list(dict.fromkeys(sigs))
 
 
 def stop_target(k):
@@ -201,6 +295,23 @@ def stop_target(k):
 # ---------- 主流程 ----------
 
 def main():
+    print("[0/4] 加载权重 + 题材/情绪数据...")
+    W = load_weights()
+    FW = W["factorWeights"]
+    TA = W.get("thresholdAdjust", DEFAULT_WEIGHTS["thresholdAdjust"])
+    print(f"   权重版本 {W['version']} · 技术{FW['technical']} 题材{FW['hotTheme']} 板块{FW['sector']}")
+    hot_map = fetch_ths_hot()
+    tag_counts = {}
+    for tags in hot_map.values():
+        for t in tags:
+            tag_counts[t] = tag_counts.get(t, 0) + 1
+    print(f"   同花顺强势股 {len(hot_map)} 只" + (f", 热门题材: {'、'.join(sorted(tag_counts, key=tag_counts.get, reverse=True)[:3])}" if tag_counts else "(接口不可用, 题材因子中性化)"))
+    sentiment = fetch_limit_up_pool()
+    if sentiment:
+        print(f"   涨停情绪温度: {sentiment['score']}({sentiment['label']}) · 涨停{sentiment['ztCount']}家 · 最高{sentiment['maxLb']}连板")
+    else:
+        print("   涨停池不可用, 情绪温度缺失(不影响选股, 仅展示层缺一项)")
+
     print("[1/4] 拉取大盘指数...")
     indices = []
     idx_klines = {}
@@ -272,13 +383,21 @@ def main():
             try:
                 k = kline(secid_of(code))
                 if k and len(k["close"]) >= 80:
-                    sc, sigs = stock_score(k)
+                    sc, sigs = stock_score(k, W["signalWeights"])
+                    theme_sc, hot_tags = hot_theme_score(code, name, hot_map, tag_counts)
+                    # 三因子合成: 技术(0-100) × 题材热度(0-100) × 板块强度(0-100)
+                    comp = (FW["technical"] * sc + FW["hotTheme"] * theme_sc
+                            + FW["sector"] * b["score"])
                     entry, stop, target = stop_target(k)
                     i = len(k["close"]) - 1
                     universe.append({
                         "secid": secid_of(code), "code": code, "name": name,
                         "sector": b["name"], "sectorScore": b["score"],
-                        "score": sc, "signals": sigs,
+                        "score": int(round(comp)), "techScore": sc,
+                        "themeScore": int(round(theme_sc)),
+                        "isHot": bool(hot_map.get(code)),
+                        "hotTags": hot_tags,
+                        "signals": sigs,
                         "price": round(k["close"][i], 2),
                         "chg": round(k["close"][i] / k["close"][i - 1] - 1, 4),
                         "entry": entry, "stop": stop, "target": target,
@@ -300,6 +419,13 @@ def main():
     pick_th = (55 if market_score >= 70 else
                60 if market_score >= 55 else
                65 if market_score >= 40 else 70)
+    if sentiment:   # 情绪温度联动: 冰点收紧、亢奋放宽
+        if sentiment["score"] < TA["sentimentIceBelow"]:
+            pick_th += TA["sentimentIce"]
+            print(f"   情绪{sentiment['label']}({sentiment['score']}) -> 门槛+{TA['sentimentIce']}")
+        elif sentiment["score"] > TA["sentimentHotAbove"]:
+            pick_th = max(50, pick_th + TA["sentimentHot"])
+            print(f"   情绪{sentiment['label']}({sentiment['score']}) -> 门槛{TA['sentimentHot']}")
 
     good = [s for s in universe if s["score"] >= pick_th]
     print(f"   大盘{market_status}(评分{market_score}) -> 入选门槛 {pick_th} 分, "
@@ -318,14 +444,20 @@ def main():
         if s["code"] not in used:
             picks.append(s); used.add(s["code"])
     for p in picks:
-        p["reason"] = (f"{p['sector']}板块动量排名靠前(综合{p['sectorScore']}分)，"
-                       f"个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
+        hot_txt = f"，同花顺强势股题材：{'、'.join(p['hotTags'][:3])}" if p.get("hotTags") else ""
+        p["reason"] = (f"{p['sector']}板块动量排名靠前(综合{p['sectorScore']}分)"
+                       f"，技术{p['techScore']}/题材{p['themeScore']}{hot_txt}"
+                       f"，个股触发{len(p['signals'])}项信号：{'、'.join(p['signals'][:4])}。"
                        f"建议以{ p['stop']}为止损参考，分批布局。")
 
     meta = {"generated": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "universe": len(universe), "sectors": len(sectors),
             "marketScore": market_score, "marketStatus": market_status,
-            "pickThreshold": pick_th}
+            "pickThreshold": pick_th,
+            "weightsVersion": W["version"],
+            "factorWeights": {"technical": FW["technical"], "hotTheme": FW["hotTheme"],
+                              "sector": FW["sector"]},
+            "sentiment": sentiment}
 
     # 回测/图表用的全量K线: 指数 + 推荐股 (复用已拉数据, 不重复请求)
     kline_out = []
