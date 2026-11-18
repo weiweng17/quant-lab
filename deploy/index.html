@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0e17">
+<meta name="ql-build" content="2026-11-18 10:19:37">
 <title>QuantLab · A股量化扫描实验室</title>
 <style>
 :root{
@@ -48,6 +49,22 @@ nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
 .pill b{color:var(--txt)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--down);box-shadow:0 0 8px var(--down);animation:pulse 2.2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+/* ---------- 刷新按钮 ---------- */
+.nav-refresh{position:relative;width:32px;height:32px;border-radius:99px;border:1px solid var(--line2);
+  background:rgba(148,163,184,.05);color:var(--mut);display:grid;place-items:center;cursor:pointer;
+  transition:.2s;flex:0 0 auto}
+.nav-refresh:hover{color:var(--txt);background:rgba(79,124,255,.14);border-color:rgba(79,124,255,.4)}
+.nav-refresh svg{width:16px;height:16px}
+.nav-refresh.loading svg{animation:spin .8s linear infinite}
+.nav-refresh .new-dot{display:none;position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.nav-refresh.has-new .new-dot{display:block;animation:pulse 1.6s infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);z-index:99;
+  padding:10px 18px;border-radius:12px;background:var(--panel3);border:1px solid var(--line2);
+  color:var(--txt);font-size:13px;box-shadow:0 8px 28px rgba(0,0,0,.45);opacity:0;
+  pointer-events:none;transition:.25s;max-width:86vw}
+#toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- hero ---------- */
 .hero{padding:52px 0 30px;position:relative}
@@ -327,6 +344,7 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
 <body>
 
 <nav>
+  <div id="toast" role="status"></div>
   <div class="wrap nav-in">
     <div class="logo"><span class="mark">◆</span><em>QuantLab</em><span class="cn">&nbsp;量化实验室</span></div>
     <div class="nav-links">
@@ -337,6 +355,12 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
       <a href="#backtest">回测对比</a>
     </div>
     <div class="nav-right">
+      <button class="nav-refresh" id="navRefresh" type="button" title="检查并加载最新数据" aria-label="刷新数据">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/>
+        </svg>
+        <span class="new-dot"></span>
+      </button>
       <span class="pill"><span class="dot"></span><b id="navAuto">盘中每小时更新 · 收盘定稿</b></span>
       <span class="pill mono" id="navTime"></span>
     </div>
@@ -1164,6 +1188,61 @@ function renderAnalytics(){
   });
 }
 
+/* ============ 手动刷新: 检查线上是否有更新构建的数据 ============ */
+let REFRESHING = false;
+let toastTimer = null;
+function showToast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+function fmtBuildTs(ts){
+  return (ts || '').replace(/^\d{4}-/, '') || '未知';
+}
+async function checkNewerBuild(){
+  /* 拉线上最新页面对比构建时间戳（带 cache-busting，绕过 10 分钟 CDN 缓存） */
+  const myTs = (document.querySelector('meta[name="ql-build"]')||{}).content || '';
+  const r = await fetch(location.pathname.split('?')[0] + '?_t=' + Date.now(), {cache:'no-store'});
+  if(!r.ok) throw new Error('HTTP ' + r.status);
+  const txt = await r.text();
+  const m = txt.match(/name="ql-build" content="([^"]+)"/);
+  if(!m) throw new Error('无法解析构建时间戳');
+  return {newer: m[1] !== myTs, remoteTs: m[1], localTs: myTs};
+}
+async function refreshSiteData(){
+  if(REFRESHING) return;
+  REFRESHING = true;
+  const btn = $('#navRefresh');
+  btn.classList.add('loading');
+  try{
+    const res = await checkNewerBuild();
+    if(res.newer){
+      showToast('发现新数据（' + fmtBuildTs(res.remoteTs) + '），正在加载…');
+      location.replace(location.pathname.split('?')[0] + '?_r=' + Date.now());
+      return; /* 跳转后不再恢复按钮 */
+    }
+    showToast('已是最新数据 · 构建于 ' + fmtBuildTs(res.localTs));
+  }catch(e){
+    showToast('检查更新失败（' + e.message + '），可稍后重试');
+  }
+  btn.classList.remove('loading');
+  REFRESHING = false;
+}
+function startBuildWatch(){
+  $('#navRefresh').addEventListener('click', refreshSiteData);
+  /* 每 5 分钟静默检查：有新构建时按钮亮金点提示，不强制打断浏览 */
+  setInterval(async ()=>{
+    if(document.hidden || REFRESHING) return;
+    try{
+      const res = await checkNewerBuild();
+      $('#navRefresh').classList.toggle('has-new', res.newer);
+      if(res.newer) $('#navRefresh').title = '有新数据（' + fmtBuildTs(res.remoteTs) + '），点击加载';
+    }catch(e){ /* 静默失败不打扰 */ }
+  }, 300000);
+}
+
 /* ============ init ============ */
 (function init(){
   selStrats = new Set(['bh','ma','macd']);
@@ -1174,6 +1253,7 @@ function renderAnalytics(){
   renderTrack(); renderAnalytics();
   renderControls(); draw(); renderTable();
   startLiveQuotes();
+  startBuildWatch();
   window.addEventListener('resize', draw);
 })();
 </script>
