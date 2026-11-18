@@ -146,6 +146,30 @@ section.hide{display:none}
 .card-t{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
 .card-t b{font-size:14px}
 .dim-note{color:var(--dim);font-size:11.5px}
+/* 熔断横幅 / 周度条 / 题材分组 */
+.fuse{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:14px;margin-bottom:14px;
+  border:1px solid var(--line);background:var(--panel)}
+.fuse.bad{border-color:rgba(255,77,79,.55);background:rgba(255,77,79,.09)}
+.fuse.ok{border-color:rgba(0,196,140,.45);background:rgba(0,196,140,.08)}
+.fuse.wait{border-color:rgba(240,180,60,.4);background:rgba(240,180,60,.07)}
+.fuse .fi{font-size:20px;line-height:1;flex:0 0 auto}
+.fuse .ft{font-size:14.5px;font-weight:700}
+.fuse .fs{font-size:12px;color:var(--mut);margin-top:3px;line-height:1.6}
+.fuse .fv{margin-left:auto;text-align:right;flex:0 0 auto}
+.fuse .fv .big{font-size:21px;font-weight:800;line-height:1.1}
+.fuse .fv small{font-size:10.5px;color:var(--dim)}
+.wk-wrap{display:flex;align-items:flex-end;gap:7px;height:118px;padding-top:8px}
+.wk{flex:1 1 0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;min-width:0}
+.wk .bar{width:100%;max-width:44px;border-radius:5px 5px 2px 2px;min-height:3px}
+.wk .v{font-size:10.5px;color:var(--mut);font-weight:600}
+.wk .k{font-size:9.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.grp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.grp:last-child{border-bottom:0;padding-bottom:0}
+.grp .gn{font-size:13px}
+.grp .gn small{display:block;color:var(--dim);font-size:11px;margin-top:3px;font-weight:400}
+.grp .gv{text-align:right;font-size:14px;font-weight:700;white-space:nowrap}
+.grp .gv small{display:block;font-weight:400;font-size:11px;color:var(--dim);margin-top:3px}
+.hot-badge{font-size:10px;line-height:1;vertical-align:middle}
 .heat-scroll{overflow-x:auto;padding-bottom:6px}
 .hm{border-collapse:separate;border-spacing:3px;font-size:12px}
 .hm td{min-width:56px;height:24px;text-align:center;border-radius:5px;color:#eaf0fa;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -475,12 +499,23 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
 
   <!-- TRACK 历史推荐跟踪 -->
   <section id="track">
-    <div class="sec-head"><h2>历史推荐跟踪</h2><span class="tagline">以推荐日收盘价买入, 统计 +1/+3/+5 交易日实际涨跌, 检验选股命中率</span></div>
+    <div class="sec-head"><h2>历史推荐跟踪</h2><span class="tagline">以推荐日收盘价买入, 统计 +1/+3/+5/+10/+20 交易日实际涨跌, 检验选股命中率</span></div>
+    <div id="trackFuse"></div>
     <div class="track-chips" id="trackChips"></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-bottom:14px">
+      <div class="card">
+        <div class="card-t"><b>周度命中率（+5日）</b><span class="dim-note">按推荐周聚合</span></div>
+        <div id="trackWeek" class="wk-wrap"></div>
+      </div>
+      <div class="card">
+        <div class="card-t"><b>题材股 vs 非题材股</b><span class="dim-note">检验题材权重</span></div>
+        <div id="trackGroups"></div>
+      </div>
+    </div>
     <div class="card" style="padding:8px 12px">
       <div class="tbl-wrap tbl-scroll">
         <table id="trackTable">
-          <thead><tr><th>推荐日</th><th>标的</th><th>推荐价</th><th>止损</th><th>目标</th><th>+1日</th><th>+3日</th><th>+5日</th><th>区间结果</th></tr></thead>
+          <thead><tr><th>推荐日</th><th>标的</th><th>推荐价</th><th>止损</th><th>目标</th><th>+1日</th><th>+3日</th><th>+5日</th><th>+10日</th><th>+20日</th><th>区间结果</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -832,6 +867,17 @@ function renderMarket(){
 /* ============ 渲染: 精选 ============ */
 function renderPicks(){
   const g = $('#picksGrid'); g.innerHTML = '';
+  const fz = (TRACK && TRACK.stats && TRACK.stats.fuse) || {};
+  if(fz.status==='fused' || fz.status==='warn'){
+    const bad = fz.status==='fused';
+    g.insertAdjacentHTML('beforeend', `
+    <div class="card" style="grid-column:1/-1;border-color:${bad?'rgba(255,77,79,.5)':'rgba(240,180,60,.45)'};background:${bad?'rgba(255,77,79,.08)':'rgba(240,180,60,.07)'};padding:14px 18px">
+      <div style="font-size:13.5px;font-weight:700;color:${bad?'var(--down)':'var(--gold)'}">${bad?'🛑 命中率熔断':'⚠️ 信号边际转弱'} · 最近 ${fz.n} 笔推荐 +5日命中率 ${(fz.hitRate*100).toFixed(0)}%、平均收益 ${sign(fz.avg||0)+((fz.avg||0)*100).toFixed(2)}%</div>
+      <div style="font-size:12px;color:var(--mut);margin-top:5px;line-height:1.7">${bad
+        ? '当前评分体系选出的股票跑不赢抛硬币 → 下方推荐仅供观察, 建议空仓。'
+        : '命中率或收益有一项不达标 → 下方推荐请减半仓位试错。'} 详见「历史推荐跟踪」的熔断说明。</div>
+    </div>`);
+  }
   const th = SCAN.meta.pickThreshold;
   const sent = SCAN.meta.sentiment;
   const sentTxt = sent ? ` · 涨停情绪 ${sent.score}°${sent.label}(${sent.ztCount}家涨停/最高${sent.maxLb}连板)` : '';
@@ -1307,35 +1353,136 @@ function renderTrack(){
   const sec = $('#track');
   if(!TRACK || !(TRACK.records||[]).length){ if(sec) sec.style.display='none'; return; }
   const st = TRACK.stats || {};
+  const f = st.fuse || {};
+  const pctTxt = v => v==null ? '—' : (v*100).toFixed(0)+'%';
+
+  /* ---- 熔断横幅 ---- */
+  const fz = $('#trackFuse');
+  if(f.status){
+    const bad = f.status==='fused', warn = f.status==='warn', wait = f.status==='collecting';
+    const rt = pctTxt(f.hitRate);
+    const at = f.avg==null ? '—' : sign(f.avg)+(f.avg*100).toFixed(2)+'%';
+    const head = bad ? '命中率熔断 · 当前选股逻辑已失效'
+      : warn ? '信号边际转弱 · 建议轻仓试错'
+      : wait ? '熔断监测中 · 样本不足以下结论' : '信号状态正常';
+    const body = bad
+      ? `最近 ${f.n} 笔推荐 +5日命中率只有 <b>${rt}</b>、平均收益 <b>${at}</b>（熔断线 命中率≤${(f.threshold*100).toFixed(0)}% 且收益≤0）。选出来的股票跑不赢抛硬币 —— 建议空仓或只观察，别用真金白银验证一个已失效的信号。`
+      : warn
+      ? `最近 ${f.n} 笔 +5日命中率 ${rt}、平均收益 ${at}，两项里有一项不达标。信号可能正在失效，建议把仓位降到平时的 1/3 以下，等回到双达标再恢复。`
+      : wait
+      ? `熔断规则需要至少 ${f.minN||15} 笔已成熟样本，当前 ${f.n} 笔。样本够了才判定，避免小样本误杀。`
+      : `最近 ${f.n} 笔 +5日命中率 <b>${rt}</b>、平均收益 <b>${at}</b>，双项均达标，选股逻辑处于有效区间。`;
+    fz.innerHTML = `
+    <div class="fuse ${bad?'bad':(warn||wait)?'wait':'ok'}">
+      <div class="fi">${bad?'🛑':warn?'⚠️':wait?'⏳':'✅'}</div>
+      <div>
+        <div class="ft">${head}</div>
+        <div class="fs">${body}</div>
+      </div>
+      <div class="fv">
+        <div class="big mono ${f.hitRate==null?'':(f.hitRate>f.threshold?'up':'down')}">${rt}</div>
+        <small>近 ${f.n} 笔 · +5日命中率</small>
+        <div class="mono ${f.avg==null?'':(f.avg>0?'up':'down')}" style="font-size:13px;margin-top:4px">${at}</div>
+        <small>平均收益</small>
+      </div>
+    </div>`;
+  } else fz.innerHTML = '';
+
+  /* ---- 指标卡 ---- */
   const chips = [
     ['累计推荐', st.total+' 只'],
     ['已满5日评估', st.matured+' 只'],
-    ['待评估', st.pending+' 只'],
-    ['+5日命中率', st.hit5Rate==null?'积累中':(st.hit5Rate*100).toFixed(0)+'%'],
+    ['+5日命中率', pctTxt(st.hit5Rate)],
     ['+5日平均收益', st.avg5==null?'—':sign(st.avg5)+(st.avg5*100).toFixed(2)+'%'],
+    ['+5日超额(vs沪深300)', st.excess5==null?'—':sign(st.excess5)+(st.excess5*100).toFixed(2)+'pp'],
+    ['+20日命中率', pctTxt(st.hit20Rate)],
+    ['+20日平均收益', st.avg20==null?'—':sign(st.avg20)+(st.avg20*100).toFixed(2)+'%'],
+    ['+20日超额(vs沪深300)', st.excess20==null?'—':sign(st.excess20)+(st.excess20*100).toFixed(2)+'pp'],
     ['触目标 / 触止损', (st.target||0)+' / '+(st.stop||0)],
+    ['待评估', st.pending+' 只'],
   ];
   $('#trackChips').innerHTML = chips.map(c=>`<div class="tch"><div class="l">${c[0]}</div><div class="v">${c[1]}</div></div>`).join('');
+
+  /* ---- 周度命中率柱 ---- */
+  const wk = $('#trackWeek');
+  const weekly = st.weekly || [];
+  if(!weekly.length){
+    wk.innerHTML = '<div class="dim-note" style="padding:22px 0;text-align:center">暂无满5日的样本，每日收盘后自动累积</div>';
+  } else {
+    wk.innerHTML = weekly.map(w=>{
+      const r = Math.max(0, Math.min(1, w.hitRate));
+      const col = w.hitRate>0.5 ? 'var(--up)' : 'var(--down)';
+      const h = Math.max(4, r*86);
+      return `<div class="wk" title="${w.week} · ${w.n} 笔 · 命中 ${(w.hitRate*100).toFixed(0)}% · 均收益 ${(w.avg5*100).toFixed(2)}%">
+        <div class="v" style="color:${col}">${(w.hitRate*100).toFixed(0)}</div>
+        <div class="bar" style="height:${h}px;background:${col};opacity:.85"></div>
+        <div class="k">${w.week.replace(/^\d+-/,'')}</div>
+      </div>`;
+    }).join('') + `<div class="dim-note" style="align-self:flex-end;padding-left:6px">单位 %</div>`;
+  }
+
+  /* ---- 题材 / 非题材分组 ---- */
+  const gg = $('#trackGroups');
+  const G = st.groups || {};
+  const rowsG = [
+    ['hot', '🔥 题材股', '推荐日在同花顺强势股池内'],
+    ['cold', '非题材股', '纯技术+板块动量选出'],
+    ['unlabeled', '旧记录', '加题材因子之前的推荐（无标签）'],
+  ];
+  const anyG = rowsG.some(k=>((G[k[0]]||{}).n||0) > 0);
+  const newG = ((G.hot||{}).n||0) + ((G.cold||{}).n||0);
+  if(!anyG){
+    gg.innerHTML = '<div class="dim-note" style="padding:22px 0;text-align:center">还没有带题材标签的成熟样本</div>';
+  } else {
+    gg.innerHTML = (newG===0
+      ? '<div class="dim-note" style="margin-bottom:10px;line-height:1.7">⚠️ 题材分组需要「带题材标签的推荐」满 5 个交易日才结算，目前 0 笔 —— 从下一个推荐日起开始累积，样本 ≥20 笔才有判断价值。</div>'
+      : '')
+      + rowsG.map(k=>{
+      const g = G[k[0]] || {};
+      if(!g.n) return '';
+      const h5 = g.hit5Rate, a5 = g.avg5, h20 = g.hit20Rate;
+      return `<div class="grp">
+        <div class="gn">${k[1]}<small>${k[2]} · ${g.n} 笔</small></div>
+        <div class="gv ${g.n<20?'':(h5>0.5?'up':'down')}" ${g.n<20?'style="color:var(--mut)"':''}>
+          ${h5==null?'—':(h5*100).toFixed(0)+'%'}
+          <small>+5日均 ${a5==null?'—':sign(a5)+(a5*100).toFixed(2)+'%'}
+            ${h20==null?'':'· +20日 '+(h20*100).toFixed(0)+'%'}</small>
+        </div>
+      </div>`;
+    }).join('') + (rowsG.some(k=>((G[k[0]]||{}).n||0)>0 && (G[k[0]]||{}).n < 20)
+      ? '<div class="dim-note" style="margin-top:10px">灰色 = 样本 &lt;20 笔，还不足以判断优劣</div>' : '');
+  }
+
+  /* ---- 明细表 ---- */
   const tbody = $('#trackTable tbody'); tbody.innerHTML = '';
   TRACK.records.slice().reverse().forEach(r=>{
     const out = r.outcome==null ? '<span style="color:var(--dim)">跟踪中…</span>'
       : r.outcome==='target' ? '<span class="up" style="font-weight:700">触目标 ✓</span>'
       : r.outcome==='stop' ? '<span class="down" style="font-weight:700">触止损 ✗</span>'
       : '<span style="color:var(--mut)">区间内</span>';
+    const hot = r.isHot ? ' <span class="hot-badge">🔥</span>' : '';
     tbody.insertAdjacentHTML('beforeend', `<tr>
       <td class="mono">${esc((r.date||'').slice(5))}</td>
-      <td><b>${esc(r.name||'')}</b> <span style="color:var(--dim)">${esc(r.sector||'')}</span></td>
+      <td><b>${esc(r.name||'')}</b>${hot} <span style="color:var(--dim)">${esc(r.sector||'')}</span></td>
       <td class="mono">${fmt(r.entry,2)}</td>
       <td class="mono" style="color:var(--down)">${r.stop?fmt(r.stop,2):'—'}</td>
       <td class="mono" style="color:var(--up)">${r.target?fmt(r.target,2):'—'}</td>
       <td class="mono">${cellRet(r.r1)}</td>
       <td class="mono">${cellRet(r.r3)}</td>
       <td class="mono">${cellRet(r.r5)}</td>
+      <td class="mono">${cellRet(r.r10)}</td>
+      <td class="mono">${cellRet(r.r20)}</td>
       <td>${out}</td>
     </tr>`);
   });
+
   const firstDate = TRACK.records[0].date || '';
-  $('#trackNote').textContent = `口径: 以推荐日收盘价买入, 之后每满 1/3/5 个交易日按收盘价结算(红涨绿跌); 触目标/触止损以区间内当日最高/最低价判断, 先到哪个算哪个。数据自 ${firstDate} 起每日收盘后自动累积, 满5个交易日后进入命中率统计。`;
+  $('#trackNote').textContent =
+    `口径: 以推荐日收盘价买入, 之后每满 1/3/5/10/20 个交易日按收盘价结算（红涨绿跌）; 触目标/触止损以区间内当日最高/最低价判断, 先到哪个算哪个。`
+    + `数据自 ${firstDate} 起每日收盘后自动累积。`
+    + ` 超额 = 推荐股收益 − 同期沪深300收益, 是剔除大盘涨跌后的真实选股能力（下跌市里绝对收益为负不等于选股变差, 要看超额）。`
+    + ` 熔断: 最近 ${(f.window||10)} 笔已成熟样本 +5日命中率 ≤${((f.threshold||0.5)*100).toFixed(0)}% 即判定信号失效（样本 <${f.minN||8} 笔不下结论）。`
+    + ` 题材分组只对加题材因子之后的新记录生效, 旧记录无标签单列。命中率只反映是否上涨, 不代表扣费后盈利, 请与平均收益、超额一起看。`;
 }
 
 /* ============ 渲染: 组合体检 ============ */
