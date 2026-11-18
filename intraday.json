@@ -1,78 +1,27 @@
 {
- "ts": "2026-11-18 12:44",
- "phase": "午间休市",
- "picks": [
-  {
-   "secid": "0.002142",
-   "code": "002142",
-   "name": "宁波银行",
-   "sector": "城商行Ⅲ",
-   "price": 35.18,
-   "prevClose": 35.53,
-   "chg": -0.0099,
-   "stop": 33.34,
-   "target": 37.94,
-   "signals": [
-    "小时MA5>MA20",
-    "小时MACD多头"
-   ],
-   "volRatio": 0.8,
-   "warn": []
-  },
-  {
-   "secid": "0.002419",
-   "code": "002419",
-   "name": "天虹股份",
-   "sector": "百货",
-   "price": 4.97,
-   "prevClose": 5.34,
-   "chg": -0.0693,
-   "stop": 4.29,
-   "target": 5.99,
-   "signals": [
-    "小时MA5>MA20"
-   ],
-   "volRatio": 0.58,
-   "warn": []
-  },
-  {
-   "secid": "0.301376",
-   "code": "301376",
-   "name": "致欧科技",
-   "sector": "成品家居",
-   "price": 21.97,
-   "prevClose": 22.8,
-   "chg": -0.0364,
-   "stop": 19.41,
-   "target": 25.81,
-   "signals": [
-    "小时MA5>MA20",
-    "MACD小时死叉"
-   ],
-   "volRatio": 0.78,
-   "warn": []
-  }
- ],
+ "ts": "2026-11-18 13:14",
+ "phase": "盘中快照",
+ "picks": [],
  "indices": [
   {
    "secid": "1.000001",
    "name": "上证指数",
-   "price": 3570.21,
-   "chg": -0.004,
+   "price": 3568.54,
+   "chg": -0.0045,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
-   "price": 10558.59,
-   "chg": -0.0075,
+   "price": 10564.61,
+   "chg": -0.0069,
    "signals": []
   },
   {
    "secid": "0.399006",
    "name": "创业板指",
-   "price": 2278.82,
-   "chg": -0.0058,
+   "price": 2280.53,
+   "chg": -0.0051,
    "signals": []
   }
  ],
