@@ -35,6 +35,7 @@ jobs:
           python param_scan.py
           python youzi.py || true
           python strategy_lab.py || true
+          python hot_chase.py || true
           python track_picks.py
           python fetch_intraday.py || true
           python build_site.py

@@ -601,6 +601,16 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
         </div>
       </div>
     </div>
+    <div class="sec-head" style="margin-top:26px"><h2>热点隔日检验</h2><span class="tagline" id="hcTag">每日追热点 → 次日开盘买 → 持1~2日卖 · 与同池随机买入对照 · 剔除竞价涨停买不进</span></div>
+    <div class="card" style="padding:10px 14px">
+      <div style="font-size:12.5px;line-height:1.6;color:var(--mut);padding:2px 2px 8px" id="hcNote"></div>
+      <div class="tbl-wrap tbl-scroll">
+        <table id="hcTable">
+          <thead><tr><th>玩法</th><th>规则</th><th>累计</th><th>年化</th><th>最大回撤</th><th>笔数</th><th>胜率</th><th>单笔均值</th><th>买不进</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
   <!-- RADAR 策略雷达 -->
@@ -702,6 +712,7 @@ const TRACK = __TRACK__;
 const ANAL = __ANAL__;
 const YOUZI = __YOUZI__;
 const SLAB = __SLAB__;
+const HOTCHASE = __HOTCHASE__;
 
 /* ============ 工具 ============ */
 const $ = s => document.querySelector(s);
@@ -1165,6 +1176,36 @@ function renderSlab(){
       <td class="mono ${cls(e.mom20||0)}">${e.mom20!=null?sign(e.mom20)+pct(e.mom20,1):'—'}</td>
       <td style="font-size:11.5px;color:${e.aboveMa20?'var(--up)':'var(--mut)'}">${e.aboveMa20?'● MA20上方':'○ MA20下方'}</td>
     </tr>`).join('');
+}
+
+/* ============ 渲染: 热点隔日检验 ============ */
+function renderHotChase(){
+  const H = HOTCHASE || {};
+  const vs = H.variants || [];
+  const tb = $('#hcTable tbody');
+  $('#hcTag').textContent =
+    `${H.range?H.range[0]+' ~ '+H.range[1]:''} · 股票池${H.pool||0}只 · 次日开盘成交, 竞价涨幅≥9.5%视为买不进剔除`;
+  if(!vs.length){
+    tb.innerHTML = '<tr><td colspan="9" style="color:var(--mut);padding:16px">热点检验数据未生成（工作流运行 hot_chase.py 后出现）</td></tr>';
+    return;
+  }
+  $('#hcNote').innerHTML = '<b style="color:var(--text)">结论：</b>' + esc(H.verdict || '');
+  const best = vs.reduce((a,b)=> (b.metrics.totalRet > a.metrics.totalRet ? b : a), vs[0]);
+  tb.innerHTML = vs.map(v=>{
+    const m = v.metrics;
+    const hot = v.id.startsWith('hot');
+    return `<tr${v.id===best.id?' style="background:rgba(240,180,60,.07)"':''}>
+      <td>${esc(v.name)}${v.id===best.id?' <span style="color:var(--gold);font-size:11px">最佳</span>':''}</td>
+      <td style="color:var(--mut);font-size:11.5px">${esc(v.desc)}</td>
+      <td class="mono ${cls(m.totalRet)}">${sign(m.totalRet)}${pct(m.totalRet,1)}</td>
+      <td class="mono ${cls(m.annRet||0)}">${m.annRet==null?'—':sign(m.annRet)+pct(m.annRet,1)}</td>
+      <td class="mono down">${pct(m.mdd,1)}</td>
+      <td class="mono">${m.trades}</td>
+      <td class="mono">${m.winRate==null?'—':(m.winRate*100).toFixed(1)+'%'}</td>
+      <td class="mono ${cls(m.avgRet||0)}">${m.avgRet==null?'—':sign(m.avgRet)+pct(m.avgRet,2)}</td>
+      <td class="mono" style="color:${m.skippedGap>0?'var(--gold)':'var(--mut)'}">${m.skippedGap||0}</td>
+    </tr>`;
+  }).join('');
 }
 
 /* ============ 渲染: 策略雷达 ============ */
@@ -1766,7 +1807,7 @@ window.addEventListener('hashchange', ()=>switchTab(location.hash.slice(1), fals
     $('#footWeights').textContent = `评分权重 ${SCAN.meta.weightsVersion}：技术${Math.round(fw.technical*100)}% / 题材${Math.round(fw.hotTheme*100)}% / 板块${Math.round(fw.sector*100)}%`;
   }
   $('#footTime').textContent = 'Generated ' + SCAN.meta.generated;
-  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar(); renderYouzi(); renderSlab();
+  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar(); renderYouzi(); renderSlab(); renderHotChase();
   renderIntraday();
   renderTrack(); renderAnalytics();
   renderControls(); renderTable();
@@ -1805,6 +1846,11 @@ def main():
         youzi = {"variants": [], "recent": [], "daily": [],
                  "meta": {"note": "游资回测暂未生成（工作流运行 youzi.py 后出现）"}}
     try:
+        hc = json.load(open("hot_chase.json", encoding="utf-8"))
+    except Exception:
+        hc = {"variants": [], "verdict": "",
+              "note": "热点隔日检验暂未生成（工作流运行 hot_chase.py 后出现）"}
+    try:
         slab = json.load(open("strategy_lab.json", encoding="utf-8"))
     except Exception:
         slab = {"strategies": [], "verdict": "",
@@ -1816,6 +1862,7 @@ def main():
     html = html.replace("__ANAL__", json.dumps(anl, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__YOUZI__", json.dumps(youzi, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__SLAB__", json.dumps(slab, ensure_ascii=False, separators=(",", ":")))
+    html = html.replace("__HOTCHASE__", json.dumps(hc, ensure_ascii=False, separators=(",", ":")))
     from datetime import datetime
     html = html.replace("__BUILD_TS__", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     out = "量化实验室.html"
