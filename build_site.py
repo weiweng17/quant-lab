@@ -568,6 +568,41 @@ footer{margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);colo
     </div>
   </section>
 
+  <!-- SLAB 策略实验室 -->
+  <section id="slab">
+    <div class="sec-head"><h2>策略实验室</h2><span class="tagline" id="slabTag">换方法验证：动量追涨 vs 风险开关 · open_t1成交 + 手续费 · 覆盖2021-12至今全牛熊</span></div>
+    <div class="yz-why" id="slabVerdict"></div>
+    <div class="card" style="padding:10px 14px;margin-bottom:16px">
+      <div style="font-size:13.5px;font-weight:700;margin:2px 0 6px">净值曲线对比（期初=1，红线为买入持有基准）</div>
+      <div id="slabChart"></div>
+      <div id="slabLegend" style="display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--mut);padding:6px 2px 2px"></div>
+    </div>
+    <div class="card" style="padding:10px 14px;margin-bottom:16px">
+      <div class="tbl-wrap tbl-scroll">
+        <table id="slabTable">
+          <thead><tr><th>策略</th><th>规则</th><th>累计</th><th>年化</th><th>最大回撤</th><th>换手</th><th>胜率</th><th>单笔均值</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="grid two-col">
+      <div class="card">
+        <div class="card-t"><b>当前大盘开关信号</b><span class="dim-note">上证收盘 vs MA20 · 每5个交易日检查</span></div>
+        <div id="slabRegime" style="padding:6px 2px;font-size:13.5px;line-height:1.7"></div>
+        <div style="font-size:11.5px;color:var(--mut);padding:2px 2px 8px" id="slabSwitches"></div>
+      </div>
+      <div class="card">
+        <div class="card-t"><b>ETF 20日动量排名</b><span class="dim-note">红色=在MA20上方(可持有) · 灰色=弱势</span></div>
+        <div class="tbl-wrap tbl-scroll" style="max-height:260px">
+          <table id="slabEtf">
+            <thead><tr><th>ETF</th><th>现价</th><th>20日动量</th><th>状态</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- RADAR 策略雷达 -->
   <section id="radar">
     <div class="sec-head"><h2>策略雷达</h2><span class="tagline">全股票池回测统计：哪个策略平均收益最高、最常跑赢基准</span></div>
@@ -666,6 +701,7 @@ const INTRADAY = __INTRADAY__;
 const TRACK = __TRACK__;
 const ANAL = __ANAL__;
 const YOUZI = __YOUZI__;
+const SLAB = __SLAB__;
 
 /* ============ 工具 ============ */
 const $ = s => document.querySelector(s);
@@ -1036,6 +1072,99 @@ function renderYouzi(){
       <td class="mono ${cls(t.ret)}">${sign(t.ret)}${pct(t.ret,2)}</td>
       <td style="font-size:11.5px;color:${t.reason==='stop'?'var(--down)':'var(--mut)'}">${t.reason==='stop'?`止损(${t.days}日)`:`持有${t.days}日`}</td>
     </tr>`).join('') || '<tr><td colspan="8" style="color:var(--mut);padding:14px">暂无成交</td></tr>';
+}
+
+/* ============ 渲染: 策略实验室 ============ */
+const SLAB_COLORS = {'mom':'#e05252','mom_gate':'#d97742','os_gate':'#b0885a','etf_rot':'#8f8f9f',
+                     'toggle_cyb':'#2e9e6b','toggle_1000':'#3a8fd4','toggle_300':'#7a5fd0','bh300':'#c44569'};
+function renderSlab(){
+  const S = SLAB || {};
+  const sts = S.strategies || [];
+  if(!sts.length){
+    $('#slabVerdict').innerHTML = '<div class="yz-why-h">策略实验室数据未生成（工作流运行 strategy_lab.py 后出现）</div>';
+    return;
+  }
+  $('#slabTag').textContent = `换方法验证 · ${S.range?S.range[0]+' ~ '+S.range[1]:''} · 上证MA${S.gateMa}开关 · 每${S.checkEvery}日检查 · open_t1+手续费`;
+  $('#slabVerdict').innerHTML = '<div class="yz-why-h">结论：换方法，不换运气</div><div class="yz-why-grid" style="grid-template-columns:1fr"><div>'+
+    esc(S.verdict||'')+'</div><div style="color:var(--mut);font-size:12px">'+
+    '同一口径(open_t1+手续费)下：动量追涨在含三波暴跌的4.9年里累计亏损，行业ETF轮动更惨(追高-杀跌双向挨打)；'+
+    '唯一稳定转正的是"大盘风险开关"——上证在MA20上方持进攻腿(创业板/中证1000/沪深300)，下方切黄金ETF防守。'+
+    '所有开关变体均跑赢对应资产买入持有且回撤更浅。主推保守档(沪深300/黄金)，激进档选创业板腿。'+
+    '⚠ 样本仍有限，参数(MA20/5日)方向稳健但非精确最优，勿当作收益承诺。</div></div>';
+
+  /* 净值曲线 */
+  const W=680,H=240,padL=34,padR=8,padT=10,padB=20;
+  const N = Math.max(...sts.map(s=>s.nav.length));
+  let mn=Infinity,mx=-Infinity;
+  sts.forEach(s=>s.nav.forEach(v=>{ if(v!=null){mn=Math.min(mn,v);mx=Math.max(mx,v);} }));
+  mn=Math.max(mn*0.95,0); mx=mx*1.05;
+  const dx=i=>padL+(W-padL-padR)*i/(N-1), dy=v=>padT+(H-padT-padB)*(1-(v-mn)/(mx-mn));
+  let grid='',lines='',area='';
+  for(let g=0;g<=4;g++){
+    const v=mn+(mx-mn)*g/4, y=dy(v);
+    grid+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="rgba(120,130,160,.15)" stroke-width="1"/>`+
+          `<text x="${padL-4}" y="${(y+3).toFixed(1)}" font-size="9" fill="#5b6885" text-anchor="end">${v.toFixed(2)}</text>`;
+  }
+  sts.forEach(s=>{
+    const pts=[]; const step=Math.max(1,Math.floor(s.nav.length/200));
+    s.nav.forEach((v,i)=>{ if(i%step===0 && v!=null) pts.push([dx(i),dy(v)]); });
+    const col=SLAB_COLORS[s.id]||'#888';
+    if(s.id==='bh300'){
+      let d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L');
+      lines+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="1.4" stroke-dasharray="5 4" opacity=".9"/>`;
+    }else{
+      let d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L');
+      lines+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="${s.id.startsWith('toggle')?2:1.3}" opacity="${s.id.startsWith('toggle')?1:.75}"/>`;
+    }
+  });
+  const dates=S.range||[];
+  if(dates.length){
+    area+=`<text x="${padL}" y="${H-4}" font-size="9" fill="#5b6885">${dates[0]}</text>`+
+          `<text x="${W-padR}" y="${H-4}" font-size="9" fill="#5b6885" text-anchor="end">${dates[1]}</text>`;
+  }
+  $('#slabChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${grid}${area}${lines}</svg>`;
+  $('#slabLegend').innerHTML=sts.map(s=>
+    `<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:3px;border-radius:2px;background:${SLAB_COLORS[s.id]||'#888'}"></span>${esc(s.name)}</span>`).join('');
+
+  /* 策略表: 按年化排序 */
+  const sorted=[...sts].sort((a,b)=>b.metrics.annRet-a.metrics.annRet);
+  const bhRow=sorted.find(s=>s.id==='bh300');
+  $('#slabTable tbody').innerHTML=sorted.map(s=>{
+    const m=s.metrics, isT=s.id.startsWith('toggle');
+    const beatBh = bhRow && m.annRet>bhRow.metrics.annRet;
+    return `<tr${isT?' style="background:rgba(46,158,107,.06)"':''}>
+      <td>${esc(s.name)}${isT?' <span style="color:var(--up);font-size:10.5px">开关</span>':''}${beatBh?' <span style="color:var(--gold);font-size:10.5px">胜基准</span>':''}</td>
+      <td style="font-size:11.5px;color:var(--mut);max-width:230px">${esc(s.desc)}</td>
+      <td class="mono ${cls(m.totalRet)}">${sign(m.totalRet)}${pct(m.totalRet,1)}</td>
+      <td class="mono ${cls(m.annRet)}">${sign(m.annRet)}${pct(m.annRet,1)}</td>
+      <td class="mono down">${pct(m.mdd,1)}</td>
+      <td class="mono">${m.trades}</td>
+      <td class="mono">${m.winRate==null?'—':(m.winRate*100).toFixed(0)+'%'}</td>
+      <td class="mono ${cls(m.avgRet)}">${m.avgRet==null?'—':sign(m.avgRet)+pct(m.avgRet,2)}</td>
+    </tr>`;
+  }).join('');
+
+  /* 当前信号 */
+  const rg=S.regime||{};
+  const inMk=rg.inMarket;
+  $('#slabRegime').innerHTML=
+    `上证收盘 <b class="mono">${rg.indexClose!=null?rg.indexClose.toFixed(0):'—'}</b> · `+
+    `MA${S.gateMa} <b class="mono">${rg.ma20!=null?rg.ma20.toFixed(0):'—'}</b> → `+
+    (inMk?'<b style="color:var(--up)">上方 · 开关策略持进攻腿(创业板/中证1000 ETF)</b>'
+         :'<b style="color:var(--down)">下方 · 开关策略持黄金ETF防守，动量选股禁开仓</b>');
+  const cyb=sts.find(s=>s.id==='toggle_cyb');
+  if(cyb && cyb.switches && cyb.switches.length){
+    $('#slabSwitches').textContent='创业板/黄金 最近切换: '+
+      cyb.switches.map(w=>w.date.slice(5)+'→'+(w.to==='sh518880'?'黄金':'创业板')).join('  ');
+  }
+  /* ETF 排名 */
+  $('#slabEtf tbody').innerHTML=(S.etfRank||[]).map(e=>
+    `<tr style="opacity:${e.aboveMa20?1:.55}">
+      <td>${esc(e.name)}</td>
+      <td class="mono">${e.close!=null?e.close.toFixed(3):'—'}</td>
+      <td class="mono ${cls(e.mom20||0)}">${e.mom20!=null?sign(e.mom20)+pct(e.mom20,1):'—'}</td>
+      <td style="font-size:11.5px;color:${e.aboveMa20?'var(--up)':'var(--mut)'}">${e.aboveMa20?'● MA20上方':'○ MA20下方'}</td>
+    </tr>`).join('');
 }
 
 /* ============ 渲染: 策略雷达 ============ */
@@ -1607,7 +1736,7 @@ function startBuildWatch(){
 const TABS = {
   market:   ['market','intraday'],                          /* 大盘: 指数研判 + 盘中快照 */
   picks:    ['picks','themes','track','sectors'],           /* 选股: 精选 + 题材热度 + 历史跟踪 + 板块扫描 */
-  backtest: ['youzi','radar','analytics','backtest']       /* 回测: 游资模式 + 策略雷达 + 数据体检 + 回测对比 */
+  backtest: ['youzi','slab','radar','analytics','backtest']       /* 回测: 游资模式 + 策略实验室 + 策略雷达 + 数据体检 + 回测对比 */
 };
 const TAB_IDS = Object.keys(TABS);
 function tabFor(id){ return TAB_IDS.find(t=>TABS[t].includes(id)); }
@@ -1637,7 +1766,7 @@ window.addEventListener('hashchange', ()=>switchTab(location.hash.slice(1), fals
     $('#footWeights').textContent = `评分权重 ${SCAN.meta.weightsVersion}：技术${Math.round(fw.technical*100)}% / 题材${Math.round(fw.hotTheme*100)}% / 板块${Math.round(fw.sector*100)}%`;
   }
   $('#footTime').textContent = 'Generated ' + SCAN.meta.generated;
-  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar(); renderYouzi();
+  renderMarket(); renderPicks(); renderThemes(); renderSectors(); renderRadar(); renderYouzi(); renderSlab();
   renderIntraday();
   renderTrack(); renderAnalytics();
   renderControls(); renderTable();
@@ -1675,12 +1804,18 @@ def main():
     except Exception:
         youzi = {"variants": [], "recent": [], "daily": [],
                  "meta": {"note": "游资回测暂未生成（工作流运行 youzi.py 后出现）"}}
+    try:
+        slab = json.load(open("strategy_lab.json", encoding="utf-8"))
+    except Exception:
+        slab = {"strategies": [], "verdict": "",
+                "note": "策略实验室暂未生成（工作流运行 strategy_lab.py 后出现）"}
     html = TEMPLATE.replace("__SCAN__", json.dumps(scan, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__RES__", json.dumps(res, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__INTRADAY__", json.dumps(intraday, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__TRACK__", json.dumps(track, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__ANAL__", json.dumps(anl, ensure_ascii=False, separators=(",", ":")))
     html = html.replace("__YOUZI__", json.dumps(youzi, ensure_ascii=False, separators=(",", ":")))
+    html = html.replace("__SLAB__", json.dumps(slab, ensure_ascii=False, separators=(",", ":")))
     from datetime import datetime
     html = html.replace("__BUILD_TS__", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     out = "量化实验室.html"
