@@ -1,20 +1,38 @@
 {
- "ts": "2026-11-25 19:08",
- "phase": "收盘定稿",
- "picks": [],
+ "ts": "2026-11-26 02:12",
+ "phase": "盘前",
+ "picks": [
+  {
+   "secid": "1.600814",
+   "code": "600814",
+   "name": "杭州解百",
+   "sector": "百货",
+   "price": 8.35,
+   "prevClose": 8.35,
+   "chg": 0.0,
+   "stop": 7.41,
+   "target": 9.76,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.32,
+   "warn": []
+  }
+ ],
  "indices": [
   {
    "secid": "1.000001",
    "name": "上证指数",
    "price": 3476.47,
-   "chg": -0.0203,
+   "chg": 0.0,
    "signals": []
   },
   {
    "secid": "0.399001",
    "name": "深证成指",
    "price": 10086.36,
-   "chg": -0.0324,
+   "chg": 0.0,
    "signals": [
     "MACD小时死叉"
    ]
@@ -23,7 +41,7 @@
    "secid": "0.399006",
    "name": "创业板指",
    "price": 2183.58,
-   "chg": -0.0419,
+   "chg": 0.0,
    "signals": [
     "MACD小时死叉"
    ]
