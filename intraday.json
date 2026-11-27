@@ -1,22 +1,56 @@
 {
- "ts": "2026-11-27 18:45",
- "phase": "收盘定稿",
+ "ts": "2026-11-28 01:41",
+ "phase": "盘前",
  "picks": [
+  {
+   "secid": "0.000889",
+   "code": "000889",
+   "name": "中嘉博创",
+   "sector": "通信工程及服务",
+   "price": 4.3,
+   "prevClose": 4.3,
+   "chg": 0.0,
+   "stop": 3.73,
+   "target": 5.15,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.03,
+   "warn": []
+  },
   {
    "secid": "1.600814",
    "code": "600814",
    "name": "杭州解百",
    "sector": "百货",
    "price": 9.53,
-   "prevClose": 9.19,
-   "chg": 0.037,
-   "stop": 8.16,
-   "target": 10.73,
+   "prevClose": 9.53,
+   "chg": 0.0,
+   "stop": 8.31,
+   "target": 11.36,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
    ],
    "volRatio": 1.15,
+   "warn": []
+  },
+  {
+   "secid": "1.600186",
+   "code": "600186",
+   "name": "莲花控股",
+   "sector": "调味发酵品Ⅲ",
+   "price": 9.61,
+   "prevClose": 9.61,
+   "chg": 0.0,
+   "stop": 8.29,
+   "target": 11.59,
+   "signals": [
+    "小时MA5>MA20",
+    "小时MACD多头"
+   ],
+   "volRatio": 0.07,
    "warn": []
   }
  ],
@@ -25,7 +59,7 @@
    "secid": "1.000001",
    "name": "上证指数",
    "price": 3606.49,
-   "chg": 0.0373,
+   "chg": 0.0,
    "signals": [
     "小时MA5>MA20",
     "小时金叉",
@@ -36,7 +70,7 @@
    "secid": "0.399001",
    "name": "深证成指",
    "price": 10814.02,
-   "chg": 0.0724,
+   "chg": 0.0,
    "signals": [
     "小时MA5>MA20",
     "小时金叉",
@@ -47,7 +81,7 @@
    "secid": "0.399006",
    "name": "创业板指",
    "price": 2443.96,
-   "chg": 0.1161,
+   "chg": 0.0,
    "signals": [
     "小时MA5>MA20",
     "小时MACD多头"
